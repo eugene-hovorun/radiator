@@ -1,0 +1,85 @@
+<template>
+  <div id="audio-container"></div>
+  <div id="canvas-container"></div>
+</template>
+
+<script lang="ts" setup>
+import AudioMotionAnalyzer from "audiomotion-analyzer";
+import { watch } from "vue";
+
+const emit = defineEmits(["loaded", "play", "error"]);
+const props = defineProps({ src: String, playing: Boolean });
+
+watch(
+  () => props.src,
+  (src) => playChannel(src)
+);
+
+watch(
+  () => props.playing,
+  (playing) => {
+    const audio = document.querySelector("#audio") as HTMLAudioElement;
+
+    if (playing) {
+      audio?.play();
+    } else {
+      audio?.pause();
+    }
+  }
+);
+
+const playChannel = (src?: string) => {
+  if (!src) return;
+
+  const container = document.querySelector("#audio-container") as HTMLElement;
+
+  const player = Object.assign(document.createElement("audio"), {
+    id: "audio",
+    src,
+    autoplay: true,
+    crossOrigin: "anonymous",
+    volume: 0.2,
+    ondurationchange() {
+      emit("loaded");
+    },
+    onerror() {
+      emit("error");
+    },
+    onplay() {
+      emit("play");
+    },
+  });
+
+  container.innerHTML = "";
+  container.appendChild(player);
+
+  const canvas = document.querySelector("#canvas-container") as HTMLElement;
+
+  canvas.innerHTML = "";
+
+  new AudioMotionAnalyzer(canvas, {
+    source: player,
+    showScaleX: false,
+    overlay: true,
+    gradient: "steelblue",
+  }).start();
+};
+</script>
+
+<style scoped>
+#canvas-container {
+  width: 110%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -5%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#audio-container audio {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+</style>

@@ -1,0 +1,31 @@
+.alphabet {
+  max-width: calc(100% - 80px);
+  margin: 0 auto;
+  padding: 4px;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--color-border);
+  border-radius: 24px;
+}
+
+.alphabet__letter {
+  font-size: 12px;
+  background-color: transparent;
+  border: none;
+  text-transform: capitalize;
+  font-family: "Inter";
+  flex-grow: 1;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.alphabet__letter:hover {
+  text-decoration: underline;
+}
+
+.alphabet__separator {
+  color: var(--color-text-dark);
+  font-size: 48px;
+  line-height: 0;
+  transform: translateY(-5px);
+}

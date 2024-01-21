@@ -1,0 +1,31 @@
+main {
+  padding-top: 48px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+nav {
+  position: relative;
+  max-width: 1100px;
+  margin: auto;
+  z-index: 2;
+}
+
+.radio-slider ~ .radio-slider {
+  border-top: 1px solid var(--color-border);
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  min-height: 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

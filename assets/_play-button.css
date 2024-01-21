@@ -1,0 +1,37 @@
+button.play-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+button.play-button.playing {
+  opacity: 0.5;
+}
+
+button.play-button svg {
+  width: 40%;
+  fill: var(--color-primary);
+  transition: fill 0.2s ease-in-out;
+}
+
+button.play-button:hover svg {
+  fill: var(--color-text-light);
+}
+
+button.channel-button {
+  margin-right: auto;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: var(--color-border);
+}
