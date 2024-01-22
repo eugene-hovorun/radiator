@@ -9,6 +9,7 @@ type State = {
   loadingChannelSlug: string | null;
   playingChannelSlug: string | null;
   fetchingChannels: boolean;
+  fetchingPlaces: boolean;
   playing: boolean;
 };
 
@@ -22,6 +23,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     loadingChannelSlug: null,
     playingChannelSlug: null,
     fetchingChannels: false,
+    fetchingPlaces: false,
     playing: false,
   }),
   actions: {
@@ -31,9 +33,12 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.countries = countries;
     },
     async fetchPlacesByCountrySlug(slug: string) {
+      this.fetchingPlaces = true;
+
       const places = await $fetch<Place[]>("/places/" + slug);
 
       this.places = places;
+      this.fetchingPlaces = false;
     },
     async fetchChannelsByPlaceId(id: number) {
       this.fetchingChannels = true;

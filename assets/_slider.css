@@ -6,6 +6,11 @@
   margin: 0 auto 24px;
 }
 
+.radio-slider.loading .splide__track,
+.radio-slider.loading .slider-title {
+  opacity: 0;
+}
+
 .splide__pagination {
   display: none;
 }

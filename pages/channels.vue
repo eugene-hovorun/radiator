@@ -6,13 +6,17 @@
     v-model="channel"
   >
     <template #default="{ item }">
-      <div class="slide slide--channel" @click="handleItemClick(item)">
+      <div
+        class="slide slide--channel"
+        :class="{ 'slide--active': item.slug === channel?.slug }"
+        @click="handleSelect(item)"
+      >
         <radio-channel-button
           :playing="item.slug === playingChannelSlug && countriesStore.playing"
           :loading="item.slug === loadingChannelSlug"
           :failed="failedSlugs.includes(item.slug)"
         />
-        {{ failedSlugs.includes(item.slug) ? 'unavailable' : item.title }}
+        {{ failedSlugs.includes(item.slug) ? "unavailable" : item.title }}
       </div>
     </template>
   </radio-slider>
@@ -37,10 +41,21 @@ const channel = computed<Channel>({
     return channels.find((c) => c.slug === param) || channels[0];
   },
   set(channel?: Channel) {
-    if (channel) {
-      router.push(
-        `/${route.params.country}/${route.params.place}/${channel.slug}`
-      );
+    if (loadingChannelSlug.value) {
+      return;
+    }
+
+    const _channel = channel as Channel;
+
+    router.push(
+      `/${route.params.country}/${route.params.place}/${_channel.slug}`
+    );
+
+    if (_channel.slug === playingChannelSlug.value) {
+      countriesStore.togglePlay();
+    } else {
+      countriesStore.playingChannelSlug = null;
+      countriesStore.fetchChannelSrc(_channel);
     }
   },
 });
@@ -64,19 +79,7 @@ watch(
   { immediate: true }
 );
 
-const handleItemClick = (item: unknown) => {
-
-  if (loadingChannelSlug.value) {
-    return;
-  }
-
-  const _channel = item as Channel;
-
-  if (_channel.slug === playingChannelSlug.value) {
-    countriesStore.togglePlay();
-  } else {
-    countriesStore.playingChannelSlug = null;
-    countriesStore.fetchChannelSrc(_channel);
-  }
+const handleSelect = (item: unknown) => {
+  channel.value = item as Channel;
 };
 </script>

@@ -1,5 +1,10 @@
 <template>
-  <radio-slider title="City" :items="countriesStore.places" v-model="place">
+  <radio-slider
+    title="City"
+    :loading="loading"
+    :items="countriesStore.places"
+    v-model="place"
+  >
     <template #default="{ item }">
       <div
         class="slide"
@@ -21,6 +26,7 @@ import { computed, watch } from "vue";
 const route = useRoute();
 const router = useRouter();
 const countriesStore = useCountriesStore();
+const loading = computed(() => countriesStore.fetchingPlaces);
 
 const place = computed<Place>({
   get(): Place {

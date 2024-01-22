@@ -4,7 +4,8 @@ export default <RouterConfig>{
   routes: (_routes) => [
     {
       path: "/",
-      component: () => import("../pages/countries.vue").then((r) => r.default || r),
+      component: () =>
+        import("../pages/countries.vue").then((r) => r.default || r),
       children: [
         {
           path: "/:country",
@@ -21,7 +22,7 @@ export default <RouterConfig>{
                   component: () =>
                     import("../pages/stub.vue").then((r) => r.default || r),
                 },
-              ]
+              ],
             },
           ],
         },

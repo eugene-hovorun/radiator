@@ -1,5 +1,5 @@
 <template>
-  <div class="radio-slider">
+  <div class="radio-slider" :class="{ loading }">
     <ClientOnly>
       <div class="slider-title">
         {{ title }}
@@ -29,8 +29,8 @@
     </ClientOnly>
 
     <div v-if="loading || !mounted" class="skeleton">
-        <div class="skeleton--title" />
-        <div class="skeleton--range" />
+      <div class="skeleton--title" />
+      <div class="skeleton--range" />
     </div>
   </div>
 </template>

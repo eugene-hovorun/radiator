@@ -1,18 +1,7 @@
 <template>
   <div v-if="mounted" class="alphabet">
     <template
-      v-for="letter in [
-        'a',
-        'c',
-        'e',
-        'g',
-        'i',
-        'k',
-        'm',
-        'p',
-        's',
-        'u',
-      ]"
+      v-for="letter in ['a', 'c', 'e', 'g', 'i', 'k', 'm', 'p', 's', 'u']"
       :key="letter"
     >
       <button class="alphabet__letter" @click="handleLetterClick(letter)">
