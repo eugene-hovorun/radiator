@@ -8,7 +8,10 @@
     <template #default="{ item }">
       <div
         class="slide slide--channel"
-        :class="{ 'slide--active': item.slug === channel?.slug }"
+        :class="{
+          'slide--active': item.slug === channel?.slug,
+          'slide--failed': failedSlugs.includes(item.slug),
+        }"
         @click="handleSelect(item)"
       >
         <radio-channel-button
@@ -45,11 +48,11 @@ const channel = computed<Channel>({
     return channels.find((c) => c.slug === param) || channels[0];
   },
   set(channel?: Channel) {
-    if (loadingChannelSlug.value) {
+    const _channel = channel as Channel;
+
+    if (loadingChannelSlug.value === _channel.slug) {
       return;
     }
-
-    const _channel = channel as Channel;
 
     router.push(
       `/${route.params.country}/${route.params.place}/${_channel.slug}`

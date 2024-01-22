@@ -60,6 +60,10 @@
   font-weight: bold;
 }
 
+.slide--failed {
+  opacity: 0.3;
+}
+
 .slide--channel {
   border: 2px solid var(--color-primary);
   padding-left: 0;
