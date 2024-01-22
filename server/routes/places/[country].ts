@@ -12,26 +12,27 @@ async function fetchDataAndUpdateCache() {
     const response = await api.get<PlacesResponse>("/secure/places");
     const data = mapPlaces(response.data.data.list);
 
-    fs.writeFileSync(CACHE_FILE_PATH, JSON.stringify(data, null, 2));
+    return data
+
+    // fs.writeFileSync(CACHE_FILE_PATH, JSON.stringify(data, null, 2));
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
 
-// fetchDataAndUpdateCache();
-// Schedule cache update every 4 hours
-setInterval(fetchDataAndUpdateCache, 4 * 60 * 60 * 1000);
+// setInterval(fetchDataAndUpdateCache, 4 * 60 * 60 * 1000);
 
 export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
   try {
     const countrySlug = event.context.params?.country;
-    const cachedData = readFromFile(PLACES_FILE_NAME);
+    // const cachedData = readFromFile(PLACES_FILE_NAME);
 
-    if (!cachedData) {
-      await fetchDataAndUpdateCache();
-    }
+    // if (!cachedData) {
+    //   await fetchDataAndUpdateCache();
+    // }
 
-    const data = cachedData || readFromFile(PLACES_FILE_NAME);
+    // const data = cachedData || readFromFile(PLACES_FILE_NAME);
+    const data = await fetchDataAndUpdateCache();
     const places = data.filter((place: Place) => place.countrySlug === countrySlug);
 
     return places
