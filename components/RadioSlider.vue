@@ -1,6 +1,6 @@
 <template>
   <div class="radio-slider">
-    <ClientOnly v-if="!loading">
+    <ClientOnly>
       <div class="slider-title">
         {{ title }}
         <span v-if="items.length > 2">
@@ -28,7 +28,10 @@
       </slider>
     </ClientOnly>
 
-    <div v-if="loading || !mounted" class="slider-skeleton"></div>
+    <div v-if="loading || !mounted" class="skeleton">
+        <div class="skeleton--title" />
+        <div class="skeleton--range" />
+    </div>
   </div>
 </template>
 

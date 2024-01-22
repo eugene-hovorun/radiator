@@ -1,6 +1,7 @@
 .radio-slider {
+  position: relative;
   max-width: calc(100% - 80px);
-  min-height: 40px;
+  min-height: 60px;
   padding-top: 16px;
   margin: 0 auto 24px;
 }
@@ -63,13 +64,35 @@
   color: var(--color-primary);
 }
 
-.slider-skeleton {
-  max-width: calc(100% - 80px);
-  margin: 20px auto;
-  height: 40px;
+.skeleton {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 76px;
+  padding-top: 16px;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.skeleton--title,
+.skeleton--range {
   background: var(--color-primary);
   border-radius: 24px;
   animation: pulse 4s infinite;
+}
+
+.skeleton--title {
+  width: 100px;
+  height: 12px;
+  margin-bottom: 8px;
+}
+
+.skeleton--range {
+  height: 40px;
+  width: 100%;
 }
 
 @keyframes pulse {
