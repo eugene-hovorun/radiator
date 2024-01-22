@@ -1,5 +1,4 @@
 .alphabet {
-  max-width: calc(100% - 80px);
   margin: 0 auto;
   padding: 4px;
   display: flex;

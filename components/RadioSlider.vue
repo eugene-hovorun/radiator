@@ -1,7 +1,12 @@
 <template>
   <div class="radio-slider">
     <ClientOnly v-if="!loading">
-      <div class="slider-title">{{ title }}</div>
+      <div class="slider-title">
+        {{ title }}
+        <span v-if="items.length > 2">
+          ({{ findIndex(modelValue) + 1 }} / {{ items.length }})
+        </span>
+      </div>
 
       <slider
         ref="sliderRef"
