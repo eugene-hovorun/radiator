@@ -13,7 +13,13 @@ export function readFromFile(
   try {
     const CACHE_FILE_PATH = path.join(currentDir, name);
 
-    return JSON.parse(fs.readFileSync(CACHE_FILE_PATH, "utf-8"));
+    if (fs.existsSync(CACHE_FILE_PATH)) {
+      const fileContent = fs.readFileSync(CACHE_FILE_PATH, "utf-8");
+      return JSON.parse(fileContent);
+    } else {
+      fs.writeFileSync(CACHE_FILE_PATH, "[]");
+      return null;
+    }
   } catch (error) {
     console.error("Error reading cache file:", error);
     return null;
