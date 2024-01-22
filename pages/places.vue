@@ -12,7 +12,9 @@
         :class="{ 'slide--active': item.slug === place?.slug }"
         @click="handleItemClick(item)"
       >
-        {{ item.title }}
+        <div class="slide-title">
+          {{ item.title }}
+        </div>
       </div>
     </template>
   </radio-slider>

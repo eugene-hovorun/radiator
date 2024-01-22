@@ -16,7 +16,9 @@
           :loading="item.slug === loadingChannelSlug"
           :failed="failedSlugs.includes(item.slug)"
         />
-        {{ failedSlugs.includes(item.slug) ? "Unavailable" : item.title }}
+        <div class="slide-title">
+          {{ failedSlugs.includes(item.slug) ? "Unavailable" : item.title }}
+        </div>
       </div>
     </template>
   </radio-slider>

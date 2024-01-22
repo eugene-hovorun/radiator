@@ -1,26 +1,28 @@
 <template>
   <radio-app>
-  <radio-alphabet @select="goToLetter" />
+    <radio-alphabet @select="goToLetter" />
 
-  <radio-slider
-    title="Country"
-    border
-    :items="countriesStore.countries"
-    v-model="country"
-  >
-    <template #default="{ item }">
-      <div
-        class="slide"
-        :class="{ 'slide--active': item.slug === country?.slug }"
-        @click="handleItemClick(item)"
-      >
-        {{ item.title }}
-      </div>
-    </template>
-  </radio-slider>
+    <radio-slider
+      title="Country"
+      border
+      :items="countriesStore.countries"
+      v-model="country"
+    >
+      <template #default="{ item }">
+        <div
+          class="slide"
+          :class="{ 'slide--active': item.slug === country?.slug }"
+          @click="handleItemClick(item)"
+        >
+          <div class="slide-title">
+            {{ item.title }}
+          </div>
+        </div>
+      </template>
+    </radio-slider>
 
-  <router-view />
-</radio-app>
+    <router-view />
+  </radio-app>
 </template>
 
 <script lang="ts" setup>
