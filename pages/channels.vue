@@ -68,7 +68,7 @@ const channel = computed<Channel>({
 });
 
 watch(
-  () => route.params.place,
+  [() => route.params.place, () => countriesStore.places],
   async (place) => {
     const placeSlug = Array.isArray(place) ? place[0] : place;
     const placeId = countriesStore.places.find((p) => p.slug === placeSlug)?.id;
