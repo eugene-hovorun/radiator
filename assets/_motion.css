@@ -1,0 +1,14 @@
+#canvas-container {
+  width: 110%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -5%;
+  pointer-events: none;
+}
+
+#audio-container audio {
+  position: absolute;
+  width: 0;
+  height: 0;
+}

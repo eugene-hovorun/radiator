@@ -1,30 +1,36 @@
 <template>
-  <radio-layout>
-    <radio-alphabet @select="goToLetter" />
+  <radio-app>
+  <radio-alphabet @select="goToLetter" />
 
-    <radio-slider
-      title="Country"
-      :items="countriesStore.countries"
-      v-model="country"
-    >
-      <template #default="{ item }">
-        <div
-          class="slide"
-          :class="{ 'slide--active': item.slug === country?.slug }"
-          @click="handleItemClick(item)"
-        >
-          {{ item.title }}
-        </div>
-      </template>
-    </radio-slider>
+  <radio-slider
+    title="Country"
+    border
+    :items="countriesStore.countries"
+    v-model="country"
+  >
+    <template #default="{ item }">
+      <div
+        class="slide"
+        :class="{ 'slide--active': item.slug === country?.slug }"
+        @click="handleItemClick(item)"
+      >
+        {{ item.title }}
+      </div>
+    </template>
+  </radio-slider>
 
-    <router-view />
-  </radio-layout>
+  <router-view />
+</radio-app>
 </template>
 
 <script lang="ts" setup>
 import { useCountriesStore } from "../store/countries";
 import { pickRandomItem } from "../store/utils";
+
+useHead({
+  title: "Radiätor",
+  style: [{ innerHTML: "html { background: #222C35; }" }],
+});
 
 const route = useRoute();
 const router = useRouter();

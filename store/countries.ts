@@ -23,7 +23,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     loadingChannelSlug: null,
     playingChannelSlug: null,
     fetchingChannels: false,
-    fetchingPlaces: false,
+    fetchingPlaces: true,
     playing: false,
   }),
   actions: {

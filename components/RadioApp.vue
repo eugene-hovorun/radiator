@@ -1,8 +1,6 @@
 <template>
   <main>
-    <nav>
-      <slot />
-    </nav>
+    <slot />
 
     <radio-motion
       :src="src"
@@ -17,13 +15,6 @@
 <script setup lang="ts">
 import "~/assets/main.css";
 import { useCountriesStore } from "../store/countries";
-
-useHead({
-  title: "Radiätor",
-  style: [{ innerHTML: "html { background: #222C35; }" }],
-});
-
-defineProps({ loading: Boolean });
 
 const countriesStore = useCountriesStore();
 const channel = computed(() => countriesStore.activeChannel);

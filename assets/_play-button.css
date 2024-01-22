@@ -11,11 +11,10 @@ button.play-button {
   justify-content: center;
   position: relative;
   opacity: 0.9;
-  z-index: 2;
 }
 
-button.play-button.playing {
-  opacity: 0.5;
+button.play-button.playing svg {
+  fill: var(--color-text-light);
 }
 
 button.play-button svg {

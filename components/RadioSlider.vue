@@ -1,6 +1,6 @@
 <template>
-  <div class="radio-slider" :class="{ loading }">
-    <ClientOnly>
+  <ClientOnly>
+    <div class="radio-slider" :class="{ loading, border }">
       <div class="slider-title">
         {{ title }}
         <span v-if="items.length > 2">
@@ -26,13 +26,13 @@
           <slot :item="item" />
         </slide>
       </slider>
-    </ClientOnly>
 
-    <div v-if="loading || !mounted" class="skeleton">
-      <div class="skeleton--title" />
-      <div class="skeleton--range" />
+      <div v-if="loading" class="skeleton">
+        <div class="skeleton--title" />
+        <div class="skeleton--range" />
+      </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
@@ -48,10 +48,10 @@ const props = defineProps<{
   modelValue: Item;
   title: string;
   loading?: boolean;
+  border?: boolean;
 }>();
 
 const sliderRef = ref<typeof Slider>();
-const mounted = ref(false);
 
 watch(
   () => props.modelValue,
@@ -62,10 +62,6 @@ watch(
   },
   { immediate: true }
 );
-
-onMounted(() => {
-  mounted.value = true;
-});
 
 const findIndex = (item: Item) =>
   props.items.findIndex((i) => i.slug === item?.slug);

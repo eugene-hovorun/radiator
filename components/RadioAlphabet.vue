@@ -15,12 +15,8 @@
 
 <script lang="ts" setup>
 const mounted = ref(false);
-
 const emit = defineEmits(["select"]);
-
-const handleLetterClick = (letter: string) => {
-  emit("select", letter);
-};
+const handleLetterClick = (letter: string) => emit("select", letter);
 
 onMounted(() => {
   mounted.value = true;

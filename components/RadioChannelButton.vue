@@ -42,5 +42,9 @@
 </template>
 
 <script lang="ts" setup>
-defineProps({ playing: Boolean, loading: Boolean, failed: Boolean });
+defineProps({
+  playing: Boolean,
+  loading: Boolean,
+  failed: Boolean,
+});
 </script>

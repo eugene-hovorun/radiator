@@ -62,7 +62,6 @@ div {
   );
   display: grid;
   place-content: center;
-  z-index: 5;
   pointer-events: none;
 }
 

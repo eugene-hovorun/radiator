@@ -39,7 +39,7 @@ const playChannel = (src?: string) => {
     autoplay: true,
     crossOrigin: "anonymous",
     volume: 0.2,
-    ondurationchange() {
+    oncanplaythrough() {
       emit("loaded");
     },
     onerror() {
@@ -61,25 +61,8 @@ const playChannel = (src?: string) => {
     source: player,
     showScaleX: false,
     overlay: true,
+    showBgColor: false,
     gradient: "steelblue",
   }).start();
 };
 </script>
-
-<style scoped>
-#canvas-container {
-  width: 110%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: -5%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-#audio-container audio {
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-</style>

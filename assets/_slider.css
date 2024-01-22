@@ -2,8 +2,12 @@
   position: relative;
   max-width: calc(100% - 80px);
   min-height: 60px;
-  padding-top: 16px;
-  margin: 0 auto 24px;
+  padding: 16px 0 24px;
+  margin: auto;
+}
+
+.radio-slider.border {
+  border-bottom: 1px solid var(--color-border);
 }
 
 .radio-slider.loading .splide__track,

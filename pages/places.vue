@@ -1,6 +1,7 @@
 <template>
   <radio-slider
     title="City"
+    border
     :loading="loading"
     :items="countriesStore.places"
     v-model="place"

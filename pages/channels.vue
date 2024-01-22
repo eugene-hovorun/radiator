@@ -16,10 +16,12 @@
           :loading="item.slug === loadingChannelSlug"
           :failed="failedSlugs.includes(item.slug)"
         />
-        {{ failedSlugs.includes(item.slug) ? "unavailable" : item.title }}
+        {{ failedSlugs.includes(item.slug) ? "Unavailable" : item.title }}
       </div>
     </template>
   </radio-slider>
+
+  <router-view />
 </template>
 
 <script lang="ts" setup>
