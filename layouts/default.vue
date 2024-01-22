@@ -1,6 +1,5 @@
 <template>
   <slot />
-
   <radio-loading v-if="showHideSpinner" />
 </template>
 
