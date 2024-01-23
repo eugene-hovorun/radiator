@@ -1,12 +1,12 @@
 <template>
   <slot />
-  <radio-loading v-if="showHideSpinner" />
+  <radio-loading v-if="showSpinner" />
 </template>
 
 <script lang="ts" setup>
-const showHideSpinner = ref(true);
+const showSpinner = ref(true);
 
 onMounted(() => {
-  showHideSpinner.value = false;
+  showSpinner.value = false;
 });
 </script>

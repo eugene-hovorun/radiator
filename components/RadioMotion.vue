@@ -57,12 +57,16 @@ const playChannel = (src?: string) => {
 
   canvas.innerHTML = "";
 
-  new AudioMotionAnalyzer(canvas, {
+  const instance = new AudioMotionAnalyzer(canvas, {
     source: player,
     showScaleX: false,
     overlay: true,
     showBgColor: false,
     gradient: "steelblue",
-  }).start();
+  });
+
+  instance.start();
+
+  // instance.gradient = "orangered";
 };
 </script>
