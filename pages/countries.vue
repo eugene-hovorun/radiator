@@ -29,11 +29,6 @@
 import { useCountriesStore } from "../store/countries";
 import { pickRandomItem } from "../store/utils";
 
-useHead({
-  title: "Radiätor",
-  style: [{ innerHTML: "html { background: #222C35; }" }],
-});
-
 const route = useRoute();
 const router = useRouter();
 const countriesStore = useCountriesStore();

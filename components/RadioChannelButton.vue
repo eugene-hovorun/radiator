@@ -1,6 +1,6 @@
 <template>
   <button
-    class="play-button channel-button"
+    class="channel-button"
     :class="{ playing, loading, failed }"
   >
     <svg v-if="failed" viewBox="0 0 22 22" style="width: 80%">
@@ -35,8 +35,8 @@
       <rect x="31.5" y="0.5" width="10" height="58" />
     </svg>
 
-    <svg v-else viewBox="0 0 55 63">
-      <path transform="translate(4)" d="M54 31L0 63L0 0.2L54 31Z" />
+    <svg v-else viewBox="0 0 55 63" style="width: 50%;">
+      <path transform="translate(5)" d="M54 31L0 63L0 0.2L54 31Z" />
     </svg>
   </button>
 </template>

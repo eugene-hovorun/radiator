@@ -7,7 +7,7 @@
       <button class="alphabet__letter" @click="handleLetterClick(letter)">
         {{ letter }}
       </button>
-      <span v-if="letter !== 'u'" class="alphabet__separator">.</span>
+      <span v-if="letter !== 'u'" class="alphabet__separator"></span>
     </template>
   </div>
   <div v-else style="height: 25px"></div>

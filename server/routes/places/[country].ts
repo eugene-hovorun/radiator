@@ -1,41 +1,16 @@
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import { api, readFromFile, mapPlaces, PLACES_FILE_NAME } from "../../utils";
-import fs from "fs";
-import path from "path";
-
-const currentFilePath = fileURLToPath(import.meta.url);
-const CACHE_FILE_PATH = path.join(dirname(currentFilePath), PLACES_FILE_NAME);
-
-async function fetchDataAndUpdateCache() {
-  try {
-    const response = await api.get<PlacesResponse>("/secure/places");
-    const data = mapPlaces(response.data.data.list);
-
-    return data
-
-    // fs.writeFileSync(CACHE_FILE_PATH, JSON.stringify(data, null, 2));
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
-
-// setInterval(fetchDataAndUpdateCache, 4 * 60 * 60 * 1000);
+import { mapPlaces, getPlaces } from "../../utils";
 
 export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
   try {
     const countrySlug = event.context.params?.country;
-    // const cachedData = readFromFile(PLACES_FILE_NAME);
 
-    // if (!cachedData) {
-    //   await fetchDataAndUpdateCache();
-    // }
+    const list = (await getPlaces()) || [];
+    const data = mapPlaces(list);
+    const places = data
+      .filter((place: Place) => place.countrySlug === countrySlug)
+      .sort((a, b) => a.title.localeCompare(b.title));
 
-    // const data = cachedData || readFromFile(PLACES_FILE_NAME);
-    const data = await fetchDataAndUpdateCache();
-    const places = data.filter((place: Place) => place.countrySlug === countrySlug);
-
-    return places
+    return places;
   } catch (error) {
     return { error };
   }

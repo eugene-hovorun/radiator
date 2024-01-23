@@ -7,9 +7,10 @@ export const mapPlaces = (places: Place[]) =>
     countrySlug: createSlug(place.country),
   }));
 
-export const mapCountries = (places: Place[]) => [
-  ...new Set(places.map((place) => place.country).sort()),
-].map((country: string) => ({ title: country, slug: createSlug(country) }));
+export const mapCountries = (places: Place[]) =>
+  [...new Set(places.map((place) => place.country).sort())].map(
+    (country: string) => ({ title: country, slug: createSlug(country) })
+  );
 
 export const mapChannels = (channels: Channel[]) =>
   channels.map((channel) => ({

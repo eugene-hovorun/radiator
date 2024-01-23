@@ -1,8 +1,10 @@
-button.play-button {
-  width: 64px;
-  height: 64px;
+.channel-button {
+  margin-right: auto;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--color-border);
+  background: var(--color-text-dark);
   border: none;
   outline: none;
   cursor: pointer;
@@ -13,24 +15,16 @@ button.play-button {
   opacity: 0.9;
 }
 
-button.play-button.playing svg {
+.channel-button.playing svg {
   fill: var(--color-text-light);
 }
 
-button.play-button svg {
+.channel-button svg {
   width: 40%;
   fill: var(--color-primary);
   transition: fill 0.2s ease-in-out;
 }
 
-button.play-button:hover svg {
+.channel-button:hover svg {
   fill: var(--color-text-light);
-}
-
-button.channel-button {
-  margin-right: auto;
-  flex-shrink: 0;
-  width: 42px;
-  height: 42px;
-  background: var(--color-border);
 }

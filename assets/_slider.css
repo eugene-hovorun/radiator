@@ -7,7 +7,7 @@
 }
 
 .radio-slider.border {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
 }
 
 .radio-slider.loading .splide__track,
@@ -24,11 +24,11 @@
 }
 
 .splide__arrow {
-  background: var(--color-primary);
+  background: transparent;
 }
 
 .splide__arrow svg {
-  fill: var(--color-text-light);
+  fill: var(--color-border);
 }
 
 .splide__arrow--prev {
@@ -44,7 +44,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 24px;
+  height: 40px;
   text-align: center;
   color: var(--color-text-light);
   font-size: 14px;
@@ -52,6 +52,7 @@
   border-radius: 24px;
   cursor: pointer;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .slide--active {
@@ -78,11 +79,11 @@
 }
 
 .slide-title {
-  display: -webkit-box; 
-  -webkit-box-orient: vertical; 
-  -webkit-line-clamp: 2; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .skeleton {

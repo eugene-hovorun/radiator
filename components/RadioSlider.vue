@@ -4,7 +4,7 @@
       <div class="slider-title">
         {{ title }}
         <span v-if="items.length > 2">
-          ({{ findIndex(modelValue) + 1 }} / {{ items.length }})
+          {{ findIndex(modelValue) + 1 }} / {{ items.length }}
         </span>
       </div>
 
@@ -14,7 +14,7 @@
           perPage: 5,
           focus: 'center',
           gap: '8px',
-          arrowPath: '',
+          wheel: true,
           breakpoints: {
             1400: { perPage: 5 },
             1100: { perPage: 3 },
