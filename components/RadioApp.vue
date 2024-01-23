@@ -5,7 +5,7 @@
     <radio-motion
       :src="src"
       :playing="playing"
-      @loaded="countriesStore.loadingChannelSlug = null"
+      @loaded="countriesStore.loadingChannelId = null"
       @play="handlePlay"
       @error="channel && countriesStore.setFailedChannel(channel)"
     />
@@ -22,13 +22,16 @@ useHead({
 });
 
 useSeoMeta({
-  title: 'Radiator',
-  ogTitle: 'Radiator',
-  description: 'App that lets you listen to radio stations from around the world.',
-  ogDescription: 'App that lets you listen to radio stations from around the world.',
-  ogImage: 'https://github.com/hvianna/audioMotion-analyzer/blob/master/img/gradient-steelblue.png?raw=true',
-  twitterCard: 'summary_large_image',
-})
+  title: "Radiator",
+  ogTitle: "Radiator",
+  description:
+    "App that lets you listen to radio stations from around the world.",
+  ogDescription:
+    "App that lets you listen to radio stations from around the world.",
+  ogImage:
+    "https://github.com/hvianna/audioMotion-analyzer/blob/master/img/gradient-steelblue.png?raw=true",
+  twitterCard: "summary_large_image",
+});
 
 const countriesStore = useCountriesStore();
 const channel = computed(() => countriesStore.activeChannel);
@@ -37,7 +40,7 @@ const playing = computed(() => countriesStore.playing);
 
 const handlePlay = () => {
   if (channel.value) {
-    countriesStore.playingChannelSlug = channel.value.slug;
+    countriesStore.playingChannelId = channel.value.id;
     countriesStore.togglePlay(true);
   }
 };

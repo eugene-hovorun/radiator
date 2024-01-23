@@ -9,18 +9,18 @@
       <div
         class="slide slide--channel"
         :class="{
-          'slide--active': item.slug === channel?.slug,
-          'slide--failed': failedSlugs.includes(item.slug),
+          'slide--active': item.id === channel?.id,
+          'slide--failed': isFailed(item),
         }"
         @click="handleSelect(item)"
       >
         <radio-channel-button
-          :playing="item.slug === playingChannelSlug && countriesStore.playing"
-          :loading="item.slug === loadingChannelSlug"
-          :failed="failedSlugs.includes(item.slug)"
+          :playing="item.id === playingChannelId && countriesStore.playing"
+          :loading="item.id === loadingChannelId"
+          :failed="isFailed(item)"
         />
         <div class="slide-title">
-          {{ failedSlugs.includes(item.slug) ? "Unavailable" : item.title }}
+          {{ isFailed(item) ? "Unavailable" : item.title }}
         </div>
       </div>
     </template>
@@ -35,33 +35,33 @@ import { useCountriesStore } from "../store/countries";
 const router = useRouter();
 const route = useRoute();
 const countriesStore = useCountriesStore();
-const loadingChannelSlug = computed(() => countriesStore.loadingChannelSlug);
-const playingChannelSlug = computed(() => countriesStore.playingChannelSlug);
+const loadingChannelId = computed(() => countriesStore.loadingChannelId);
+const playingChannelId = computed(() => countriesStore.playingChannelId);
 const fetchingChannels = computed(() => countriesStore.fetchingChannels);
-const failedSlugs = computed(() => countriesStore.failedSlugs);
+const failedIds = computed(() => countriesStore.failedIds);
 
 const channel = computed<Channel>({
   get(): Channel {
     const channels = countriesStore.channels;
     const param = route.params.channel;
 
-    return channels.find((c) => c.slug === param) || channels[0];
+    return channels.find((c) => c.id === param) || channels[0];
   },
   set(channel?: Channel) {
     const _channel = channel as Channel;
 
-    if (loadingChannelSlug.value === _channel.slug) {
+    if (loadingChannelId.value === _channel.id) {
       return;
     }
 
-    router.push(
-      `/${route.params.country}/${route.params.place}/${_channel.slug}`
-    );
+    const { country, place } = route.params;
 
-    if (_channel.slug === playingChannelSlug.value) {
+    router.push(`/${country}/${place}/${_channel.id}`);
+
+    if (_channel.id === playingChannelId.value) {
       countriesStore.togglePlay();
     } else {
-      countriesStore.playingChannelSlug = null;
+      countriesStore.playingChannelId = null;
       countriesStore.fetchChannelSrc(_channel);
     }
   },
@@ -78,7 +78,7 @@ watch(
 
       if (!route.params.channel && countriesStore.channels[0]) {
         router.push(
-          `/${route.params.country}/${route.params.place}/${countriesStore.channels[0].slug}`
+          `/${route.params.country}/${route.params.place}/${countriesStore.channels[0].id}`
         );
       }
     }
@@ -88,5 +88,11 @@ watch(
 
 const handleSelect = (item: unknown) => {
   channel.value = item as Channel;
+};
+
+const isFailed = (item: unknown) => {
+  const channel = item as Channel;
+
+  return failedIds.value.includes(channel.id);
 };
 </script>

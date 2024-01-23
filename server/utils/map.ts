@@ -15,5 +15,6 @@ export const mapCountries = (places: Place[]) =>
 export const mapChannels = (channels: Channel[]) =>
   channels.map((channel) => ({
     ...channel,
+    id: channel.url.split("/").pop(),
     slug: createSlug(channel.title),
   }));

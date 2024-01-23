@@ -4,10 +4,10 @@ type State = {
   countries: Country[];
   places: Place[];
   channels: Channel[];
-  failedSlugs: string[];
+  failedIds: string[];
   activeChannel: Channel | null;
-  loadingChannelSlug: string | null;
-  playingChannelSlug: string | null;
+  loadingChannelId: string | null;
+  playingChannelId: string | null;
   fetchingChannels: boolean;
   fetchingPlaces: boolean;
   playing: boolean;
@@ -18,10 +18,10 @@ export const useCountriesStore = defineStore("countriesStore", {
     countries: [],
     places: [],
     channels: [],
-    failedSlugs: [],
+    failedIds: [],
     activeChannel: null,
-    loadingChannelSlug: null,
-    playingChannelSlug: null,
+    loadingChannelId: null,
+    playingChannelId: null,
     fetchingChannels: false,
     fetchingPlaces: true,
     playing: false,
@@ -40,7 +40,7 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.places = places;
       this.fetchingPlaces = false;
     },
-    async fetchChannelsByPlaceId(id: number) {
+    async fetchChannelsByPlaceId(id: string) {
       this.fetchingChannels = true;
       const channels = await $fetch<Channel[]>("/place/" + id);
 
@@ -48,11 +48,9 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.fetchingChannels = false;
     },
     async fetchChannelSrc(channel: Channel) {
-      this.loadingChannelSlug = channel.slug;
+      this.loadingChannelId = channel.id;
 
-      const url = channel?.url || "";
-      const id = url.split("/").pop();
-      const src = await $fetch<string>("/listen/" + id);
+      const src = await $fetch<string>("/listen/" + channel.id);
 
       this.activeChannel = {
         ...channel,
@@ -63,11 +61,11 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.playing = state ?? !this.playing;
     },
     setFailedChannel(channel: Channel) {
-      this.failedSlugs.push(channel.slug);
+      this.failedIds.push(channel.id);
 
-      this.loadingChannelSlug = null;
+      this.loadingChannelId = null;
       this.activeChannel = null;
-      this.playingChannelSlug = null;
+      this.playingChannelId = null;
     },
   },
 });

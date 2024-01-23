@@ -2,12 +2,13 @@ export {};
 
 declare global {
   interface Country {
+    id?: string;
     slug: string;
     title: string;
   }
 
   interface Place {
-    id: number;
+    id: string;
     geo: [number, number];
     url: string;
     size: number;
