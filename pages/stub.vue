@@ -1,1 +1,1 @@
-<template />
+<template><i /></template>

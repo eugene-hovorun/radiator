@@ -1,9 +1,9 @@
 <template>
   <radio-slider
+    v-model="channel"
     title="Channel"
     :items="countriesStore.channels"
     :loading="fetchingChannels"
-    v-model="channel"
   >
     <template #default="{ item }">
       <div
@@ -52,7 +52,7 @@ const channel = computed<Channel>({
     const _channel = channel as Channel;
 
     if (loadingId) {
-      countriesStore.cancelFetchChannelSrc()
+      countriesStore.cancelFetchChannelSrc();
     }
 
     if (loadingId === _channel.id) {
@@ -83,12 +83,12 @@ watch(
 
       if (!route.params.channel && countriesStore.channels[0]) {
         router.replace(
-          `/${route.params.country}/${route.params.place}/${countriesStore.channels[0].id}`
+          `/${route.params.country}/${route.params.place}/${countriesStore.channels[0].id}`,
         );
       }
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const handleSelect = (item: unknown) => {

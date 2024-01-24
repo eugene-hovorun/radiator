@@ -13,7 +13,7 @@
   background-color: transparent;
   border: none;
   text-transform: capitalize;
-  font-family: "Inter";
+  font-family: inherit;
   flex-grow: 1;
   color: var(--color-primary);
   cursor: pointer;

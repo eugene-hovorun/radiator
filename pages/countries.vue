@@ -3,10 +3,10 @@
     <radio-alphabet @select="goToLetter" />
 
     <radio-slider
+      v-model="country"
       title="Country"
       border
       :items="countriesStore.countries"
-      v-model="country"
     >
       <template #default="{ item }">
         <div
@@ -56,7 +56,7 @@ const handleItemClick = (item: unknown) => {
 
 const goToLetter = (letter: string) => {
   const country = countriesStore.countries.find((c) =>
-    c.title.toLowerCase().startsWith(letter)
+    c.title.toLowerCase().startsWith(letter),
   );
 
   if (country) {

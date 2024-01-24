@@ -41,7 +41,7 @@ import "@splidejs/vue-splide/css";
 
 type Item = Country | Place | Channel;
 
-const emit = defineEmits(["update:modelValue"]);
+defineEmits(["update:modelValue"]);
 
 const props = defineProps<{
   items: Item[];
@@ -60,7 +60,7 @@ watch(
       sliderRef.value?.go(findIndex(value));
     });
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const findIndex = (item: Item) =>

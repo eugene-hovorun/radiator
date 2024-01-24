@@ -6,7 +6,7 @@ export function createSlug(title: string) {
   slug = slug.replace(/\s+/g, "-");
 
   // Use the `normalize` function to handle non-Latin characters
-  slug = slug.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  slug = slug.normalize("NFD").replace(/[\u0300-\u036F]/g, "");
 
   // Remove special characters
   slug = slug.replace(/[^\w-]/g, "");

@@ -8,11 +8,17 @@ import AudioMotionAnalyzer from "audiomotion-analyzer";
 import { watch } from "vue";
 
 const emit = defineEmits(["loaded", "play", "error"]);
-const props = defineProps({ src: String, playing: Boolean });
+const props = defineProps({
+  src: {
+    type: String,
+    default: "",
+  },
+  playing: Boolean,
+});
 
 watch(
   () => props.src,
-  (src) => playChannel(src)
+  (src) => playChannel(src),
 );
 
 watch(
@@ -25,7 +31,7 @@ watch(
     } else {
       audio?.pause();
     }
-  }
+  },
 );
 
 const playChannel = (src?: string) => {

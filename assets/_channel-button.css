@@ -28,3 +28,14 @@
 .channel-button:hover svg {
   fill: var(--color-text-light);
 }
+
+.svg-enter-active,
+.svg-leave-active {
+  transition: 0.35s;
+}
+
+.svg-enter,
+.svg-leave-to {
+  transform: scale(1.2);
+  opacity: 0.2;
+}

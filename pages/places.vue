@@ -1,10 +1,10 @@
 <template>
   <radio-slider
+    v-model="place"
     title="City"
     border
     :loading="loading"
     :items="countriesStore.places"
-    v-model="place"
   >
     <template #default="{ item }">
       <div
@@ -23,8 +23,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useCountriesStore } from "../store/countries";
 import { computed, watch } from "vue";
+import { useCountriesStore } from "../store/countries";
 
 const route = useRoute();
 const router = useRouter();
@@ -55,12 +55,12 @@ watch(
 
       if (!route.params.place && countriesStore.places[0]) {
         router.replace(
-          `/${route.params.country}/${countriesStore.places[0].slug}`
+          `/${route.params.country}/${countriesStore.places[0].slug}`,
         );
       }
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const handleItemClick = (item: unknown) => {
