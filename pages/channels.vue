@@ -64,7 +64,7 @@ const channel = computed<Channel>({
     } else {
       const { country, place } = route.params;
 
-      router.push(`/${country}/${place}/${_channel.id}`);
+      router.replace(`/${country}/${place}/${_channel.id}`);
       countriesStore.fetchChannelSrc(_channel);
 
       countriesStore.playingChannelId = null;
@@ -82,7 +82,7 @@ watch(
       await countriesStore.fetchChannelsByPlaceId(placeId);
 
       if (!route.params.channel && countriesStore.channels[0]) {
-        router.push(
+        router.replace(
           `/${route.params.country}/${route.params.place}/${countriesStore.channels[0].id}`
         );
       }

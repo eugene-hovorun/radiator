@@ -45,7 +45,7 @@ const country = computed<Country>({
   },
   set(country?: Country) {
     if (country) {
-      router.push(`/${country.slug}`);
+      router.replace(`/${country.slug}`);
     }
   },
 });
@@ -60,13 +60,13 @@ const goToLetter = (letter: string) => {
   );
 
   if (country) {
-    router.push(`/${country.slug}`);
+    router.replace(`/${country.slug}`);
   }
 };
 
 onMounted(() => {
   if (!route.params.country) {
-    router.push(`/${pickRandomItem(countriesStore.countries).slug}`);
+    router.replace(`/${pickRandomItem(countriesStore.countries).slug}`);
   }
 });
 </script>

@@ -40,7 +40,7 @@ const place = computed<Place>({
   },
   set(place?: Place) {
     if (place) {
-      router.push(`/${route.params.country}/${place.slug}`);
+      router.replace(`/${route.params.country}/${place.slug}`);
     }
   },
 });
@@ -54,7 +54,7 @@ watch(
       await countriesStore.fetchPlacesByCountrySlug(countrySlug);
 
       if (!route.params.place && countriesStore.places[0]) {
-        router.push(
+        router.replace(
           `/${route.params.country}/${countriesStore.places[0].slug}`
         );
       }
