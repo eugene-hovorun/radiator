@@ -1,12 +1,18 @@
 <template>
   <ClientOnly>
-    <div class="radio-slider" :class="{ loading, border }">
-      <div class="slider-title">
-        {{ title }}
-        <span v-if="items.length > 2">
-          {{ findIndex(modelValue) + 1 }} / {{ items.length }}
-        </span>
-      </div>
+    <div class="radio-slider" :class="{ loading }">
+      <radio-alphabet
+        :items="items"
+        :enabled="alphabet"
+        @select="(letter) => $emit('go-to-letter', letter)"
+      >
+        <div class="slider-title">
+          <span>{{ title }}</span>
+          <span v-if="items.length > 2">
+            {{ findIndex(modelValue) + 1 }} / {{ items.length }}
+          </span>
+        </div>
+      </radio-alphabet>
 
       <slider
         ref="sliderRef"
@@ -26,11 +32,11 @@
           <slot :item="item" />
         </slide>
       </slider>
-
-      <div v-if="loading" class="skeleton">
-        <div class="skeleton--title" />
-        <div class="skeleton--range" />
-      </div>
+      <transition name="skeleton" mode="out-in">
+        <div v-if="loading" class="skeleton">
+          <div v-for="index in 5" :key="index" class="skeleton--item" />
+        </div>
+      </transition>
     </div>
   </ClientOnly>
 </template>
@@ -41,14 +47,14 @@ import "@splidejs/vue-splide/css";
 
 type Item = Country | Place | Channel;
 
-defineEmits(["update:modelValue"]);
+defineEmits(["update:modelValue", "go-to-letter"]);
 
 const props = defineProps<{
   items: Item[];
   modelValue: Item;
   title: string;
   loading?: boolean;
-  border?: boolean;
+  alphabet?: boolean;
 }>();
 
 const sliderRef = ref<typeof Slider>();

@@ -1,12 +1,11 @@
 <template>
   <radio-app>
-    <radio-alphabet @select="goToLetter" />
-
     <radio-slider
       v-model="country"
       title="Country"
-      border
+      alphabet
       :items="countriesStore.countries"
+      @go-to-letter="goToCountryByLetter"
     >
       <template #default="{ item }">
         <div
@@ -54,7 +53,7 @@ const handleItemClick = (item: unknown) => {
   country.value = item as Country;
 };
 
-const goToLetter = (letter: string) => {
+const goToCountryByLetter = (letter: string) => {
   const country = countriesStore.countries.find((c) =>
     c.title.toLowerCase().startsWith(letter),
   );

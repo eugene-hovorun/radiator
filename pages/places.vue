@@ -2,9 +2,10 @@
   <radio-slider
     v-model="place"
     title="City"
-    border
+    alphabet
     :loading="loading"
     :items="countriesStore.places"
+    @go-to-letter="goToCityByLetter"
   >
     <template #default="{ item }">
       <div
@@ -65,5 +66,17 @@ watch(
 
 const handleItemClick = (item: unknown) => {
   place.value = item as Place;
+};
+
+const goToCityByLetter = (letter: string) => {
+  const place = countriesStore.places.find((p) =>
+    p.title.toLowerCase().startsWith(letter),
+  );
+
+  if (place) {
+    const country = route.params.country;
+
+    router.replace(`/${country}/${place.slug}`);
+  }
 };
 </script>

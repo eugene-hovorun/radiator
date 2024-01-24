@@ -1,11 +1,13 @@
 .alphabet {
-  margin: 0 auto;
+  min-height: 32px;
+  margin: 0 auto 12px;
   padding: 4px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: var(--color-border);
   border-radius: 24px;
+  box-sizing: border-box;
 }
 
 .alphabet__letter {
