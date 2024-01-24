@@ -29,9 +29,17 @@ watch(
 );
 
 const playChannel = (src?: string) => {
-  if (!src) return;
-
+  const canvas = document.querySelector("#canvas-container") as HTMLElement;
   const container = document.querySelector("#audio-container") as HTMLElement;
+  const audio = document.querySelector("#audio") as HTMLAudioElement;
+
+  canvas.innerHTML = "";
+  audio?.pause();
+  audio?.parentElement?.removeChild(audio);
+
+  if (!src) {
+    return;
+  }
 
   const player = Object.assign(document.createElement("audio"), {
     id: "audio",
@@ -50,13 +58,6 @@ const playChannel = (src?: string) => {
     },
   });
 
-  container.innerHTML = "";
-  container.appendChild(player);
-
-  const canvas = document.querySelector("#canvas-container") as HTMLElement;
-
-  canvas.innerHTML = "";
-
   const instance = new AudioMotionAnalyzer(canvas, {
     source: player,
     showScaleX: false,
@@ -65,6 +66,7 @@ const playChannel = (src?: string) => {
     gradient: "steelblue",
   });
 
+  container.appendChild(player);
   instance.start();
 
   // instance.gradient = "orangered";

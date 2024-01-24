@@ -48,21 +48,26 @@ const channel = computed<Channel>({
     return channels.find((c) => c.id === param) || channels[0];
   },
   set(channel?: Channel) {
+    const loadingId = loadingChannelId.value;
     const _channel = channel as Channel;
 
-    if (loadingChannelId.value === _channel.id) {
-      return;
+    if (loadingId) {
+      countriesStore.cancelFetchChannelSrc()
     }
 
-    const { country, place } = route.params;
-
-    router.push(`/${country}/${place}/${_channel.id}`);
+    if (loadingId === _channel.id) {
+      return;
+    }
 
     if (_channel.id === playingChannelId.value) {
       countriesStore.togglePlay();
     } else {
-      countriesStore.playingChannelId = null;
+      const { country, place } = route.params;
+
+      router.push(`/${country}/${place}/${_channel.id}`);
       countriesStore.fetchChannelSrc(_channel);
+
+      countriesStore.playingChannelId = null;
     }
   },
 });

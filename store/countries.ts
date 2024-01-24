@@ -11,6 +11,7 @@ type State = {
   fetchingChannels: boolean;
   fetchingPlaces: boolean;
   playing: boolean;
+  abortController: AbortController | null;
 };
 
 export const useCountriesStore = defineStore("countriesStore", {
@@ -25,6 +26,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     fetchingChannels: false,
     fetchingPlaces: true,
     playing: false,
+    abortController: null,
   }),
   actions: {
     async fetchCountries() {
@@ -32,6 +34,7 @@ export const useCountriesStore = defineStore("countriesStore", {
 
       this.countries = countries;
     },
+
     async fetchPlacesByCountrySlug(slug: string) {
       this.fetchingPlaces = true;
 
@@ -40,6 +43,7 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.places = places;
       this.fetchingPlaces = false;
     },
+
     async fetchChannelsByPlaceId(id: string) {
       this.fetchingChannels = true;
       const channels = await $fetch<Channel[]>("/place/" + id);
@@ -47,19 +51,32 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.channels = channels;
       this.fetchingChannels = false;
     },
-    async fetchChannelSrc(channel: Channel) {
+
+    fetchChannelSrc(channel: Channel) {
       this.loadingChannelId = channel.id;
+      console.log("fetchChannelSrc", channel.id);
+      this.abortController = new AbortController();
 
-      const src = await $fetch<string>("/listen/" + channel.id);
-
-      this.activeChannel = {
-        ...channel,
-        src,
-      };
+      $fetch<string>("/listen/" + channel.id, {
+        signal: this.abortController.signal,
+      })
+        .then((src) => (this.activeChannel = { ...channel, src }))
+        .catch(() => {});
     },
+
+    cancelFetchChannelSrc() {
+      console.log("cancelFetchChannelSrc");
+      this.abortController?.abort();
+
+      this.abortController = null;
+      this.loadingChannelId = null;
+      this.activeChannel = null;
+    },
+
     togglePlay(state?: boolean) {
       this.playing = state ?? !this.playing;
     },
+
     setFailedChannel(channel: Channel) {
       this.failedIds.push(channel.id);
 
