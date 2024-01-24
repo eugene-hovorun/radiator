@@ -54,7 +54,6 @@ export const useCountriesStore = defineStore("countriesStore", {
 
     fetchChannelSrc(channel: Channel) {
       this.loadingChannelId = channel.id;
-      console.log("fetchChannelSrc", channel.id);
       this.abortController = new AbortController();
 
       $fetch<string>("/listen/" + channel.id, {
@@ -65,7 +64,6 @@ export const useCountriesStore = defineStore("countriesStore", {
     },
 
     cancelFetchChannelSrc() {
-      console.log("cancelFetchChannelSrc");
       this.abortController?.abort();
 
       this.abortController = null;
