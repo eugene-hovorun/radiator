@@ -1,6 +1,7 @@
 .alphabet {
   min-height: 32px;
   margin: 0 auto 12px;
+  max-width: calc(100% - 24px);
   padding: 4px;
   display: flex;
   justify-content: space-around;
