@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     "@pinia/nuxt",
+    "nuxt-vercel-analytics",
     [
       "@nuxtjs/google-fonts",
       {
