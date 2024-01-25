@@ -33,7 +33,7 @@
         </slide>
       </slider>
       <transition name="skeleton" mode="out-in">
-        <div v-if="loading" class="skeleton">
+        <div v-if="loading && showSkeleton" class="skeleton">
           <div v-for="index in 5" :key="index" class="skeleton--item" />
         </div>
       </transition>
@@ -58,6 +58,7 @@ const props = defineProps<{
 }>();
 
 const sliderRef = ref<typeof Slider>();
+const showSkeleton = ref(false);
 
 watch(
   () => props.modelValue,
@@ -68,6 +69,12 @@ watch(
   },
   { immediate: true },
 );
+
+onMounted(() => {
+  setTimeout(() => {
+    showSkeleton.value = true;
+  }, 500);
+});
 
 const findIndex = (item: Item) =>
   props.items.findIndex((i) => i.slug === item?.slug);
