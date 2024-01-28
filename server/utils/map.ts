@@ -1,4 +1,5 @@
 import { createSlug } from "./slug";
+import { colorsMap } from "./data/colorsMap";
 
 export const mapPlaces = (places: Place[]) =>
   places.map((place) => ({
@@ -9,7 +10,16 @@ export const mapPlaces = (places: Place[]) =>
 
 export const mapCountries = (places: Place[]) =>
   [...new Set(places.map((place) => place.country).sort())].map(
-    (country: string) => ({ title: country, slug: createSlug(country) }),
+    (country: string) => {
+      const slug = createSlug(country);
+      const colors = colorsMap[slug]?.colors || [];
+
+      return {
+        title: country,
+        colors,
+        slug,
+      };
+    },
   );
 
 export const mapChannels = (channels: Channel[]) =>
