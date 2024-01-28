@@ -3,6 +3,7 @@ export {};
 declare global {
   interface Country {
     id?: string;
+    colors: string[];
     slug: string;
     title: string;
   }

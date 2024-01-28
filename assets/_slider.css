@@ -152,7 +152,6 @@
   opacity: 0;
 }
 
-
 .splide__track::before,
 .splide__track::after {
   content: "";
