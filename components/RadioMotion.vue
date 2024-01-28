@@ -7,14 +7,14 @@
 import AudioMotionAnalyzer from "audiomotion-analyzer";
 import { watch } from "vue";
 
+interface Props {
+  src?: string;
+  colors: string[];
+  playing?: boolean;
+}
+
 const emit = defineEmits(["loaded", "play", "error"]);
-const props = defineProps({
-  src: {
-    type: String,
-    default: "",
-  },
-  playing: Boolean,
-});
+const props = defineProps<Props>();
 
 watch(
   () => props.src,
@@ -52,7 +52,7 @@ const playChannel = (src?: string) => {
     src,
     autoplay: true,
     crossOrigin: "anonymous",
-    volume: 0.2,
+    volume: 0.4,
     oncanplaythrough() {
       emit("loaded");
     },
@@ -64,7 +64,7 @@ const playChannel = (src?: string) => {
     },
   });
 
-  const instance = new AudioMotionAnalyzer(canvas, {
+  const analyzer = new AudioMotionAnalyzer(canvas, {
     source: player,
     showScaleX: false,
     overlay: true,
@@ -72,9 +72,16 @@ const playChannel = (src?: string) => {
     gradient: "steelblue",
   });
 
-  container.appendChild(player);
-  instance.start();
+  if (props.colors.length) {
+    analyzer.registerGradient("country", {
+      bgColor: "transparent",
+      colorStops: [...props.colors],
+    });
 
-  // instance.gradient = "orangered";
+    analyzer.gradient = "country";
+  }
+
+  container.appendChild(player);
+  analyzer.start();
 };
 </script>

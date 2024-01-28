@@ -5,6 +5,7 @@
     <radio-motion
       :src="src"
       :playing="playing"
+      :colors="colors"
       @loaded="countriesStore.loadingChannelId = null"
       @play="handlePlay"
       @error="channel && countriesStore.setFailedChannel(channel)"
@@ -18,7 +19,7 @@ import { useCountriesStore } from "../store/countries";
 
 useHead({
   title: "Radiätor",
-  style: [{ innerHTML: "html { background: #222C35; }" }],
+  style: [{ innerHTML: "html { background: var(--color-bg); }" }],
 });
 
 useSeoMeta({
@@ -33,10 +34,19 @@ useSeoMeta({
   twitterCard: "summary_large_image",
 });
 
+const route = useRoute();
 const countriesStore = useCountriesStore();
 const channel = computed(() => countriesStore.activeChannel);
 const src = computed(() => channel.value?.src);
 const playing = computed(() => countriesStore.playing);
+
+const colors = computed(() => {
+  const countries = countriesStore.countries;
+  const param = route.params.country;
+  const country = countries.find((c) => c.slug === param);
+
+  return country?.colors || [];
+});
 
 const handlePlay = () => {
   if (channel.value) {

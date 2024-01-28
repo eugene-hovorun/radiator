@@ -164,12 +164,12 @@
 
 .splide__track::before {
   left: 0;
-  background: linear-gradient(to right, #222c35 0%, transparent 100%);
+  background: linear-gradient(to right, var(--color-bg) 0%, transparent 100%);
   z-index: 1;
 }
 
 .splide__track::after {
   right: 0;
-  background: linear-gradient(to left, #222c35 0%, transparent 100%);
+  background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
   z-index: 1;
 }
