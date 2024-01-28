@@ -1,6 +1,8 @@
 <template>
   <main>
-    <slot />
+    <div class="sliders-z-index">
+      <slot />
+    </div>
 
     <radio-motion
       :src="src"

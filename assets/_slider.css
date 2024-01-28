@@ -53,6 +53,7 @@
   cursor: pointer;
   overflow: hidden;
   box-sizing: border-box;
+  backdrop-filter: blur(10px);
 }
 
 .slide--active {

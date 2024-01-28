@@ -10,3 +10,8 @@ main {
 .radio-slider ~ .radio-slider {
   margin-top: 12px;
 }
+
+.sliders-z-index {
+  position: relative;
+  z-index: 1;
+}
