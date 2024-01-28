@@ -29,8 +29,7 @@ useSeoMeta({
     "App that lets you listen to radio stations from around the world.",
   ogDescription:
     "App that lets you listen to radio stations from around the world.",
-  ogImage:
-    "https://github.com/hvianna/audioMotion-analyzer/blob/master/img/gradient-steelblue.png?raw=true",
+  ogImage: "/og.png",
   twitterCard: "summary_large_image",
 });
 
