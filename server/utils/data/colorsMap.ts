@@ -1889,7 +1889,7 @@ export const colorsMap: {
     title: "Ukraine",
     slug: "ukraine",
     iso: "ua",
-    colors: ["gold", "#0057b8"],
+    colors: ["#0057b8", "gold"],
   },
   "united-arab-emirates": {
     title: "United Arab Emirates",
