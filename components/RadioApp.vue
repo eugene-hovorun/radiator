@@ -12,6 +12,8 @@
       @play="handlePlay"
       @error="channel && countriesStore.setFailedChannel(channel)"
     />
+
+    <radio-bar />
   </main>
 </template>
 

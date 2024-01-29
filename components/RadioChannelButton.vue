@@ -9,14 +9,6 @@
       </svg>
 
       <svg v-else-if="loading" viewBox="0 0 42 42" style="width: 100%">
-        <path
-          v-if="showCancel"
-          d="M0.757812 11.2428L6.00081 5.99984L11.2438 11.2428M11.2438 0.756836L5.99981 5.99984L0.757812 0.756836"
-          transform="translate(12.5, 12) scale(1.4)"
-          fill="none"
-          stroke="var(--color-primary)"
-          stroke-width="2"
-        />
         <circle
           cx="21"
           cy="21"
@@ -49,29 +41,9 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
+defineProps({
   playing: Boolean,
   loading: Boolean,
   failed: Boolean,
 });
-
-const timer = ref<number | null>(null);
-const showCancel = ref(false);
-
-watch(
-  () => props.loading,
-  (loading) => {
-    if (loading) {
-      timer.value = window.setTimeout(() => {
-        showCancel.value = true;
-      }, 5000);
-    } else {
-      if (timer.value) {
-        clearTimeout(timer.value);
-      }
-
-      showCancel.value = false;
-    }
-  },
-);
 </script>
