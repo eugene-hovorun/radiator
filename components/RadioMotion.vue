@@ -75,7 +75,10 @@ const playChannel = (src?: string) => {
   if (props.colors.length) {
     analyzer.registerGradient("country", {
       bgColor: "transparent",
-      colorStops: [...props.colors],
+      colorStops: [...props.colors].reverse().map((color, i) => ({
+        color,
+        pos: 1 / props.colors.length + i / props.colors.length,
+      })),
     });
 
     analyzer.gradient = "country";

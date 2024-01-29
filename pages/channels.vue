@@ -42,20 +42,10 @@ const failedIds = computed(() => countriesStore.failedIds);
 
 const channel = computed<Channel>({
   get(): Channel {
-    try {
-      const channels = countriesStore.channels;
-      const param = route.params.channel;
-      const channel = channels.find((c) => c.id === param);
+    const channels = countriesStore.channels;
+    const param = route.params.channel;
 
-      if (param && !channel) {
-        throw new Error("Channel not found");
-      } else {
-        return channel || channels[0];
-      }
-    } catch (error) {
-      router.replace("/404");
-      return countriesStore.channels[0];
-    }
+    return channels.find((c) => c.id === param) || channels[0];
   },
   set(channel?: Channel) {
     const loadingId = loadingChannelId.value;

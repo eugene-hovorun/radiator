@@ -34,20 +34,10 @@ const loading = computed(() => countriesStore.fetchingPlaces);
 
 const place = computed<Place>({
   get(): Place {
-    try {
-      const places = countriesStore.places;
-      const param = route.params.place;
-      const place = places.find((p) => p.slug === param);
+    const places = countriesStore.places;
+    const param = route.params.place;
 
-      if (param && !place) {
-        throw new Error("Place not found");
-      } else {
-        return place || places[0];
-      }
-    } catch (error) {
-      router.replace("/404");
-      return countriesStore.places[0];
-    }
+    return places.find((p) => p.slug === param) || places[0];
   },
   set(place?: Place) {
     if (place) {
