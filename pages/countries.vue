@@ -36,11 +36,20 @@ await callOnce(countriesStore.fetchCountries);
 
 const country = computed<Country>({
   get(): Country {
-    const countries = countriesStore.countries;
-    const param = route.params.country;
-    const country = countries.find((c) => c.slug === param);
+    try {
+      const countries = countriesStore.countries;
+      const param = route.params.country;
+      const country = countries.find((c) => c.slug === param);
 
-    return country || countries[0];
+      if (param && !country) {
+        throw new Error("Country not found");
+      } else {
+        return country || countries[0];
+      }
+    } catch (error) {
+      router.replace("/404");
+      return countriesStore.countries[0];
+    }
   },
   set(country?: Country) {
     if (country) {

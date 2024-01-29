@@ -16,24 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import "~/assets/main.css";
 import { useCountriesStore } from "../store/countries";
-
-useHead({
-  title: "Radiätor",
-  style: [{ innerHTML: "html { background: var(--color-bg); }" }],
-});
-
-useSeoMeta({
-  title: "Radiator",
-  ogTitle: "Radiator",
-  description:
-    "App that lets you listen to radio stations from around the world.",
-  ogDescription:
-    "App that lets you listen to radio stations from around the world.",
-  ogImage: "/og.png",
-  twitterCard: "summary_large_image",
-});
 
 const route = useRoute();
 const countriesStore = useCountriesStore();

@@ -28,5 +28,9 @@ export default <RouterConfig>{
         },
       ],
     },
+    {
+      path: "/404",
+      component: () => import("../pages/404.vue").then((r) => r.default || r),
+    },
   ],
 };
