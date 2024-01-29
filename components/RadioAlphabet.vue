@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-type Item = Country | Place;
+type Item = Country | Place | Channel;
 
 const props = defineProps({
   enabled: Boolean,
