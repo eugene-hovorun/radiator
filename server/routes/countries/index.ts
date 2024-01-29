@@ -6,6 +6,8 @@ export default defineEventHandler(async (): Promise<Place[] | unknown> => {
     const places = mapPlaces(list);
     const countries = mapCountries(places);
 
+    console.log(countries);
+
     return countries;
   } catch (error) {
     console.error("Error fetching data:", error);

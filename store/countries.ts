@@ -35,10 +35,10 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.countries = countries;
     },
 
-    async fetchPlacesByCountrySlug(slug: string) {
+    async fetchPlacesByCountryId(id: string) {
       this.fetchingPlaces = true;
 
-      const places = await $fetch<Place[]>("/places/" + slug);
+      const places = await $fetch<Place[]>("/places/" + id);
 
       this.places = places;
       this.fetchingPlaces = false;

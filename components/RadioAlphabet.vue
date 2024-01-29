@@ -44,7 +44,9 @@ const emit = defineEmits(["select"]);
 const showLetters = computed(() => props.enabled && props.items.length > 10);
 
 const updateFirstLetters = () => {
-  if (props.items[0] && !props.items[0].id) {
+  const isCountry = () => props.items.some((item) => "colors" in item);
+
+  if (isCountry()) {
     lettersMatrix.value = [
       ["a", "c", "e", "g", "i"],
       ["k", "m", "p", "s", "u"],

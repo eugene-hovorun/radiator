@@ -49,10 +49,10 @@ const place = computed<Place>({
 watch(
   () => route.params.country,
   async (country) => {
-    const countrySlug = Array.isArray(country) ? country[0] : country;
+    const countryId = Array.isArray(country) ? country[0] : country;
 
-    if (countrySlug) {
-      await countriesStore.fetchPlacesByCountrySlug(countrySlug);
+    if (countryId) {
+      await countriesStore.fetchPlacesByCountryId(countryId);
 
       if (!route.params.place && countriesStore.places[0]) {
         router.replace(

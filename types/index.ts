@@ -17,7 +17,7 @@ declare global {
     title: string;
     country: string;
     slug: string;
-    countrySlug: string;
+    countryId: string;
   }
 
   interface PlacesResponse {

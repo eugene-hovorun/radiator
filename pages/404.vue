@@ -21,7 +21,7 @@ import { useCountriesStore } from "../store/countries";
 const router = useRouter();
 const countriesStore = useCountriesStore();
 const goHome = () => {
-  router.replace(`/${pickRandomItem(countriesStore.countries).slug}`);
+  router.replace(`/${pickRandomItem(countriesStore.countries).id}`);
 };
 
 await callOnce(countriesStore.fetchCountries);

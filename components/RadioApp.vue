@@ -27,7 +27,7 @@ const playing = computed(() => countriesStore.playing);
 const colors = computed(() => {
   const countries = countriesStore.countries;
   const param = route.params.country;
-  const country = countries.find((c) => c.slug === param);
+  const country = countries.find((c) => c.id === param);
 
   return country?.colors || [];
 });

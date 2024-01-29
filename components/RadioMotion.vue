@@ -72,6 +72,8 @@ const playChannel = (src?: string) => {
     gradient: "steelblue",
   });
 
+  console.log(props.colors);
+
   if (props.colors.length) {
     analyzer.registerGradient("country", {
       bgColor: "transparent",

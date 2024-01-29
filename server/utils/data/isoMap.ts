@@ -1,4 +1,6 @@
-export const isoMap = {
+export const isoMap: {
+  [key: string]: string;
+} = {
   afghanistan: "AF",
   albania: "AL",
   algeria: "DZ",

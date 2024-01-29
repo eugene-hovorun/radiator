@@ -39,7 +39,7 @@ const country = computed<Country>({
     try {
       const countries = countriesStore.countries;
       const param = route.params.country;
-      const country = countries.find((c) => c.slug === param);
+      const country = countries.find((c) => c.id === param);
 
       if (param && !country) {
         throw new Error("Country not found");
@@ -53,7 +53,7 @@ const country = computed<Country>({
   },
   set(country?: Country) {
     if (country) {
-      router.replace(`/${country.slug}`);
+      router.replace(`/${country.id}`);
     }
   },
 });
@@ -68,13 +68,13 @@ const goToCountryByLetter = (letter: string) => {
   );
 
   if (country) {
-    router.replace(`/${country.slug}`);
+    router.replace(`/${country.id}`);
   }
 };
 
 onMounted(() => {
   if (!route.params.country) {
-    router.replace(`/${pickRandomItem(countriesStore.countries).slug}`);
+    router.replace(`/${pickRandomItem(countriesStore.countries).id}`);
   }
 });
 </script>
