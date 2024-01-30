@@ -67,7 +67,7 @@
 }
 
 .slide--channel {
-  border: 2px solid transparent;
+  border: 2px solid var(--color-primary);
   padding-left: 0;
   gap: 8px;
 }
@@ -89,6 +89,10 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.slide--channel .channel-button {
+  margin-right: auto;
 }
 
 .skeleton {

@@ -19,15 +19,12 @@
       </template>
 
       <div class="bar-actions">
-        <radio-channel-button @click="() => countriesStore.toggleDrawer(true)">
-          <svg viewBox="0 0 17 13" fill="none" style="width: 70%">
-            <path
-              d="M1.38281 11.1348H15.3828M1.38281 6.13477H15.3828M1.38281 1.13477H15.3828"
-              stroke="var(--color-text-light)"
-              stroke-width="2"
-            />
-          </svg>
-        </radio-channel-button>
+        <base-icon-button
+          name="bx:menu-alt-right"
+          size="1.5"
+          dynamic
+          @click="() => countriesStore.toggleDrawer(true)"
+        />
       </div>
     </div>
   </div>
@@ -64,3 +61,57 @@ const togglePlay = () => {
   countriesStore.togglePlay();
 };
 </script>
+
+<style scoped>
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-border);
+  box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.5);
+}
+
+.bar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 12px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.channel-button {
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+}
+
+.bar-country {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-primary);
+}
+
+.bar-flag {
+  width: 24px;
+  aspect-ratio: 3/4;
+}
+
+.bar-channel {
+  max-width: 260px;
+  height: 17px;
+  font-size: 14px;
+  color: var(--color-text-light);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bar-actions {
+  margin-left: auto;
+}
+</style>

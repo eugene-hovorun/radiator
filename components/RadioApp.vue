@@ -15,7 +15,7 @@
 
     <radio-bar />
 
-    <radio-drawer />
+    <drawer-wrapper />
   </main>
 </template>
 
