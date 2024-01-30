@@ -26,6 +26,7 @@
 <script lang="ts" setup>
 import { computed, watch } from "vue";
 import { useCountriesStore } from "../store/countries";
+import { pickRandomItem } from "../store/utils";
 
 const route = useRoute();
 const router = useRouter();
@@ -37,7 +38,7 @@ const place = computed<Place>({
     const places = countriesStore.places;
     const param = route.params.place;
 
-    return places.find((p) => p.slug === param) || places[0];
+    return places.find((p) => p.slug === param) || pickRandomItem(places);
   },
   set(place?: Place) {
     if (place) {
@@ -53,11 +54,10 @@ watch(
 
     if (countryId) {
       await countriesStore.fetchPlacesByCountryId(countryId);
+      const randomPlace = pickRandomItem(countriesStore.places);
 
-      if (!route.params.place && countriesStore.places[0]) {
-        router.replace(
-          `/${route.params.country}/${countriesStore.places[0].slug}`,
-        );
+      if (!route.params.place && randomPlace) {
+        router.replace(`/${route.params.country}/${randomPlace.slug}`);
       }
     }
   },

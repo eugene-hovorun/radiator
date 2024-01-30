@@ -31,6 +31,7 @@
 
 <script lang="ts" setup>
 import { useCountriesStore } from "../store/countries";
+import { pickRandomItem } from "../store/utils";
 
 const router = useRouter();
 const route = useRoute();
@@ -45,7 +46,7 @@ const channel = computed<Channel>({
     const channels = countriesStore.channels;
     const param = route.params.channel;
 
-    return channels.find((c) => c.id === param) || channels[0];
+    return channels.find((c) => c.id === param) || pickRandomItem(channels);
   },
   set(channel?: Channel) {
     const loadingId = loadingChannelId.value;
@@ -80,20 +81,21 @@ watch(
 
     if (placeId) {
       await countriesStore.fetchChannelsByPlaceId(placeId);
+      const randomChannel = pickRandomItem(countriesStore.channels);
 
       if (countriesStore.autoplay) {
-        const channel = countriesStore.channels.find(
-          (c) => c.id === route.params.channel,
-        );
+        const channel =
+          countriesStore.channels.find((c) => c.id === route.params.channel) ||
+          randomChannel;
 
         if (channel) {
           countriesStore.fetchChannelSrc(channel);
           countriesStore.playingChannelId = null;
           countriesStore.autoplay = false;
         }
-      } else if (!route.params.channel && countriesStore.channels[0]) {
+      } else if (!route.params.channel && randomChannel) {
         router.replace(
-          `/${route.params.country}/${route.params.place}/${countriesStore.channels[0].id}`,
+          `/${route.params.country}/${route.params.place}/${randomChannel.id}`,
         );
       }
     }

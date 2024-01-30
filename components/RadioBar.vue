@@ -20,6 +20,13 @@
 
       <div class="bar-actions">
         <base-icon-button
+          name="ion:shuffle-outline"
+          size="1.2"
+          dynamic
+          @click="shuffle"
+        />
+
+        <base-icon-button
           v-if="activeChannel"
           :name="isFavorite ? 'ion:heart-dislike-outline' : 'ion:heart-outline'"
           size="1.2"
@@ -40,7 +47,9 @@
 
 <script lang="ts" setup>
 import { useCountriesStore } from "../store/countries";
+import { pickRandomItem } from "../store/utils";
 
+const router = useRouter();
 const route = useRoute();
 const countriesStore = useCountriesStore();
 const loadingChannelId = computed(() => countriesStore.loadingChannelId);
@@ -89,6 +98,11 @@ const toggleFavorite = () => {
     title,
     countryId,
   });
+};
+
+const shuffle = () => {
+  router.replace(`/${pickRandomItem(countriesStore.countries).id}`);
+  countriesStore.autoplay = true;
 };
 </script>
 
