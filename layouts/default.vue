@@ -1,5 +1,5 @@
 <template>
-  <slot />
+  <slot v-if="!showSpinner" />
 
   <transition name="skeleton">
     <radio-loading v-if="showSpinner" />
