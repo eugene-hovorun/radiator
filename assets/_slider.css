@@ -1,6 +1,6 @@
 .radio-slider {
   position: relative;
-  min-height: 84px;
+  min-height: 78px;
   margin: auto;
   box-sizing: border-box;
 }
@@ -28,7 +28,7 @@
 }
 
 .splide__arrow svg {
-  fill: var(--color-border);
+  fill: var(--color-text-dark);
 }
 
 .splide__arrow--prev {
@@ -44,10 +44,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 34px;
   text-align: center;
   color: var(--color-text-light);
-  font-size: 14px;
+  font-size: 12px;
   padding: 8px 16px;
   border-radius: 24px;
   cursor: pointer;
@@ -95,7 +95,7 @@
   position: absolute;
   display: flex;
   gap: 8px;
-  height: 40px;
+  height: 34px;
   z-index: 1;
   bottom: 0;
   left: 40px;
@@ -124,11 +124,6 @@
   background: var(--color-primary);
   border-radius: 24px;
   animation: pulse 4s infinite;
-}
-
-.skeleton--range {
-  height: 40px;
-  width: 100%;
 }
 
 @keyframes pulse {
