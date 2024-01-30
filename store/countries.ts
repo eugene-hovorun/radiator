@@ -9,6 +9,7 @@ type State = {
   activeChannel: Channel | null;
   loadingChannelId: string | null;
   playingChannelId: string | null;
+  favoriteChannels: FavoriteChannel[];
   fetchingChannels: boolean;
   fetchingPlaces: boolean;
   playing: boolean;
@@ -26,6 +27,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     activeChannel: null,
     loadingChannelId: null,
     playingChannelId: null,
+    favoriteChannels: [],
     fetchingChannels: false,
     fetchingPlaces: true,
     playing: false,
@@ -92,22 +94,47 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.showDrawer = show ?? !this.showDrawer;
     },
 
-    initTheme() {
-      const storedValue = localStorage.getItem("radio-theme") as Theme["value"];
-      const storedTheme = storedValue || themes[0].value;
+    applyStoredData() {
+      const storedFavorites = localStorage.getItem("radio-favorites");
+      const storedThemeValue = localStorage.getItem(
+        "radio-theme",
+      ) as Theme["value"];
+      const theme = storedThemeValue || themes[0].value;
+      const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
 
-      if (!storedValue) {
-        localStorage.setItem("radio-theme", storedTheme);
+      if (!storedThemeValue) {
+        localStorage.setItem("radio-theme", theme);
       }
 
-      this.currentThemeValue = storedTheme;
-      document.documentElement.setAttribute("data-theme", storedTheme);
+      if (!storedFavorites) {
+        localStorage.setItem("radio-favorites", JSON.stringify(favorites));
+      }
+
+      this.favoriteChannels = favorites;
+      this.currentThemeValue = theme;
+
+      document.documentElement.setAttribute("data-theme", theme);
     },
 
     setTheme(theme: Theme["value"]) {
       localStorage.setItem("radio-theme", theme);
       document.documentElement.setAttribute("data-theme", theme);
       this.currentThemeValue = theme;
+    },
+
+    toggleFavorite(channel: FavoriteChannel) {
+      const index = this.favoriteChannels.findIndex((c) => c.id === channel.id);
+
+      if (index === -1) {
+        this.favoriteChannels.push(channel);
+      } else {
+        this.favoriteChannels.splice(index, 1);
+      }
+
+      localStorage.setItem(
+        "radio-favorites",
+        JSON.stringify(this.favoriteChannels),
+      );
     },
   },
 });

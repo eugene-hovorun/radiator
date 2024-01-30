@@ -46,6 +46,6 @@ const handlePlay = () => {
 };
 
 onMounted(() => {
-  countriesStore.initTheme();
+  countriesStore.applyStoredData();
 });
 </script>

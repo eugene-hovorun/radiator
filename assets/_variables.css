@@ -7,8 +7,8 @@
 }
 
 :root[data-theme="orangered"] {
-  --color-bg: #3E2F29;
-  --color-primary: #F64504;
+  --color-bg: #3e2f29;
+  --color-primary: #f64504;
   --color-text-dark: rgb(51, 19, 6);
   --color-text-light: #ffffff;
   --color-border: #411b0d;

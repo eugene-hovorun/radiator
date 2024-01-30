@@ -36,6 +36,13 @@ declare global {
     src: string;
   }
 
+  interface FavoriteChannel {
+    id: string;
+    url: string;
+    title: string;
+    countryId: string;
+  }
+
   interface Theme {
     title: "Steel Blue" | "Orange Red" | "Flag palette";
     value: "steelblue" | "orangered" | "flag";

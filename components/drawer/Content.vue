@@ -11,7 +11,14 @@
         />
       </template>
 
-      <!-- <template #favorites> favorites </template> -->
+      <template #favorites>
+        <drawer-favorite
+          v-for="channel in favoriteChannels"
+          :key="channel.id"
+          :channel="channel"
+          @click="goToChannel(channel.url)"
+        />
+      </template>
     </u-accordion>
   </div>
 </template>
@@ -20,7 +27,9 @@
 import { useCountriesStore } from "../../store/countries";
 import { themes } from "~/assets/themes";
 
+const router = useRouter();
 const countriesStore = useCountriesStore();
+const favoriteChannels = computed(() => countriesStore.favoriteChannels);
 
 const items = [
   {
@@ -29,18 +38,23 @@ const items = [
     defaultOpen: true,
     slot: "theme",
   },
-  // {
-  //   label: "Favorites",
-  //   icon: "i-heroicons-heart",
-  //   defaultOpen: false,
-  //   slot: "favorites",
-  // },
+  {
+    label: "Favorites",
+    icon: "i-heroicons-heart",
+    defaultOpen: true,
+    slot: "favorites",
+  },
 ];
 
 const currentThemeValue = computed({
   get: () => countriesStore.currentThemeValue,
   set: (value) => countriesStore.setTheme(value),
 });
+
+const goToChannel = (url: string) => {
+  countriesStore.toggleDrawer(false);
+  router.push(url);
+};
 </script>
 
 <style>

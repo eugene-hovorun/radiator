@@ -20,8 +20,16 @@
 
       <div class="bar-actions">
         <base-icon-button
+          v-if="activeChannel"
+          :name="isFavorite ? 'ion:heart-dislike-outline' : 'ion:heart-outline'"
+          size="1.2"
+          dynamic
+          @click="toggleFavorite"
+        />
+
+        <base-icon-button
           name="bx:menu-alt-right"
-          size="1.5"
+          size="1.2"
           dynamic
           @click="() => countriesStore.toggleDrawer(true)"
         />
@@ -37,9 +45,14 @@ const route = useRoute();
 const countriesStore = useCountriesStore();
 const loadingChannelId = computed(() => countriesStore.loadingChannelId);
 const activeChannel = computed(() => countriesStore.activeChannel);
+const favoriteChannels = computed(() => countriesStore.favoriteChannels);
 
 const flagSrc = ref("");
 const countryTitle = ref("");
+const isFavorite = computed(() => {
+  const channelId = activeChannel.value?.id;
+  return channelId && favoriteChannels.value.some((c) => c.id === channelId);
+});
 
 watch(
   () => activeChannel.value,
@@ -59,6 +72,23 @@ const togglePlay = () => {
   }
 
   countriesStore.togglePlay();
+};
+
+const toggleFavorite = () => {
+  if (!activeChannel.value) {
+    return;
+  }
+
+  const country = route.params.country;
+  const countryId = Array.isArray(country) ? country[0] : country;
+  const { id, title } = activeChannel.value;
+
+  countriesStore.toggleFavorite({
+    id,
+    url: route.fullPath,
+    title,
+    countryId,
+  });
 };
 </script>
 
@@ -113,5 +143,8 @@ const togglePlay = () => {
 
 .bar-actions {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 </style>
