@@ -8,6 +8,7 @@
       :src="src"
       :playing="playing"
       :colors="colors"
+      :theme="currentThemeValue"
       @loaded="countriesStore.loadingChannelId = null"
       @play="handlePlay"
       @error="channel && countriesStore.setFailedChannel(channel)"
@@ -27,6 +28,7 @@ const countriesStore = useCountriesStore();
 const channel = computed(() => countriesStore.activeChannel);
 const src = computed(() => channel.value?.src);
 const playing = computed(() => countriesStore.playing);
+const currentThemeValue = computed(() => countriesStore.currentThemeValue);
 
 const colors = computed(() => {
   const countries = countriesStore.countries;
@@ -42,4 +44,8 @@ const handlePlay = () => {
     countriesStore.togglePlay(true);
   }
 };
+
+onMounted(() => {
+  countriesStore.initTheme();
+});
 </script>

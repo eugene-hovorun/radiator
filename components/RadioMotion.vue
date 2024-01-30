@@ -10,11 +10,13 @@ import { watch } from "vue";
 interface Props {
   src?: string;
   colors: string[];
+  theme: Theme["value"];
   playing?: boolean;
 }
 
 const emit = defineEmits(["loaded", "play", "error"]);
 const props = defineProps<Props>();
+const analyzer = ref<AudioMotionAnalyzer>();
 
 watch(
   () => props.src,
@@ -33,6 +35,41 @@ watch(
     }
   },
 );
+
+watch(
+  () => props.theme,
+  () => setGradient(),
+);
+
+const setGradient = () => {
+  if (!analyzer.value) {
+    return;
+  }
+
+  if (props.theme === "steelblue") {
+    analyzer.value.gradient = "steelblue";
+  } else if (props.theme === "orangered") {
+    analyzer.value.gradient = "orangered";
+  } else if (props.theme === "flag") {
+    registerGradient();
+  }
+};
+
+const registerGradient = () => {
+  if (!analyzer.value) {
+    return;
+  }
+
+  analyzer.value.registerGradient("country", {
+    bgColor: "transparent",
+    colorStops: [...props.colors].reverse().map((color, i) => ({
+      color,
+      pos: 1 / props.colors.length + i / props.colors.length,
+    })),
+  });
+
+  analyzer.value.gradient = "country";
+};
 
 const playChannel = (src?: string) => {
   const canvas = document.querySelector("#canvas-container") as HTMLElement;
@@ -64,7 +101,7 @@ const playChannel = (src?: string) => {
     },
   });
 
-  const analyzer = new AudioMotionAnalyzer(canvas, {
+  analyzer.value = new AudioMotionAnalyzer(canvas, {
     source: player,
     showScaleX: false,
     overlay: true,
@@ -72,19 +109,9 @@ const playChannel = (src?: string) => {
     gradient: "steelblue",
   });
 
-  if (props.colors.length) {
-    analyzer.registerGradient("country", {
-      bgColor: "transparent",
-      colorStops: [...props.colors].reverse().map((color, i) => ({
-        color,
-        pos: 1 / props.colors.length + i / props.colors.length,
-      })),
-    });
-
-    analyzer.gradient = "country";
-  }
+  setGradient();
 
   container.appendChild(player);
-  analyzer.start();
+  analyzer.value.start();
 };
 </script>

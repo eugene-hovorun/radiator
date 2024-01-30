@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { themes } from "~/assets/themes";
 
 type State = {
   countries: Country[];
@@ -12,6 +13,7 @@ type State = {
   fetchingPlaces: boolean;
   playing: boolean;
   showDrawer: boolean;
+  currentThemeValue: Theme["value"];
   abortController: AbortController | null;
 };
 
@@ -28,6 +30,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     fetchingPlaces: true,
     playing: false,
     showDrawer: false,
+    currentThemeValue: themes[0].value,
     abortController: null,
   }),
   actions: {
@@ -87,6 +90,24 @@ export const useCountriesStore = defineStore("countriesStore", {
 
     toggleDrawer(show?: boolean) {
       this.showDrawer = show ?? !this.showDrawer;
+    },
+
+    initTheme() {
+      const storedValue = localStorage.getItem("radio-theme") as Theme["value"];
+      const storedTheme = storedValue || themes[0].value;
+
+      if (!storedValue) {
+        localStorage.setItem("radio-theme", storedTheme);
+      }
+
+      this.currentThemeValue = storedTheme;
+      document.documentElement.setAttribute("data-theme", storedTheme);
+    },
+
+    setTheme(theme: Theme["value"]) {
+      localStorage.setItem("radio-theme", theme);
+      document.documentElement.setAttribute("data-theme", theme);
+      this.currentThemeValue = theme;
     },
   },
 });

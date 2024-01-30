@@ -36,7 +36,7 @@ const closeDrawer = () => {
   right: 0;
   bottom: 0;
   backdrop-filter: blur(2px);
-  background: color-mix(in srgb, var(--color-bg) 25%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 70%, transparent);
   z-index: 4;
 }
 
@@ -67,6 +67,5 @@ const closeDrawer = () => {
 .drawer-enter,
 .drawer-leave-to {
   opacity: 0;
-  transform: translateX(-50%);
 }
 </style>

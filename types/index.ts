@@ -35,4 +35,10 @@ declare global {
     id: string;
     src: string;
   }
+
+  interface Theme {
+    title: "Steel Blue" | "Orange Red" | "Flag palette";
+    value: "steelblue" | "orangered" | "flag";
+    gradient: string;
+  }
 }
