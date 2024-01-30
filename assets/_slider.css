@@ -67,7 +67,7 @@
 }
 
 .slide--channel {
-  border: 2px solid var(--color-primary);
+  border: 2px solid transparent;
   padding-left: 0;
   gap: 8px;
 }

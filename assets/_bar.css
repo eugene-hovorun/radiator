@@ -45,3 +45,7 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+.bar-actions {
+  margin-left: auto;
+}

@@ -11,6 +11,7 @@ type State = {
   fetchingChannels: boolean;
   fetchingPlaces: boolean;
   playing: boolean;
+  showDrawer: boolean;
   abortController: AbortController | null;
 };
 
@@ -26,6 +27,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     fetchingChannels: false,
     fetchingPlaces: true,
     playing: false,
+    showDrawer: false,
     abortController: null,
   }),
   actions: {
@@ -81,6 +83,10 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.loadingChannelId = null;
       this.activeChannel = null;
       this.playingChannelId = null;
+    },
+
+    toggleDrawer(show?: boolean) {
+      this.showDrawer = show ?? !this.showDrawer;
     },
   },
 });
