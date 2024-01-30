@@ -53,6 +53,7 @@ const currentThemeValue = computed({
 
 const goToChannel = (url: string) => {
   countriesStore.toggleDrawer(false);
+  countriesStore.autoplay = true;
   router.push(url);
 };
 </script>

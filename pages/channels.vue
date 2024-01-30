@@ -81,7 +81,16 @@ watch(
     if (placeId) {
       await countriesStore.fetchChannelsByPlaceId(placeId);
 
-      if (!route.params.channel && countriesStore.channels[0]) {
+      if (countriesStore.autoplay) {
+        const channel = countriesStore.channels.find(
+          (c) => c.id === route.params.channel,
+        );
+
+        if (channel) {
+          countriesStore.fetchChannelSrc(channel);
+          countriesStore.autoplay = false;
+        }
+      } else if (!route.params.channel && countriesStore.channels[0]) {
         router.replace(
           `/${route.params.country}/${route.params.place}/${countriesStore.channels[0].id}`,
         );

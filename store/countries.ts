@@ -13,6 +13,7 @@ type State = {
   fetchingChannels: boolean;
   fetchingPlaces: boolean;
   playing: boolean;
+  autoplay: boolean;
   showDrawer: boolean;
   currentThemeValue: Theme["value"];
   abortController: AbortController | null;
@@ -31,6 +32,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     fetchingChannels: false,
     fetchingPlaces: true,
     playing: false,
+    autoplay: false,
     showDrawer: false,
     currentThemeValue: themes[0].value,
     abortController: null,
