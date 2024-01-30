@@ -35,7 +35,7 @@ const items = [
   {
     label: "Theme",
     icon: "i-heroicons-swatch",
-    defaultOpen: true,
+    defaultOpen: false,
     slot: "theme",
   },
   {
@@ -58,6 +58,11 @@ const goToChannel = (url: string) => {
 </script>
 
 <style>
+.drawer-content {
+  height: calc(100vh - 78px);
+  overflow: auto;
+}
+
 .drawer-content [type="button"] {
   padding: 8px 12px;
   background-color: transparent;
