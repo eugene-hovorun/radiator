@@ -1,5 +1,9 @@
 <template>
-  <button class="channel-button" :class="{ playing, loading, failed }">
+  <button
+    :key="`${loading}`"
+    class="channel-button"
+    :class="{ playing, loading, failed }"
+  >
     <transition name="svg" mode="out-in">
       <u-icon v-if="failed" name="iconamoon:unavailable" dynamic />
 

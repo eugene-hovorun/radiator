@@ -88,6 +88,7 @@ watch(
 
         if (channel) {
           countriesStore.fetchChannelSrc(channel);
+          countriesStore.playingChannelId = null;
           countriesStore.autoplay = false;
         }
       } else if (!route.params.channel && countriesStore.channels[0]) {
