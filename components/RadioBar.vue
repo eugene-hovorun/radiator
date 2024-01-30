@@ -113,7 +113,7 @@ const shuffle = () => {
   left: 0;
   right: 0;
   background-color: var(--color-border);
-  box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -4px 12px 0 color-mix(in srgb, var(--color-primary) 15%, rgba(0, 0, 0, 1));
 }
 
 .bar-container {
@@ -146,7 +146,7 @@ const shuffle = () => {
 }
 
 .bar-channel {
-  max-width: 260px;
+  max-width: 130px;
   height: 17px;
   font-size: 14px;
   color: var(--color-text-light);

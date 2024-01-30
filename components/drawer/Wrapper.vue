@@ -48,7 +48,8 @@ const closeDrawer = () => {
   width: 280px;
   background: var(--color-border);
   box-sizing: border-box;
-  box-shadow: 4px 0 12px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 0 12px 0
+    color-mix(in srgb, var(--color-primary) 15%, rgba(0, 0, 0, 1));
   transition: transform 0.3s ease-in-out;
 }
 
