@@ -146,13 +146,19 @@ const shuffle = () => {
 }
 
 .bar-channel {
-  max-width: 130px;
+  max-width: 300px;
   height: 17px;
   font-size: 14px;
   color: var(--color-text-light);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .bar-channel {
+    max-width: 130px;
+  }
 }
 
 .bar-actions {
