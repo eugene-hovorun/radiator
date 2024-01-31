@@ -20,6 +20,8 @@
         />
       </template>
     </u-accordion>
+
+    <drawer-ios-caption v-if="!isIos" />
   </div>
 </template>
 
@@ -30,6 +32,8 @@ import { themes } from "~/assets/themes";
 const router = useRouter();
 const countriesStore = useCountriesStore();
 const favoriteChannels = computed(() => countriesStore.favoriteChannels);
+const isIos =
+  /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
 const items = [
   {
@@ -60,6 +64,8 @@ const goToChannel = (url: string) => {
 
 <style>
 .drawer-content {
+  display: flex;
+  flex-direction: column;
   height: calc(100vh - 78px);
   overflow: auto;
 }

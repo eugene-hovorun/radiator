@@ -40,10 +40,8 @@ const place = computed<Place>({
 
     return places.find((p) => p.slug === param) || pickRandomItem(places);
   },
-  set(place?: Place) {
-    if (place) {
-      router.replace(`/${route.params.country}/${place.slug}`);
-    }
+  set(place: Place) {
+    router.replace(`/${route.params.country}/${place.slug}`);
   },
 });
 

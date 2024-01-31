@@ -51,10 +51,8 @@ const country = computed<Country>({
       return countriesStore.countries[0];
     }
   },
-  set(country?: Country) {
-    if (country) {
-      router.replace(`/${country.id}`);
-    }
+  set(country: Country) {
+    router.replace(`/${country.id}`);
   },
 });
 

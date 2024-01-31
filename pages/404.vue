@@ -1,16 +1,9 @@
 <template>
   <div
-    style="
-      min-height: 50vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-text-light);
-    "
+    class="flex flex-col gap-8 max-w-md m-auto h-screen justify-center text-center"
   >
-    <h1>Country or Place not found</h1>
-    <button @click="goHome">Go home</button>
+    <div class="text-2xl text-gray-400">Country or place not found</div>
+    <button class="bg-gray-500 rounded-md p-3" @click="goHome">Go home</button>
   </div>
 </template>
 
