@@ -21,7 +21,7 @@
       </template>
     </u-accordion>
 
-    <drawer-ios-caption v-if="!isIos" />
+    <drawer-ios-caption v-if="isIos" />
   </div>
 </template>
 
