@@ -65,7 +65,7 @@ watch(
   (value) => {
     setTimeout(() => {
       sliderRef.value?.go(findIndex(value));
-    });
+    }, 50);
   },
   { immediate: true },
 );
