@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="radio-slider mb-3" :class="{ loading }">
+    <div class="radio-slider mb-3" :class="{ loading, fade: items.length > 3 }">
       <radio-alphabet
         :items="items"
         :enabled="alphabet"
@@ -209,8 +209,8 @@ const findIndex = (item: Item) =>
   opacity: 0;
 }
 
-.splide__track::before,
-.splide__track::after {
+.fade .splide__track::before,
+.fade .splide__track::after {
   content: "";
   position: absolute;
   top: 0;
