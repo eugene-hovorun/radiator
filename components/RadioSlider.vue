@@ -199,16 +199,6 @@ const findIndex = (item: Item) =>
   }
 }
 
-.skeleton-enter-active,
-.skeleton-leave-active {
-  transition: 0.2s;
-}
-
-.skeleton-enter,
-.skeleton-leave-to {
-  opacity: 0;
-}
-
 .fade .splide__track::before,
 .fade .splide__track::after {
   content: "";

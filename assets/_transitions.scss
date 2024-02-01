@@ -1,0 +1,39 @@
+.drawer {
+  &-enter-active,
+  &-leave-active {
+    transition: 0.25s;
+  }
+
+  &-enter {
+    opacity: 0;
+  }
+}
+
+.play {
+  &-enter-active,
+  &-leave-active {
+    transition: 0.25s;
+  }
+
+  &-enter {
+    transform: scale(1.2);
+    opacity: 0.1;
+  }
+
+  &-leave-to {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+}
+
+.skeleton {
+    &-enter-active,
+    &-leave-active {
+      transition: 0.25s;
+    }
+
+    &-enter,
+    &-leave-to {
+      opacity: 0;
+    }
+}

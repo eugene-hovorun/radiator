@@ -4,7 +4,7 @@
     class="channel-button bg-text-dark text-main hover:text-text-light"
     :class="{ playing, loading, failed }"
   >
-    <transition name="svg" mode="out-in">
+    <transition name="play" mode="out-in">
       <u-icon v-if="failed" name="iconamoon:unavailable" dynamic />
 
       <svg v-else-if="loading" viewBox="0 0 42 42" style="width: 60%">
@@ -54,20 +54,5 @@ defineProps({
   justify-content: center;
   transition: 0.3s;
   opacity: 0.8;
-}
-
-.svg-enter-active,
-.svg-leave-active {
-  transition: 0.3s;
-}
-
-.svg-enter {
-  transform: scale(1.2);
-  opacity: 0.1;
-}
-
-.svg-leave-to {
-  transform: scale(0.8);
-  opacity: 0.1;
 }
 </style>

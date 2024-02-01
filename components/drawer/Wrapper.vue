@@ -2,7 +2,7 @@
   <transition name="drawer" mode="out-in">
     <div
       v-if="countriesStore.showDrawer"
-      class="drawer-overlay backdrop-blur"
+      class="fixed z-[4] inset-0 bg-bg/30 backdrop-blur"
       @click.self="closeDrawer"
     >
       <div class="drawer bg-border">
@@ -29,15 +29,6 @@ const closeDrawer = () => {
 </script>
 
 <style>
-.drawer-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 4;
-}
-
 .drawer {
   position: absolute;
   top: 0;
@@ -55,15 +46,5 @@ const closeDrawer = () => {
   align-items: center;
   justify-content: space-between;
   padding: 24px 16px;
-}
-
-.drawer-enter-active,
-.drawer-leave-active {
-  transition: 0.3s;
-}
-
-.drawer-enter,
-.drawer-leave-to {
-  opacity: 0;
 }
 </style>
