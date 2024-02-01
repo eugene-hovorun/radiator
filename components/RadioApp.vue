@@ -1,6 +1,6 @@
 <template>
   <div class="bg-bg">
-    <main class="max-w-[1400px] min-h-screen m-auto pt-8">
+    <main class="max-w-[1400px] min-h-screen m-auto pt-6">
       <div class="relative z-[1]">
         <slot />
       </div>
