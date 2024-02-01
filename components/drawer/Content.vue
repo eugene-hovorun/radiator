@@ -74,6 +74,8 @@ const goToChannel = (url: string) => {
   padding: 8px 12px;
   background-color: transparent;
   color: var(--color-text-light);
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .drawer-content [type="button"]:hover {
