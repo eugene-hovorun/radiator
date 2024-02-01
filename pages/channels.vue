@@ -91,8 +91,7 @@ watch(
           randomChannel;
 
         if (channel) {
-          countriesStore.fetchChannelSrc(channel);
-          countriesStore.playingChannelId = null;
+          handleSelect(channel);
           countriesStore.autoplay = false;
         }
       } else if (!route.params.channel && randomChannel) {
