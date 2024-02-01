@@ -1,13 +1,18 @@
 <template>
-  <div class="alphabet">
+  <div
+    class="flex justify-around items-center max-w-[calc(100%-24px)] h-8 mb-3 mx-auto p-1 rounded-full backdrop-blur bg-border/90"
+  >
     <template v-if="showLetters">
       <template v-for="(letter, index) in lettersMatrix[0]" :key="letter">
-        <button class="alphabet__letter" @click="handleLetterClick(letter)">
+        <button
+          class="text-main hover:underline capitalize text-xs flex-grow"
+          @click="handleLetterClick(letter)"
+        >
           {{ letter }}
         </button>
         <span
           v-if="index !== lettersMatrix[0].length - 1"
-          class="alphabet__separator"
+          class="rounded border-2 border-text-dark"
         ></span>
       </template>
     </template>
@@ -15,12 +20,15 @@
 
     <template v-if="showLetters">
       <template v-for="(letter, index) in lettersMatrix[1]" :key="letter">
-        <button class="alphabet__letter" @click="handleLetterClick(letter)">
+        <button
+          class="text-main hover:underline capitalize text-xs flex-grow"
+          @click="handleLetterClick(letter)"
+        >
           {{ letter }}
         </button>
         <span
           v-if="index !== lettersMatrix[1].length - 1"
-          class="alphabet__separator"
+          class="rounded border-2 border-text-dark"
         ></span>
       </template>
     </template>

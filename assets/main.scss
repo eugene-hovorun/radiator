@@ -1,0 +1,16 @@
+body {
+  font-family: "Inter", sans-serif;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+:root {
+  $shades: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+  $colors: "main", "bg", "text-dark", "text-light", "border";
+
+  @each $color in $colors {
+    @each $shade in $shades {
+      --color-#{$color}: hsl(var(--twc-#{$color}));
+      --color-#{$color}-#{$shade}: hsl(var(--twc-#{$color}-#{$shade}));
+    }
+  }
+}

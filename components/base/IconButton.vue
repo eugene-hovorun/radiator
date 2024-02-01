@@ -1,5 +1,8 @@
 <template>
-  <button class="icon-button" :style="style">
+  <button
+    class="flex-shrink-0 rounded-full flex items-center justify-center transition bg-text-dark text-main hover:text-text-light opacity-90 hover:opacity-100"
+    :style="style"
+  >
     <u-icon :name="props.name" dynamic />
   </button>
 </template>
@@ -28,26 +31,3 @@ const style = computed(() => {
   };
 });
 </script>
-
-<style scoped>
-.icon-button {
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--color-text-dark);
-  color: var(--color-primary);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  opacity: 0.9;
-  transition: 0.3s;
-}
-
-.icon-button:hover {
-  opacity: 1;
-  color: var(--color-text-light);
-}
-</style>

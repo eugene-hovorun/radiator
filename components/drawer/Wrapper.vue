@@ -2,10 +2,10 @@
   <transition name="drawer" mode="out-in">
     <div
       v-if="countriesStore.showDrawer"
-      class="drawer-overlay"
+      class="drawer-overlay backdrop-blur"
       @click.self="closeDrawer"
     >
-      <div class="drawer">
+      <div class="drawer bg-border">
         <div class="drawer-header">
           <radio-logo />
 
@@ -35,8 +35,6 @@ const closeDrawer = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  backdrop-filter: blur(2px);
-  background: color-mix(in srgb, var(--color-bg) 70%, transparent);
   z-index: 4;
 }
 
@@ -46,10 +44,9 @@ const closeDrawer = () => {
   left: 0;
   bottom: 0;
   width: 280px;
-  background: var(--color-border);
   box-sizing: border-box;
   box-shadow: 4px 0 12px 0
-    color-mix(in srgb, var(--color-primary) 15%, rgba(0, 0, 0, 1));
+    color-mix(in srgb, var(--color-main) 15%, rgba(0, 0, 0, 1));
   transition: transform 0.3s ease-in-out;
 }
 

@@ -1,13 +1,14 @@
 <template>
-  <div class="m-3 mt-auto p-4 rounded-lg border border-gray-600 text-sm">
-    <h2 class="font-bold mb-4">🔊 Audio Visualizer Notice</h2>
-    <p class="text-gray-400 mb-4">
-      The audio visualizer feature is currently unavailable on iOS devices.
+  <div
+    class="m-3 mt-auto p-4 rounded-lg border border-text-light text-sm text-text-light opacity-60"
+  >
+    <h2 class="font-bold mb-4">🍏 Audio Visualizer Notice</h2>
+    <p class="mb-4">
+      The Audio visualizer feature is unavailable on most iOS devices.
     </p>
-    <p class="text-gray-400">
+    <p>
       Enjoy the music as it is or switch to another platform for the full visual
-      experience.
+      experience. 🎶
     </p>
-    <p class="text-gray-400">Thank you for your understanding! 🎶</p>
   </div>
 </template>

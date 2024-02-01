@@ -7,13 +7,12 @@
 </template>
 
 <script lang="ts" setup>
-import "~/assets/main.css";
+import "~/assets/main.scss";
 
 const showSpinner = ref(true);
 
 useHead({
   title: "Radiätor",
-  style: [{ innerHTML: "html { background: var(--color-bg); }" }],
 });
 
 useSeoMeta({

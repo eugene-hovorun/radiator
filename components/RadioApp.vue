@@ -1,23 +1,25 @@
 <template>
-  <main>
-    <div class="sliders-z-index">
-      <slot />
-    </div>
+  <div class="bg-bg">
+    <main class="max-w-[1400px] min-h-screen m-auto pt-8">
+      <div class="relative z-[1]">
+        <slot />
+      </div>
 
-    <radio-motion
-      :src="src"
-      :playing="playing"
-      :colors="colors"
-      :theme="currentThemeValue"
-      @loaded="countriesStore.loadingChannelId = null"
-      @play="handlePlay"
-      @error="channel && countriesStore.setFailedChannel(channel)"
-    />
+      <radio-motion
+        :src="src"
+        :playing="playing"
+        :colors="colors"
+        :theme="currentThemeValue"
+        @loaded="countriesStore.loadingChannelId = null"
+        @play="handlePlay"
+        @error="channel && countriesStore.setFailedChannel(channel)"
+      />
 
-    <radio-bar />
+      <radio-bar />
 
-    <drawer-wrapper />
-  </main>
+      <drawer-wrapper />
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">

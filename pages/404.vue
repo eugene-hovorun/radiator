@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex flex-col gap-8 max-w-md m-auto h-screen justify-center text-center"
+    class="flex flex-col gap-8 max-w-md m-auto h-screen justify-center text-center text-text-light"
   >
-    <div class="text-2xl text-gray-400">Country or place not found</div>
-    <button class="bg-gray-500 rounded-md p-3" @click="goHome">Go home</button>
+    <div class="text-2xl">Country or place not found</div>
+    <button class="bg-text-dark rounded p-3" @click="goHome">Go Home</button>
   </div>
 </template>
 

@@ -9,8 +9,11 @@
     >
       <template #default="{ item }">
         <div
-          class="slide"
-          :class="{ 'slide--active': item.slug === country?.slug }"
+          class="slide px-4 backdrop-blur"
+          :class="{
+            'bg-main text-text-dark font-bold': item.slug === country?.slug,
+            'text-text-light': item.slug !== country?.slug,
+          }"
           @click="handleItemClick(item)"
         >
           <div class="slide-title">

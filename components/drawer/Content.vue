@@ -5,7 +5,7 @@
         <drawer-theme
           v-for="theme in themes"
           :key="theme.value"
-          :class="{ active: theme.value === currentThemeValue }"
+          :selected="theme.value === currentThemeValue"
           :theme="theme"
           @click="currentThemeValue = theme.value"
         />
@@ -81,6 +81,6 @@ const goToChannel = (url: string) => {
 }
 
 .drawer-content [type="button"] span[class*="icon"] {
-  color: var(--color-primary);
+  color: var(--color-main);
 }
 </style>

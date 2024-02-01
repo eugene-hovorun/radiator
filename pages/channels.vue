@@ -7,14 +7,16 @@
   >
     <template #default="{ item }">
       <div
-        class="slide slide--channel"
+        class="slide gap-2 border-2 pr-4 pl-0 border-main"
         :class="{
-          'slide--active': item.id === channel?.id,
-          'slide--failed': isFailed(item),
+          'text-text-dark bg-main font-bold': item.id === channel?.id,
+          'text-text-light': item.id !== channel?.id,
+          'opacity-30': isFailed(item),
         }"
         @click="handleSelect(item)"
       >
         <radio-channel-button
+          class="mr-auto"
           :playing="item.id === playingChannelId && countriesStore.playing"
           :loading="item.id === loadingChannelId"
           :failed="isFailed(item)"

@@ -1,5 +1,5 @@
 <template>
-  <div class="bar">
+  <div class="bar bg-border">
     <div class="bar-container">
       <template v-if="activeChannel">
         <radio-channel-button
@@ -8,11 +8,11 @@
           @click="togglePlay"
         />
         <div>
-          <div v-if="countryTitle" class="bar-country">
-            <img :src="flagSrc" class="bar-flag" alt="" />
+          <div v-if="countryTitle" class="bar-country text-main">
+            <img :src="flagSrc" class="w-6" alt="" />
             <span>{{ countryTitle }}</span>
           </div>
-          <div class="bar-channel">
+          <div class="bar-channel text-text-light">
             <span v-if="activeChannel"> {{ activeChannel.title }}</span>
           </div>
         </div>
@@ -112,8 +112,7 @@ const shuffle = () => {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--color-border);
-  box-shadow: 0 -4px 12px 0 color-mix(in srgb, var(--color-primary) 15%, rgba(0, 0, 0, 1));
+  box-shadow: 0 -4px 12px 0 color-mix(in srgb, var(--color-main) 15%, rgba(0, 0, 0, 1));
 }
 
 .bar-container {
@@ -137,19 +136,12 @@ const shuffle = () => {
   gap: 8px;
   align-items: center;
   font-size: 12px;
-  color: var(--color-primary);
-}
-
-.bar-flag {
-  width: 24px;
-  aspect-ratio: 3/4;
 }
 
 .bar-channel {
   max-width: 300px;
   height: 17px;
   font-size: 14px;
-  color: var(--color-text-light);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

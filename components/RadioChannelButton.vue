@@ -1,7 +1,7 @@
 <template>
   <button
     :key="`${loading}`"
-    class="channel-button"
+    class="channel-button bg-text-dark text-main hover:text-text-light"
     :class="{ playing, loading, failed }"
   >
     <transition name="svg" mode="out-in">
@@ -13,7 +13,7 @@
           cy="21"
           r="19"
           fill="none"
-          stroke="var(--color-primary)"
+          stroke="var(--color-main)"
           stroke-width="4"
           stroke-dasharray="10 5"
         >
@@ -48,18 +48,12 @@ defineProps({
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--color-text-dark);
-  color: var(--color-primary);
   font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.3s;
   opacity: 0.8;
-}
-
-.channel-button:hover {
-  color: var(--color-text-light);
 }
 
 .svg-enter-active,

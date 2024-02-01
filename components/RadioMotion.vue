@@ -1,6 +1,9 @@
 <template>
-  <div id="audio-container"></div>
-  <div id="canvas-container"></div>
+  <div id="audio-container" class="absolute w-0 h-1"></div>
+  <div
+    id="canvas-container"
+    class="fixed w-[102%] h-[110%] bottom-20 left-0 pointer-events-none"
+  ></div>
 </template>
 
 <script lang="ts" setup>
@@ -17,6 +20,10 @@ interface Props {
 const emit = defineEmits(["loaded", "play", "error"]);
 const props = defineProps<Props>();
 const analyzer = ref<AudioMotionAnalyzer>();
+
+const themeGradients: Partial<Record<Theme["value"], string[]>> = {
+  deeppurple: ["#FFC7C7", "#C683D7", "#ED9ED6", "#7071E8"],
+};
 
 watch(
   () => props.src,
@@ -50,25 +57,39 @@ const setGradient = () => {
     analyzer.value.gradient = "steelblue";
   } else if (props.theme === "orangered") {
     analyzer.value.gradient = "orangered";
+  } else if (props.theme in themeGradients) {
+    registerGradient(themeGradients[props.theme]);
   } else if (props.theme === "flag") {
     registerGradient();
   }
 };
 
-const registerGradient = () => {
+const registerGradient = (themeColors?: string[]) => {
   if (!analyzer.value) {
     return;
   }
 
-  analyzer.value.registerGradient("country", {
-    bgColor: "transparent",
-    colorStops: [...props.colors].reverse().map((color, i) => ({
-      color,
-      pos: 1 / props.colors.length + i / props.colors.length,
-    })),
-  });
+  if (themeColors) {
+    analyzer.value.registerGradient("country", {
+      bgColor: "transparent",
+      colorStops: themeColors.map((color, i) => ({
+        color,
+        pos: 1 / themeColors.length + i / themeColors.length,
+      })),
+    });
 
-  analyzer.value.gradient = "country";
+    analyzer.value.gradient = "country";
+  } else {
+    analyzer.value.registerGradient("country", {
+      bgColor: "transparent",
+      colorStops: [...props.colors].reverse().map((color, i) => ({
+        color,
+        pos: 1 / props.colors.length + i / props.colors.length,
+      })),
+    });
+
+    analyzer.value.gradient = "country";
+  }
 };
 
 const playChannel = (src?: string) => {
