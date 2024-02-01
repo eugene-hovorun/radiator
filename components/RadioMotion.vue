@@ -1,9 +1,9 @@
 <template>
-  <div id="audio-container" class="absolute w-0 h-1"></div>
+  <div id="audio-container" class="absolute w-0 h-1" />
   <div
     id="canvas-container"
-    class="fixed w-[102%] h-[110%] bottom-20 left-0 pointer-events-none"
-  ></div>
+    class="fixed w-[105%] h-[110%] bottom-20 -left-[10px] pointer-events-none"
+  />
 </template>
 
 <script lang="ts" setup>

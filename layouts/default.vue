@@ -2,7 +2,7 @@
   <slot v-if="!showSpinner" />
 
   <transition name="skeleton">
-    <radio-loading v-if="showSpinner" />
+    <app-loading v-if="showSpinner" />
   </transition>
 </template>
 

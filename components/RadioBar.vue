@@ -2,7 +2,7 @@
   <div class="bar bg-border">
     <div class="bar-container">
       <template v-if="activeChannel">
-        <radio-channel-button
+        <play-button
           :playing="countriesStore.playing"
           :loading="!!loadingChannelId"
           @click="togglePlay"

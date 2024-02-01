@@ -27,13 +27,13 @@
 }
 
 .skeleton {
-    &-enter-active,
-    &-leave-active {
-      transition: 0.25s;
-    }
+  &-enter-active,
+  &-leave-active {
+    transition: 0.25s;
+  }
 
-    &-enter,
-    &-leave-to {
-      opacity: 0;
-    }
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
 }

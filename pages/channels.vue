@@ -15,7 +15,7 @@
         }"
         @click="handleSelect(item)"
       >
-        <radio-channel-button
+        <play-button
           class="mr-auto"
           :playing="item.id === playingChannelId && countriesStore.playing"
           :loading="item.id === loadingChannelId"

@@ -7,7 +7,7 @@
     >
       <div class="drawer bg-border">
         <div class="drawer-header">
-          <radio-logo />
+          <app-logo />
 
           <base-icon-button name="ion:close" @click="closeDrawer" />
         </div>
