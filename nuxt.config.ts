@@ -57,19 +57,19 @@ export default defineNuxtConfig({
           },
           flag: {
             bg: {
-              DEFAULT: "#111111",
+              DEFAULT: "#1E1E1E",
             },
             main: {
-              DEFAULT: "#969696",
+              DEFAULT: "#D1D1D1",
             },
             "text-dark": {
-              DEFAULT: "#2a2a2a",
+              DEFAULT: "#1E1E1E",
             },
             "text-light": {
-              DEFAULT: "#ffffff",
+              DEFAULT: "#EEEEEE",
             },
             border: {
-              DEFAULT: "#3c3c3c",
+              DEFAULT: "#2E2E2E",
             },
           },
           deeppurple: {
