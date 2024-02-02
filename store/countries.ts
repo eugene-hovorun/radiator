@@ -1,4 +1,9 @@
 import { defineStore } from "pinia";
+import {
+  pickRandomItem,
+  setMediaSessionData,
+  setMediaSessionAction,
+} from "./utils";
 import { themes } from "~/assets/themes";
 
 type State = {
@@ -82,6 +87,10 @@ export const useCountriesStore = defineStore("countriesStore", {
 
     togglePlay(state?: boolean) {
       this.playing = state ?? !this.playing;
+
+      if (this.playing) {
+        this.setAudioMetaData();
+      }
     },
 
     setFailedChannel(channel: Channel) {
@@ -90,6 +99,8 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.loadingChannelId = null;
       this.activeChannel = null;
       this.playingChannelId = null;
+
+      setMediaSessionData("failed", { artist: channel.title });
     },
 
     toggleDrawer(show?: boolean) {
@@ -137,6 +148,28 @@ export const useCountriesStore = defineStore("countriesStore", {
         "radio-favorites",
         JSON.stringify(this.favoriteChannels),
       );
+    },
+
+    setAudioMetaData() {
+      const app = useNuxtApp();
+      const countryParam = app._route.params.country;
+      const country = this.countries.find((c) => c.id === countryParam);
+
+      setMediaSessionData("playing", {
+        title: country?.title,
+        artist: this.activeChannel?.title,
+        countryCode: country?.id,
+      });
+
+      setMediaSessionAction("nexttrack", () => {
+        setMediaSessionData("loading");
+
+        app.$router.replace(`/${pickRandomItem(this.countries).id}`);
+        this.autoplay = true;
+      });
+
+      setMediaSessionAction("pause", () => this.togglePlay(false));
+      setMediaSessionAction("play", () => this.togglePlay(true));
     },
   },
 });

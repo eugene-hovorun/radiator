@@ -1,6 +1,6 @@
 <template>
   <div class="drawer-content">
-    <u-accordion :items="items">
+    <lazy-u-accordion :items="items">
       <template #theme>
         <drawer-theme
           v-for="theme in themes"
@@ -19,9 +19,9 @@
           @click="goToChannel(channel.url)"
         />
       </template>
-    </u-accordion>
+    </lazy-u-accordion>
 
-    <drawer-ios-caption v-if="isIos" />
+    <lazy-drawer-ios-caption v-if="isIos" />
   </div>
 </template>
 

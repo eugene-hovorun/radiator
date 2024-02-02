@@ -13,6 +13,7 @@ const showSpinner = ref(true);
 
 useHead({
   title: "Radiätor",
+  style: [{ innerHTML: "html { background: #111; }" }],
 });
 
 useSeoMeta({

@@ -7,7 +7,7 @@
     >
       <div class="drawer bg-border">
         <div class="drawer-header">
-          <app-logo />
+          <lazy-app-logo />
 
           <base-icon-button name="ion:close" @click="closeDrawer" />
         </div>
