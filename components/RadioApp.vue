@@ -5,7 +5,7 @@
         <slot />
       </div>
 
-      <radio-motion
+      <audio-motion
         :src="src"
         :playing="playing"
         :colors="colors"

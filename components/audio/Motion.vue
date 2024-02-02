@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import AudioMotionAnalyzer from "audiomotion-analyzer";
-import { watch } from "vue";
+import { setGradient } from "./utils";
 
 interface Props {
   src?: string;
@@ -20,10 +20,6 @@ interface Props {
 const emit = defineEmits(["loaded", "play", "error"]);
 const props = defineProps<Props>();
 const analyzer = ref<AudioMotionAnalyzer>();
-
-const themeGradients: Partial<Record<Theme["value"], string[]>> = {
-  deeppurple: ["#FFC7C7", "#C683D7", "#ED9ED6", "#7071E8"],
-};
 
 watch(
   () => props.src,
@@ -45,52 +41,8 @@ watch(
 
 watch(
   () => props.theme,
-  () => setGradient(),
+  () => setGradient(analyzer, props.theme, props.colors),
 );
-
-const setGradient = () => {
-  if (!analyzer.value) {
-    return;
-  }
-
-  if (props.theme === "steelblue") {
-    analyzer.value.gradient = "steelblue";
-  } else if (props.theme === "orangered") {
-    analyzer.value.gradient = "orangered";
-  } else if (props.theme in themeGradients) {
-    registerGradient(themeGradients[props.theme]);
-  } else if (props.theme === "flag") {
-    registerGradient();
-  }
-};
-
-const registerGradient = (themeColors?: string[]) => {
-  if (!analyzer.value) {
-    return;
-  }
-
-  if (themeColors) {
-    analyzer.value.registerGradient("country", {
-      bgColor: "transparent",
-      colorStops: themeColors.map((color, i) => ({
-        color,
-        pos: 1 / themeColors.length + i / themeColors.length,
-      })),
-    });
-
-    analyzer.value.gradient = "country";
-  } else {
-    analyzer.value.registerGradient("country", {
-      bgColor: "transparent",
-      colorStops: [...props.colors].reverse().map((color, i) => ({
-        color,
-        pos: 1 / props.colors.length + i / props.colors.length,
-      })),
-    });
-
-    analyzer.value.gradient = "country";
-  }
-};
 
 const playChannel = (src?: string) => {
   const canvas = document.querySelector("#canvas-container") as HTMLElement;
@@ -130,7 +82,7 @@ const playChannel = (src?: string) => {
     gradient: "steelblue",
   });
 
-  setGradient();
+  setGradient(analyzer, props.theme, props.colors);
 
   container.appendChild(player);
   analyzer.value.start();
