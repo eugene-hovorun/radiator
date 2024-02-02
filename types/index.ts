@@ -44,8 +44,13 @@ declare global {
   }
 
   interface Theme {
-    title: "Steel Blue" | "Orange Red" | "Flag Palette" | "Deep Purple";
-    value: "steelblue" | "orangered" | "flag" | "deeppurple";
+    title:
+      | "Steel Blue"
+      | "Orange Red"
+      | "Flag Palette"
+      | "Deep Purple"
+      | "Sunlit Gold";
+    value: "steelblue" | "orangered" | "flag" | "deeppurple" | "sunlit";
     gradient: string;
   }
 }

@@ -89,6 +89,23 @@ export default defineNuxtConfig({
               DEFAULT: "#121212",
             },
           },
+          sunlit: {
+            bg: {
+              DEFAULT: "#1A1F25",
+            },
+            main: {
+              DEFAULT: "#FED428",
+            },
+            "text-dark": {
+              DEFAULT: "#000000",
+            },
+            "text-light": {
+              DEFAULT: "#FFFFFF",
+            },
+            border: {
+              DEFAULT: "#272C35",
+            },
+          },
         }),
       ],
     },

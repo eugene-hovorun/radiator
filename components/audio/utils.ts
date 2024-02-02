@@ -3,6 +3,10 @@ import type { Ref } from "vue";
 
 const themeGradients: Partial<Record<Theme["value"], string[]>> = {
   deeppurple: ["#FFC7C7", "#C683D7", "#ED9ED6", "#7071E8"],
+  sunlit: Array.from(
+    { length: 17 },
+    (_, i) => `hsl(${32 + i}, 99%, 56%)`,
+  ).reverse(),
 };
 
 export const setGradient = (

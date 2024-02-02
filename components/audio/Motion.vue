@@ -74,12 +74,14 @@ const playChannel = (src?: string) => {
     },
   });
 
+  // https://github.com/hvianna/audioMotion-analyzer?tab=readme-ov-file
   analyzer.value = new AudioMotionAnalyzer(canvas, {
     source: player,
     showScaleX: false,
     overlay: true,
     showBgColor: false,
     gradient: "steelblue",
+    // alphaBars: true,
   });
 
   setGradient(analyzer, props.theme, props.colors);

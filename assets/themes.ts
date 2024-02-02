@@ -19,4 +19,9 @@ export const themes: Theme[] = [
     value: "deeppurple",
     gradient: "linear-gradient(-45deg, #B980F5, #673AB7)",
   },
+  {
+    title: "Sunlit Gold",
+    value: "sunlit",
+    gradient: "linear-gradient(-45deg, #FED428, #ffdf80)",
+  },
 ];
