@@ -28,7 +28,7 @@
 
         <base-icon-button
           v-if="activeChannel"
-          :name="isFavorite ? 'ion:heart-dislike-outline' : 'ion:heart-outline'"
+          :name="isFavorite ? 'ion:heart' : 'ion:heart-outline'"
           size="1.2"
           dynamic
           @click="toggleFavorite"
