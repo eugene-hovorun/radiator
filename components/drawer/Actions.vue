@@ -4,7 +4,7 @@
 
     <base-icon-button
       v-if="activeChannel"
-      :name="cahShare ? 'ci:share' : 'ci:copy'"
+      :name="cahShare ? 'ci:share' : justCopied ? 'ci:check' : 'ci:copy'"
       size="1.2"
       dynamic
       @click="share"
@@ -21,6 +21,7 @@ import { pickRandomItem } from "../../store/utils";
 const router = useRouter();
 const countriesStore = useCountriesStore();
 const activeChannel = computed(() => countriesStore.activeChannel);
+const justCopied = ref(false);
 const cahShare = "share" in navigator;
 
 const shuffle = () => {
@@ -48,9 +49,15 @@ const share = () => {
     input.select();
     document.execCommand("copy");
     document.body.removeChild(input);
+
+    justCopied.value = true;
+
+    setTimeout(() => {
+      justCopied.value = false;
+    }, 500);
   }
 
-  setTimeout(closeDrawer, 300);
+  setTimeout(closeDrawer, 500);
 };
 
 const search = () => {
