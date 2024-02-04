@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     "vue/no-multiple-template-root": "off",
     "vue/multi-word-component-names": "off",
+    "vue/no-v-html": "off",
     "no-console": "off",
   },
 };

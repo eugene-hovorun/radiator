@@ -17,9 +17,12 @@ type State = {
   favoriteChannels: FavoriteChannel[];
   fetchingChannels: boolean;
   fetchingPlaces: boolean;
+  fetchingSearch: boolean;
   playing: boolean;
   autoplay: boolean;
   showDrawer: boolean;
+  showSearch: boolean;
+  searchResults: (Place | Country)[];
   currentThemeValue: Theme["value"];
   abortController: AbortController | null;
 };
@@ -39,6 +42,8 @@ export const useCountriesStore = defineStore("countriesStore", {
     playing: false,
     autoplay: false,
     showDrawer: false,
+    showSearch: false,
+    searchResults: [],
     currentThemeValue: themes[0].value,
     abortController: null,
   }),
@@ -107,6 +112,10 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.showDrawer = show ?? !this.showDrawer;
     },
 
+    toggleSearch(show?: boolean) {
+      this.showSearch = show ?? false;
+    },
+
     applyStoredData() {
       const storedFavorites = localStorage.getItem("radio-favorites");
       const storedThemeValue = localStorage.getItem(
@@ -170,6 +179,16 @@ export const useCountriesStore = defineStore("countriesStore", {
 
       setMediaSessionAction("pause", () => this.togglePlay(false));
       setMediaSessionAction("play", () => this.togglePlay(true));
+    },
+
+    async getSearchResults(query: string) {
+      this.fetchingSearch = true;
+      const results = await $fetch<(Country | Place)[]>(
+        "/search/" + query.split(" ").join("-"),
+      );
+
+      this.searchResults = results;
+      this.fetchingSearch = false;
     },
   },
 });

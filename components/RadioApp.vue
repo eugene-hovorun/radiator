@@ -18,6 +18,8 @@
       <radio-bar />
 
       <drawer-wrapper />
+
+      <lazy-app-search />
     </main>
   </div>
 </template>

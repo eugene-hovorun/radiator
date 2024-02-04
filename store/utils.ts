@@ -67,3 +67,24 @@ export const setMediaSessionData = (
     artwork,
   });
 };
+
+export function highlightMatchedText(searchResult: string, query: string) {
+  const lowerCasedSearchResult = searchResult.toLowerCase();
+  const lowerCasedQuery = query.toLowerCase();
+
+  const startIndex = lowerCasedSearchResult.indexOf(lowerCasedQuery);
+
+  if (startIndex !== -1) {
+    const matchedText = searchResult.substring(
+      startIndex,
+      startIndex + query.length,
+    );
+    const highlightedLabel = searchResult.replace(
+      matchedText,
+      `<span class="search-result">${matchedText}</span>`,
+    );
+    return highlightedLabel;
+  }
+
+  return searchResult;
+}

@@ -1,0 +1,64 @@
+<template>
+  <div class="fixed bottom-20 right-0 flex flex-col gap-3 p-3">
+    <base-icon-button name="ion:search" size="1.2" @click="search" />
+
+    <base-icon-button
+      v-if="activeChannel"
+      :name="cahShare ? 'ci:share' : 'ci:copy'"
+      size="1.2"
+      dynamic
+      @click="share"
+    />
+
+    <base-icon-button name="ci:shuffle" size="1.2" @click="shuffle" />
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { useCountriesStore } from "../../store/countries";
+import { pickRandomItem } from "../../store/utils";
+
+const router = useRouter();
+const countriesStore = useCountriesStore();
+const activeChannel = computed(() => countriesStore.activeChannel);
+const cahShare = "share" in navigator;
+
+const shuffle = () => {
+  router.replace(`/${pickRandomItem(countriesStore.countries).id}`);
+  countriesStore.autoplay = true;
+
+  setTimeout(closeDrawer, 300);
+};
+
+const share = () => {
+  if (!activeChannel.value) {
+    return;
+  }
+
+  const title = activeChannel.value.title;
+  const url = window.location.href;
+  const text = `Listen to ${title} on Radiator`;
+
+  if ("share" in navigator) {
+    navigator.share({ title, text, url });
+  } else {
+    const input = document.createElement("input");
+    input.value = url;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+  }
+
+  setTimeout(closeDrawer, 300);
+};
+
+const search = () => {
+  closeDrawer();
+  countriesStore.toggleSearch(true);
+};
+
+const closeDrawer = () => {
+  countriesStore.toggleDrawer(false);
+};
+</script>
