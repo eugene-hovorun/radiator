@@ -68,7 +68,7 @@ const router = useRouter();
 const countriesStore = useCountriesStore();
 const query = ref("");
 const searchResults = computed(() =>
-  countriesStore.searchResults.map((item: Country | Place) => {
+  (countriesStore.searchResults || []).map((item: Country | Place) => {
     const label = isPlace(item)
       ? `<span class="search-country">${item.country}</span> > ${item.title}`
       : item.title;
