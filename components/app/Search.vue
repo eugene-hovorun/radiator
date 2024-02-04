@@ -49,7 +49,7 @@
           <div
             v-for="result in searchResults"
             :key="result.id"
-            class="border-t p-2 border-t-[var(--color-bg)] flex items-center cursor-pointer transition-colors text-text-light hover:text-main"
+            class="border-t p-2 border-t-[var(--color-bg)] cursor-pointer transition-colors text-text-light hover:text-main"
             @click="handleSelect(result)"
             v-html="result.label"
           ></div>
@@ -68,10 +68,16 @@ const router = useRouter();
 const countriesStore = useCountriesStore();
 const query = ref("");
 const searchResults = computed(() =>
-  countriesStore.searchResults.map((item: Country | Place) => ({
-    ...item,
-    label: highlightMatchedText(item.title, query.value),
-  })),
+  countriesStore.searchResults.map((item: Country | Place) => {
+    const label = isPlace(item)
+      ? `<span class="search-country">${item.country}</span> > ${item.title}`
+      : item.title;
+
+    return {
+      ...item,
+      label: highlightMatchedText(label, query.value),
+    };
+  }),
 );
 
 const closeSearch = () => {
@@ -115,5 +121,9 @@ const handleSelect = (item: Country | Place) => {
 .search .search-result {
   font-weight: bold;
   color: var(--color-main);
+}
+
+.search .search-country {
+  opacity: 0.5;
 }
 </style>
