@@ -7,7 +7,7 @@
   >
     <template #default="{ item }">
       <div
-        class="slide gap-2 border-2 pr-4 pl-0 border-main backdrop-blur"
+        class="slide gap-2 border-2 pr-4 pl-0 border-main backdrop-blur transition-colors"
         :class="{
           'text-text-dark bg-main font-bold': item.id === channel?.id,
           'text-text-light': item.id !== channel?.id,

@@ -2,7 +2,7 @@
   <div
     class="flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors hover:text-main"
     :class="{
-      'bg-bg text-main': selected,
+      'bg-bg text-main transition-colors': selected,
       'text-text-light': !selected,
     }"
   >

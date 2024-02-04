@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-20 right-0 flex flex-col gap-3 p-3">
+  <div class="actions fixed bottom-20 right-0 flex flex-col gap-3 p-3">
     <base-icon-button name="ion:search" size="1.2" @click="search" />
 
     <base-icon-button
@@ -62,3 +62,9 @@ const closeDrawer = () => {
   countriesStore.toggleDrawer(false);
 };
 </script>
+
+<style scoped>
+.actions button {
+  background: var(--color-border);
+}
+</style>

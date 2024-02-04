@@ -2,10 +2,12 @@
   <transition name="drawer" mode="out-in">
     <div
       v-if="countriesStore.showSearch"
-      class="search fixed z-[4] inset-0 bg-bg/30 backdrop-blur"
+      class="search fixed z-[4] inset-0 bg-bg/30 backdrop-blur transition-colors"
     >
-      <div class="bg-border max-w-sm mx-auto mt-8 p-3 rounded-lg">
-        <div class="flex gap-3 justify-between">
+      <div
+        class="bg-border max-w-sm mx-auto mt-8 p-3 rounded-lg transition-colors"
+      >
+        <div class="flex gap-3 justify-between items-center">
           <lazy-app-logo />
 
           <base-icon-button name="ion:close" @click="closeSearch" />
@@ -19,30 +21,31 @@
             placeholder="search country or city"
             @input="debouncedSearch"
           />
-
-          <svg
-            v-if="countriesStore.fetchingSearch"
-            viewBox="0 0 42 42"
-            class="w-6 absolute right-1 top-1"
-          >
-            <circle
-              cx="21"
-              cy="21"
-              r="19"
-              fill="none"
-              stroke="var(--color-main)"
-              stroke-width="4"
-              stroke-dasharray="10 5"
+          <transition name="play" mode="out-in">
+            <svg
+              v-if="countriesStore.fetchingSearch"
+              viewBox="0 0 42 42"
+              class="w-6 absolute right-1 top-1"
             >
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                repeatCount="indefinite"
-                dur="4s"
-                values="0 21 21;360 21 21"
-              ></animateTransform>
-            </circle>
-          </svg>
+              <circle
+                cx="21"
+                cy="21"
+                r="19"
+                fill="none"
+                stroke="var(--color-main)"
+                stroke-width="4"
+                stroke-dasharray="10 5"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  repeatCount="indefinite"
+                  dur="4s"
+                  values="0 21 21;360 21 21"
+                ></animateTransform>
+              </circle>
+            </svg>
+          </transition>
         </div>
 
         <div v-if="searchResults.length" class="max-h-40 overflow-auto">
@@ -109,6 +112,12 @@ const handleSelect = (item: Country | Place) => {
 </script>
 
 <style>
+.search > div {
+  border: 1px solid var(--color-text-dark);
+  box-shadow: 4px 0 12px 0
+    color-mix(in srgb, var(--color-main) 10%, rgba(0, 0, 0, 1));
+}
+
 .search input:focus {
   box-shadow: 0 0 0 1px var(--color-main);
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-around items-center max-w-[calc(100%-24px)] h-8 mb-3 mx-auto p-1 rounded-full backdrop-blur bg-border/80"
+    class="flex justify-around items-center max-w-[calc(100%-24px)] h-8 mb-3 mx-auto p-1 rounded-full backdrop-blur bg-border/80 transition-colors"
   >
     <template v-if="showLetters">
       <template v-for="(letter, index) in lettersMatrix[0]" :key="letter">

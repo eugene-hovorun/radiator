@@ -2,10 +2,10 @@
   <transition name="drawer" mode="out-in">
     <div
       v-if="countriesStore.showDrawer"
-      class="fixed z-[4] inset-0 bg-bg/30 backdrop-blur"
+      class="fixed z-[4] inset-0 bg-bg/30 backdrop-blur transition-colors"
       @click.self="closeDrawer"
     >
-      <div class="drawer bg-border">
+      <div class="drawer bg-border transition-colors">
         <div class="drawer-header">
           <lazy-app-logo />
 
@@ -39,7 +39,7 @@ const closeDrawer = () => {
   width: 280px;
   box-sizing: border-box;
   box-shadow: 4px 0 12px 0
-    color-mix(in srgb, var(--color-main) 15%, rgba(0, 0, 0, 1));
+    color-mix(in srgb, var(--color-main) 10%, rgba(0, 0, 0, 1));
   transition: transform 0.3s ease-in-out;
 }
 

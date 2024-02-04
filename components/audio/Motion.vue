@@ -2,7 +2,7 @@
   <div id="audio-container" class="absolute w-0 h-1" />
   <div
     id="canvas-container"
-    class="fixed w-[105%] h-[110%] bottom-20 -left-[10px] pointer-events-none"
+    class="fixed w-[100%] h-[110%] bottom-20 left-0 pointer-events-none"
   />
 </template>
 
@@ -62,7 +62,7 @@ const playChannel = (src?: string) => {
     src,
     autoplay: true,
     crossOrigin: "anonymous",
-    volume: 0.4,
+    volume: 0,
     oncanplaythrough() {
       emit("loaded");
     },
@@ -71,6 +71,14 @@ const playChannel = (src?: string) => {
     },
     onplay() {
       emit("play");
+
+      const adjustVolumeInterval = setInterval(() => {
+        if (this.volume < 0.5) {
+          this.volume += 0.025;
+        } else {
+          clearInterval(adjustVolumeInterval);
+        }
+      }, 50);
     },
   });
 
@@ -81,7 +89,8 @@ const playChannel = (src?: string) => {
     overlay: true,
     showBgColor: false,
     gradient: "steelblue",
-    // alphaBars: true,
+    alphaBars: true,
+    mirror: 1,
   });
 
   setGradient(analyzer, props.theme, props.colors);

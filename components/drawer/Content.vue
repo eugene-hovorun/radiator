@@ -70,11 +70,15 @@ const goToChannel = (url: string) => {
   overflow: auto;
 }
 
+.drawer-content .cursor-pointer {
+  border-bottom: 1px solid var(--color-bg);
+}
+
 .drawer-content [type="button"] {
   padding: 8px 12px;
   background-color: transparent;
   color: var(--color-text-light);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-bg">
+  <div class="bg-bg transition-colors">
     <main class="max-w-[1400px] min-h-screen m-auto pt-6">
       <div class="relative z-[1]">
         <slot />

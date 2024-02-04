@@ -1,5 +1,5 @@
 <template>
-  <div class="bar bg-border">
+  <div class="bar bg-border transition-colors">
     <div class="bar-container">
       <template v-if="activeChannel">
         <play-button
@@ -98,7 +98,7 @@ const toggleFavorite = () => {
   bottom: 0;
   left: 0;
   right: 0;
-  box-shadow: 0 -4px 12px 0 color-mix(in srgb, var(--color-main) 15%, rgba(0, 0, 0, 1));
+  box-shadow: 0 -4px 12px 0 color-mix(in srgb, var(--color-main) 10%, rgba(0, 0, 0, 1));
 }
 
 .bar-container {

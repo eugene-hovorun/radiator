@@ -9,7 +9,7 @@
     >
       <template #default="{ item }">
         <div
-          class="slide px-4 backdrop-blur"
+          class="slide px-4 backdrop-blur transition-colors"
           :class="{
             'bg-main text-text-dark font-bold': item.slug === country?.slug,
             'text-text-light': item.slug !== country?.slug,

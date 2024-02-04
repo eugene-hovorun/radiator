@@ -203,20 +203,22 @@ const findIndex = (item: Item) =>
 .fade .splide__track::after {
   content: "";
   position: absolute;
-  top: 0;
+  top: -1px;
   width: 10vw;
-  height: 100%;
+  height: calc(100% + 2px);
   pointer-events: none;
 }
 
 .splide__track::before {
-  left: 0;
+  left: -1px;
+  border-radius: 24px 0 0 24px;
   background: linear-gradient(to right, var(--color-bg) 0%, transparent 100%);
   z-index: 1;
 }
 
 .splide__track::after {
-  right: 0;
+  right: -1px;
+  border-radius: 0 24px 24px 0;
   background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
   z-index: 1;
 }
