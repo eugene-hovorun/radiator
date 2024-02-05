@@ -43,7 +43,7 @@ export default defineNuxtConfig({
               DEFAULT: "#131516",
             },
             main: {
-              DEFAULT: "#F64504",
+              DEFAULT: "#F45506",
             },
             "text-dark": {
               DEFAULT: "#000000",
