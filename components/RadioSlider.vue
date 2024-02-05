@@ -201,25 +201,28 @@ const findIndex = (item: Item) =>
 
 .fade .splide__track::before,
 .fade .splide__track::after {
-  content: "";
   position: absolute;
   top: -1px;
-  width: 10vw;
+  width: 4vw;
   height: calc(100% + 2px);
   pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .fade .splide__track::before,
+  .fade .splide__track::after {
+    content: "";
+  }
 }
 
 .splide__track::before {
   left: -1px;
-  border-radius: 24px 0 0 24px;
   background: linear-gradient(to right, var(--color-bg) 0%, transparent 100%);
-  z-index: 1;
 }
 
 .splide__track::after {
   right: -1px;
-  border-radius: 0 24px 24px 0;
   background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
-  z-index: 1;
 }
 </style>
