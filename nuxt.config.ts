@@ -40,19 +40,19 @@ export default defineNuxtConfig({
           },
           orangered: {
             bg: {
-              DEFAULT: "#3e2f29",
+              DEFAULT: "#131516",
             },
             main: {
-              DEFAULT: "#f64504",
+              DEFAULT: "#F64504",
             },
             "text-dark": {
-              DEFAULT: "#331306",
+              DEFAULT: "#000000",
             },
             "text-light": {
-              DEFAULT: "#ffffff",
+              DEFAULT: "#FFFFFF",
             },
             border: {
-              DEFAULT: "#411b0d",
+              DEFAULT: "#1E2021",
             },
           },
           flag: {
