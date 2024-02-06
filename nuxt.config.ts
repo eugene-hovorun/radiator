@@ -37,6 +37,9 @@ export default defineNuxtConfig({
             border: {
               DEFAULT: "#141a1f",
             },
+            shadow: {
+              DEFAULT: "#111213",
+            },
           },
           orangered: {
             bg: {
@@ -53,6 +56,9 @@ export default defineNuxtConfig({
             },
             border: {
               DEFAULT: "#1E2021",
+            },
+            shadow: {
+              DEFAULT: "#121417",
             },
           },
           flag: {
@@ -71,6 +77,9 @@ export default defineNuxtConfig({
             border: {
               DEFAULT: "#2E2E2E",
             },
+            shadow: {
+              DEFAULT: "#1C1C1C",
+            },
           },
           deeppurple: {
             bg: {
@@ -88,6 +97,9 @@ export default defineNuxtConfig({
             border: {
               DEFAULT: "#121212",
             },
+            shadow: {
+              DEFAULT: "#1F1F1F",
+            },
           },
           sunlit: {
             bg: {
@@ -104,6 +116,9 @@ export default defineNuxtConfig({
             },
             border: {
               DEFAULT: "#272C35",
+            },
+            shadow: {
+              DEFAULT: "#1A1D23",
             },
           },
         }),

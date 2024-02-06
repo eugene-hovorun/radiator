@@ -5,7 +5,7 @@
       class="search fixed z-[4] inset-0 bg-bg/30 backdrop-blur transition-colors"
     >
       <div
-        class="bg-border max-w-sm mx-auto mt-8 p-3 rounded-lg transition-colors"
+        class="bg-border max-w-sm mx-auto mt-8 p-3 rounded-lg transition-colors shadow-[0_0_9px_var(--color-shadow)]"
       >
         <div class="flex gap-3 justify-between items-center">
           <lazy-app-logo />
@@ -112,12 +112,6 @@ const handleSelect = (item: Country | Place) => {
 </script>
 
 <style>
-.search > div {
-  border: 1px solid var(--color-text-dark);
-  box-shadow: 4px 0 12px 0
-    color-mix(in srgb, var(--color-main) 10%, rgba(0, 0, 0, 1));
-}
-
 .search input:focus {
   box-shadow: 0 0 0 1px var(--color-main);
 }
