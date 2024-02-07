@@ -1,4 +1,4 @@
-import { getPlaces, getCountries } from "../../utils";
+import { api } from "../../utils";
 
 export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
   try {
@@ -10,8 +10,8 @@ export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
 
     const query = param.split("___").join(" ");
 
-    const places = await getPlaces();
-    const countries = await getCountries();
+    const places = await api.getPlaces();
+    const countries = await api.getCountries();
 
     const filteredCountries = countries.filter((country) =>
       country.title.toLowerCase().includes(query.toLowerCase()),

@@ -8,9 +8,7 @@ export default defineEventHandler(async (event) => {
       return { error: "Channel id is required" };
     }
 
-    return await api
-      .get(`/listen/${id}/channel.mp3`, { maxRedirects: 0 })
-      .catch((error) => error.response.headers.location);
+    return await api.listen(id);
   } catch (error) {
     return { error };
   }

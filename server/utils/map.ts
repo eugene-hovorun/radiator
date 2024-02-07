@@ -30,9 +30,9 @@ export const mapCountries = (places: Place[]) =>
     },
   );
 
-export const mapChannels = (channels: Channel[]) =>
-  channels.map((channel) => ({
+export const mapChannels = (channels: Channel[]): Channel[] =>
+  channels.map((channel, index) => ({
     ...channel,
-    id: channel.url.split("/").pop(),
+    id: channel.url.split("/").pop() || index.toString(),
     slug: createSlug(channel.title),
   }));

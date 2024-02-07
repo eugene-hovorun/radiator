@@ -1,4 +1,4 @@
-import { api, mapChannels } from "../../utils";
+import { api } from "../../utils";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -8,17 +8,7 @@ export default defineEventHandler(async (event) => {
       return { error: "Place ID is required" };
     }
 
-    const response = await api.get(`/secure/page/${placeId}/channels`);
-    const channels: Channel[] = [];
-    const content = response.data.data.content;
-
-    content.forEach((list: { items: { page: Channel }[] }) => {
-      list.items.forEach((item: { page: Channel }) => {
-        if (item.page) channels.push(item.page);
-      });
-    });
-
-    return mapChannels(channels);
+    return await api.getChannels(placeId);
   } catch (error) {
     return { error };
   }

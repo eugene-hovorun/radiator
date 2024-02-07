@@ -20,12 +20,6 @@ declare global {
     countryId: string;
   }
 
-  interface PlacesResponse {
-    data: {
-      list: Place[];
-    };
-  }
-
   interface Channel {
     stream: string;
     title: string;
