@@ -54,21 +54,21 @@
             <search-result-section
               title="Countries"
               :items="searchResults.countries"
-              @select="handleSelect"
+              @select="selectCountry"
             />
           </div>
           <div v-if="searchResults.places.length">
             <search-result-section
               title="Places"
               :items="searchResults.places"
-              @select="handleSelect"
+              @select="selectPlace"
             />
           </div>
           <div v-if="searchResults.channels.length">
             <search-result-section
               title="Channels"
               :items="searchResults.channels"
-              @select="handleSelect"
+              @select="selectChannel"
             />
           </div>
         </div>
@@ -81,8 +81,6 @@
 import { useDebounceFn } from "@vueuse/core";
 import { useCountriesStore } from "../../store/countries";
 import { highlightMatchedText } from "../../store/utils";
-
-type SearchItem = Country | Place | Channel;
 
 const router = useRouter();
 const countriesStore = useCountriesStore();
@@ -121,18 +119,18 @@ const handleQueryChange = () => {
   countriesStore.getSearchResults(query.value);
 };
 
-const isPlace = (result: SearchItem): result is Place => "geo" in result;
-const isChannel = (result: SearchItem): result is Channel => "stream" in result;
+const selectCountry = (country: Country) => {
+  router.push(`/${country.id}`);
+  closeSearch();
+};
 
-const handleSelect = (item: SearchItem) => {
-  if (isPlace(item)) {
-    router.push(`/${item.countryId}/${item.slug}`);
-  } else if (isChannel(item)) {
-    router.push(item.url);
-  } else {
-    router.push(`/${item.id}`);
-  }
+const selectPlace = (place: Place) => {
+  router.push(`/${place.countryId}/${place.slug}`);
+  closeSearch();
+};
 
+const selectChannel = (channel: Channel) => {
+  router.push(channel.url);
   closeSearch();
 };
 </script>
