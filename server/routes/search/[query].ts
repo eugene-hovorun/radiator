@@ -1,4 +1,4 @@
-import { mapPlaces, getPlaces } from "../../utils";
+import { getPlaces, getCountries } from "../../utils";
 
 export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
   try {
@@ -10,9 +10,9 @@ export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
 
     const query = param.split("-").join(" ");
 
-    const list = (await getPlaces()) || [];
-    const places = mapPlaces(list);
-    const countries = mapCountries(places);
+    const places = await getPlaces();
+    const countries = await getCountries();
+
     const filteredCountries = countries.filter((country) =>
       country.title.toLowerCase().includes(query.toLowerCase()),
     );
