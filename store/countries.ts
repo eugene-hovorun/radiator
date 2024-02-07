@@ -39,6 +39,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     favoriteChannels: [],
     fetchingChannels: false,
     fetchingPlaces: true,
+    fetchingSearch: false,
     playing: false,
     autoplay: false,
     showDrawer: false,
@@ -184,7 +185,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     async getSearchResults(query: string) {
       this.fetchingSearch = true;
       const results = await $fetch<(Country | Place)[]>(
-        "/search/" + query.split(" ").join("-"),
+        "/search/" + query.split(" ").join("___"),
       );
 
       this.searchResults = results;

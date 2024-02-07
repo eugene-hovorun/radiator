@@ -8,7 +8,7 @@ export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
       return [];
     }
 
-    const query = param.split("-").join(" ");
+    const query = param.split("___").join(" ");
 
     const places = await getPlaces();
     const countries = await getCountries();
