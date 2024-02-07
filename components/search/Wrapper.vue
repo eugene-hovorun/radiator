@@ -50,27 +50,26 @@
         </div>
 
         <div class="overflow-auto">
-          <div v-if="searchResults.countries.length">
-            <search-result-section
-              title="Countries"
-              :items="searchResults.countries"
-              @select="selectCountry"
-            />
-          </div>
-          <div v-if="searchResults.places.length">
-            <search-result-section
-              title="Places"
-              :items="searchResults.places"
-              @select="selectPlace"
-            />
-          </div>
-          <div v-if="searchResults.channels.length">
-            <search-result-section
-              title="Channels"
-              :items="searchResults.channels"
-              @select="selectChannel"
-            />
-          </div>
+          <search-result-section
+            v-if="searchResults.countries.length"
+            title="Countries"
+            :items="searchResults.countries"
+            @select="selectCountry"
+          />
+
+          <search-result-section
+            v-if="searchResults.places.length"
+            title="Places"
+            :items="searchResults.places"
+            @select="selectPlace"
+          />
+
+          <search-result-section
+            v-if="searchResults.channels.length"
+            title="Channels"
+            :items="searchResults.channels"
+            @select="selectChannel"
+          />
         </div>
       </div>
     </div>
