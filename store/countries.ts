@@ -22,10 +22,12 @@ type State = {
   autoplay: boolean;
   showDrawer: boolean;
   showSearch: boolean;
-  searchResults: (Place | Country)[];
+  searchResults: SearchPayload;
   currentThemeValue: Theme["value"];
   abortController: AbortController | null;
 };
+
+const EMPTY_SEARCH_PAYLOAD = { channels: [], countries: [], places: [] };
 
 export const useCountriesStore = defineStore("countriesStore", {
   state: (): State => ({
@@ -44,7 +46,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     autoplay: false,
     showDrawer: false,
     showSearch: false,
-    searchResults: [],
+    searchResults: EMPTY_SEARCH_PAYLOAD,
     currentThemeValue: themes[0].value,
     abortController: null,
   }),
@@ -183,13 +185,26 @@ export const useCountriesStore = defineStore("countriesStore", {
     },
 
     async getSearchResults(query: string) {
+      if (!query) {
+        this.clearSearchResults();
+        return;
+      }
+
+      if (query.length < 3) {
+        return;
+      }
+
       this.fetchingSearch = true;
-      const results = await $fetch<(Country | Place)[]>(
+      const results = await $fetch<SearchPayload>(
         "/search/" + query.split(" ").join("___"),
       );
 
       this.searchResults = results;
       this.fetchingSearch = false;
+    },
+
+    clearSearchResults() {
+      this.searchResults = EMPTY_SEARCH_PAYLOAD;
     },
   },
 });

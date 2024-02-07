@@ -1,27 +1,20 @@
 import { api } from "../../utils";
 
-export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
+const EMPTY_SEARCH_PAYLOAD = { channels: [], countries: [], places: [] };
+
+export default defineEventHandler(async (event): Promise<SearchPayload> => {
   try {
     const param = event.context.params?.query;
 
     if (!param) {
-      return [];
+      return EMPTY_SEARCH_PAYLOAD;
     }
 
     const query = param.split("___").join(" ");
 
-    const places = await api.getPlaces();
-    const countries = await api.getCountries();
-
-    const filteredCountries = countries.filter((country) =>
-      country.title.toLowerCase().includes(query.toLowerCase()),
-    );
-    const filteredPlaces = places.filter((place) =>
-      place.title.toLowerCase().includes(query.toLowerCase()),
-    );
-
-    return [...filteredCountries, ...filteredPlaces].slice(0, 42);
+    return await api.search(query);
   } catch (error) {
-    return { error };
+    console.error("Error fetching data:", error);
+    return EMPTY_SEARCH_PAYLOAD;
   }
 });

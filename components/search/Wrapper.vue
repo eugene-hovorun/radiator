@@ -2,10 +2,10 @@
   <transition name="drawer" mode="out-in">
     <div
       v-if="countriesStore.showSearch"
-      class="search fixed z-[4] inset-0 bg-bg/30 backdrop-blur transition-colors"
+      class="search fixed z-[4] p-4 inset-0 bg-bg/30 backdrop-blur transition-colors"
     >
       <div
-        class="bg-border max-w-sm mx-auto mt-8 p-3 rounded-lg transition-colors shadow-[0_0_9px_var(--color-shadow)]"
+        class="bg-border max-w-sm max-h-[calc(100vh-64px)] flex flex-col gap-6 mx-auto mt-4 p-3 rounded-lg transition-colors shadow-[0_0_9px_var(--color-shadow)]"
       >
         <div class="flex gap-3 justify-between items-center">
           <lazy-app-logo />
@@ -16,9 +16,10 @@
         <div class="relative">
           <u-input
             v-model="query"
-            class="w-full my-4"
+            class="w-full"
             autofocus
-            placeholder="search country or city"
+            autocomplete="off"
+            placeholder="country, city or channel"
             @input="debouncedSearch"
           />
           <transition name="play" mode="out-in">
@@ -48,14 +49,28 @@
           </transition>
         </div>
 
-        <div v-if="searchResults.length" class="max-h-40 overflow-auto">
-          <div
-            v-for="result in searchResults"
-            :key="result.id"
-            class="border-t p-2 border-t-[var(--color-bg)] cursor-pointer transition-colors text-text-light hover:text-main"
-            @click="handleSelect(result)"
-            v-html="result.label"
-          ></div>
+        <div class="overflow-auto">
+          <div v-if="searchResults.countries.length">
+            <search-result-section
+              title="Countries"
+              :items="searchResults.countries"
+              @select="handleSelect"
+            />
+          </div>
+          <div v-if="searchResults.places.length">
+            <search-result-section
+              title="Places"
+              :items="searchResults.places"
+              @select="handleSelect"
+            />
+          </div>
+          <div v-if="searchResults.channels.length">
+            <search-result-section
+              title="Channels"
+              :items="searchResults.channels"
+              @select="handleSelect"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -67,24 +82,34 @@ import { useDebounceFn } from "@vueuse/core";
 import { useCountriesStore } from "../../store/countries";
 import { highlightMatchedText } from "../../store/utils";
 
+type SearchItem = Country | Place | Channel;
+
 const router = useRouter();
 const countriesStore = useCountriesStore();
 const query = ref("");
-const searchResults = computed(() =>
-  (countriesStore.searchResults || []).map((item: Country | Place) => {
-    const label = isPlace(item)
-      ? `<span class="search-country">${item.country}</span> > ${item.title}`
-      : item.title;
-
-    return {
-      ...item,
-      label: highlightMatchedText(label, query.value),
-    };
-  }),
-);
+const searchResults = computed(() => ({
+  countries: countriesStore.searchResults.countries.map((item) => ({
+    ...item,
+    label: highlightMatchedText(item.title, query.value),
+  })),
+  channels: countriesStore.searchResults.channels.map((item) => ({
+    ...item,
+    label: highlightMatchedText(
+      `<span class="search-country">${item.subtitle}</span> > ${item.title}`,
+      query.value,
+    ),
+  })),
+  places: countriesStore.searchResults.places.map((item) => ({
+    ...item,
+    label: highlightMatchedText(
+      `<span class="search-country">${item.country}</span> > ${item.title}`,
+      query.value,
+    ),
+  })),
+}));
 
 const closeSearch = () => {
-  countriesStore.searchResults = [];
+  countriesStore.clearSearchResults();
   query.value = "";
 
   countriesStore.toggleSearch(false);
@@ -96,13 +121,14 @@ const handleQueryChange = () => {
   countriesStore.getSearchResults(query.value);
 };
 
-const isPlace = (result: Country | Place): result is Place => {
-  return "geo" in result;
-};
+const isPlace = (result: SearchItem): result is Place => "geo" in result;
+const isChannel = (result: SearchItem): result is Channel => "stream" in result;
 
-const handleSelect = (item: Country | Place) => {
+const handleSelect = (item: SearchItem) => {
   if (isPlace(item)) {
     router.push(`/${item.countryId}/${item.slug}`);
+  } else if (isChannel(item)) {
+    router.push(item.url);
   } else {
     router.push(`/${item.id}`);
   }
@@ -128,5 +154,9 @@ const handleSelect = (item: Country | Place) => {
 
 .search .search-country {
   opacity: 0.5;
+}
+
+.result-section + .result-section {
+  border-top: 1px solid var(--color-bg);
 }
 </style>

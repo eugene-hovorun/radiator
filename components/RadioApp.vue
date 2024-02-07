@@ -5,7 +5,7 @@
         <slot />
       </div>
 
-      <audio-motion
+      <lazy-audio-motion
         :src="src"
         :playing="playing"
         :colors="colors"
@@ -17,9 +17,9 @@
 
       <radio-bar />
 
-      <drawer-wrapper />
+      <lazy-drawer-wrapper />
 
-      <lazy-app-search />
+      <lazy-search-wrapper />
     </main>
   </div>
 </template>

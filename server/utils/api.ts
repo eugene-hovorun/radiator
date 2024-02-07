@@ -1,5 +1,6 @@
 import axios from "axios";
 import { mapChannels, mapCountries, mapPlaces } from "./map";
+import { createSlug } from "./slug";
 
 const SUPER_CACHE: {
   countries: Country[];
@@ -10,6 +11,8 @@ const SUPER_CACHE: {
   places: [],
   channels: {},
 };
+
+const MAX_SEARCH_RESULTS = 12;
 
 const _axios = axios.create({
   baseURL: "https://radio.garden/api/ara/content",
@@ -81,6 +84,55 @@ export const api = {
     } catch (error) {
       console.error("Error fetching data:", error);
       return {} as Channel;
+    }
+  },
+  search: async (query: string): Promise<SearchPayload> => {
+    try {
+      const response = await _axios.get(
+        `https://radio.garden/api/search/secure?q=${query}`,
+      );
+      const entries = response.data.hits.hits;
+
+      const rawCountries = await api.getCountries();
+      const rawPlaces = await api.getPlaces();
+      const rawChannels: Channel[] =
+        entries
+          ?.map((entry: Record<"_source", Channel>) => entry._source)
+          .filter(
+            (source: Channel & { code: string }) =>
+              source.type === "channel" && source.code,
+          )
+          .map((channel: Required<Channel & { code: string }>) => {
+            const countryId = channel?.code.toLowerCase();
+            const placeSlug = createSlug(channel?.subtitle.split(", ")[0]);
+            const channelId = channel.url.split("/").pop();
+
+            return {
+              ...channel,
+              placeSlug,
+              url: `/${countryId}/${placeSlug}/${channelId}`,
+            };
+          })
+          .filter((channel: Required<Channel & { placeSlug: string }>) =>
+            rawPlaces.some((place) => place.slug === channel.placeSlug),
+          ) || [];
+
+      return {
+        countries: rawCountries
+          .filter((country) =>
+            country.title.toLowerCase().includes(query.toLowerCase()),
+          )
+          .slice(0, MAX_SEARCH_RESULTS),
+        places: rawPlaces
+          .filter((place) =>
+            place.title.toLowerCase().includes(query.toLowerCase()),
+          )
+          .slice(0, MAX_SEARCH_RESULTS),
+        channels: mapChannels(rawChannels).slice(0, MAX_SEARCH_RESULTS),
+      };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return { places: [], countries: [], channels: [] };
     }
   },
 };

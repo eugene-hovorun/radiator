@@ -28,6 +28,7 @@ declare global {
     slug: string;
     id: string;
     src: string;
+    subtitle?: string;
   }
 
   interface FavoriteChannel {
@@ -46,5 +47,11 @@ declare global {
       | "Sunlit Gold";
     value: "steelblue" | "orangered" | "flag" | "deeppurple" | "sunlit";
     gradient: string;
+  }
+
+  interface SearchPayload {
+    channels: Channel[];
+    countries: Country[];
+    places: Place[];
   }
 }
