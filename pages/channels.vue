@@ -2,8 +2,10 @@
   <radio-slider
     v-model="channel"
     title="Channel"
+    alphabet
     :items="countriesStore.channels"
     :loading="fetchingChannels"
+    @go-to-letter="goToChannelByLetter"
   >
     <template #default="{ item }">
       <div
@@ -112,5 +114,16 @@ const isFailed = (item: unknown) => {
   const channel = item as Channel;
 
   return failedIds.value.includes(channel.id);
+};
+
+const goToChannelByLetter = (letter: string) => {
+  const { country, place } = route.params;
+  const channel = countriesStore.channels.find((c) =>
+    c.title.toLowerCase().startsWith(letter),
+  );
+
+  if (channel) {
+    router.replace(`/${country}/${place}/${channel.id}`);
+  }
 };
 </script>
