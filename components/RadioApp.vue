@@ -50,16 +50,19 @@ const handlePlay = () => {
 };
 
 const handleKeyDown = (event: KeyboardEvent) => {
-  if (event.ctrlKey && event.key === "f") {
+  // Handling Command + F for search
+  if ((event.metaKey || event.ctrlKey) && event.key === "f") {
     event.preventDefault();
     countriesStore.toggleSearch(true);
   }
 
-  if (event.ctrlKey && event.key === "d") {
+  // Handling Command + D for drawer toggle
+  if ((event.metaKey || event.ctrlKey) && event.key === "d") {
     event.preventDefault();
     countriesStore.toggleDrawer(true);
   }
 
+  // Handling Escape key for closing search and drawer
   if (event.key === "Escape") {
     countriesStore.toggleSearch(false);
     countriesStore.toggleDrawer(false);
