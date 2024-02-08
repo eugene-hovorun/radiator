@@ -49,7 +49,30 @@ const handlePlay = () => {
   }
 };
 
+const handleKeyDown = (event: KeyboardEvent) => {
+  if (event.ctrlKey && event.key === "f") {
+    event.preventDefault();
+    countriesStore.toggleSearch(true);
+  }
+
+  if (event.ctrlKey && event.key === "d") {
+    event.preventDefault();
+    countriesStore.toggleDrawer(true);
+  }
+
+  if (event.key === "Escape") {
+    countriesStore.toggleSearch(false);
+    countriesStore.toggleDrawer(false);
+  }
+};
+
 onMounted(() => {
   countriesStore.applyStoredData();
+
+  document.addEventListener("keydown", handleKeyDown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleKeyDown);
 });
 </script>

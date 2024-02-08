@@ -10,7 +10,7 @@
         <div class="flex gap-3 justify-between items-center">
           <lazy-app-logo />
 
-          <base-icon-button name="ion:close" @click="closeSearch" />
+          <base-icon-button name="ion:close" @click="() => closeSearch()" />
         </div>
 
         <div class="relative">
@@ -105,11 +105,12 @@ const searchResults = computed(() => ({
   })),
 }));
 
-const closeSearch = () => {
+const closeSearch = (autoplay?: boolean) => {
   countriesStore.clearSearchResults();
   query.value = "";
 
   countriesStore.toggleSearch(false);
+  countriesStore.autoplay = !!autoplay;
 };
 
 const debouncedSearch = useDebounceFn(() => handleQueryChange(), 500);
@@ -119,18 +120,18 @@ const handleQueryChange = () => {
 };
 
 const selectCountry = (country: Country) => {
-  router.push(`/${country.id}`);
   closeSearch();
+  router.push(`/${country.id}`);
 };
 
 const selectPlace = (place: Place) => {
-  router.push(`/${place.countryId}/${place.slug}`);
   closeSearch();
+  router.push(`/${place.countryId}/${place.slug}`);
 };
 
 const selectChannel = (channel: Channel) => {
+  closeSearch(true);
   router.push(channel.url);
-  closeSearch();
 };
 </script>
 
