@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="radio-slider mb-3" :class="{ loading, fade: items.length > 3 }">
+    <div class="radio-slider">
       <radio-alphabet
         :items="items"
         :enabled="alphabet"
@@ -14,26 +14,20 @@
         </div>
       </radio-alphabet>
 
-      <slider
-        ref="sliderRef"
-        :options="{
-          perPage: 5,
-          focus: 'center',
-          gap: '8px',
-          wheel: true,
-          breakpoints: {
-            1400: { perPage: 5 },
-            1100: { perPage: 3 },
-            600: { perPage: 2 },
-          },
-        }"
-      >
-        <slide v-for="item in props.items" :key="item.slug">
-          <slot :item="item" />
-        </slide>
-      </slider>
       <transition name="skeleton" mode="out-in">
-        <div v-if="loading && showSkeleton" class="skeleton">
+        <swiper v-if="!loading" v-bind="sliderOptions" @swiper="setSliderRef">
+          <swiper-slide
+            v-for="(item, index) in props.items"
+            :key="index"
+            :virtual-index="index"
+          >
+            <slot :item="item" />
+          </swiper-slide>
+        </swiper>
+      </transition>
+
+      <transition name="skeleton" mode="out-in">
+        <div v-if="showSkeleton" class="skeleton">
           <div v-for="index in 5" :key="index" class="skeleton--item bg-main" />
         </div>
       </transition>
@@ -42,8 +36,10 @@
 </template>
 
 <script setup lang="ts">
-import { Splide as Slider, SplideSlide as Slide } from "@splidejs/vue-splide";
-import "@splidejs/vue-splide/css";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/virtual";
+import { Virtual, Mousewheel } from "swiper/modules";
 
 type Item = Country | Place | Channel;
 
@@ -57,68 +53,64 @@ const props = defineProps<{
   alphabet?: boolean;
 }>();
 
-const sliderRef = ref<typeof Slider>();
+const sliderRef = ref();
 const showSkeleton = ref(false);
+let skeletonTimeout: ReturnType<typeof setTimeout> | null = null;
 
 watch(
   () => props.modelValue,
-  (value) => {
-    setTimeout(() => {
-      sliderRef.value?.go(findIndex(value));
-    }, 50);
+  () => slideToValue(250),
+);
+
+watch(
+  () => props.loading,
+  (loading) => {
+    if (loading) {
+      skeletonTimeout = setTimeout(() => {
+        showSkeleton.value = true;
+      }, 500);
+    } else {
+      if (skeletonTimeout) {
+        clearTimeout(skeletonTimeout);
+        skeletonTimeout = null;
+      }
+      showSkeleton.value = false;
+    }
   },
   { immediate: true },
 );
 
-onMounted(() => {
-  setTimeout(() => {
-    showSkeleton.value = true;
-  }, 500);
-});
+const setSliderRef = (swiper: any) => {
+  sliderRef.value = swiper;
+  slideToValue(0);
+};
 
 const findIndex = (item: Item) =>
   props.items.findIndex((i) => i.slug === item?.slug);
+
+const slideToValue = (speed?: number) =>
+  sliderRef.value?.slideTo(findIndex(props.modelValue), speed);
+
+const sliderOptions = {
+  modules: [Virtual, Mousewheel],
+  centeredSlides: true,
+  spaceBetween: 8,
+  slidesPerView: 2,
+  mousewheel: true,
+  virtual: true,
+  breakpoints: {
+    1100: { slidesPerView: 5 },
+    600: { slidesPerView: 3 },
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
 .radio-slider {
   position: relative;
   min-height: 78px;
-  box-sizing: border-box;
-}
-
-.splide {
-  max-width: calc(100% - 80px);
-  margin: auto;
-}
-
-.radio-slider.loading .splide__track,
-.radio-slider.loading .slider-title {
-  opacity: 0;
-}
-
-.splide__pagination {
-  display: none;
-}
-
-.splide__arrow:disabled {
-  display: none;
-}
-
-.splide__arrow {
-  background: transparent;
-}
-
-.splide__arrow svg {
-  fill: var(--color-text-dark);
-}
-
-.splide__arrow--prev {
-  left: -32px;
-}
-
-.splide__arrow--next {
-  right: -32px;
+  max-width: calc(100% - 24px);
+  margin: 0 auto 12px;
 }
 
 .slide {
@@ -132,7 +124,6 @@ const findIndex = (item: Item) =>
   border-radius: 24px;
   cursor: pointer;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 .slider-title {
@@ -160,8 +151,8 @@ const findIndex = (item: Item) =>
   height: 34px;
   z-index: 1;
   bottom: 0;
-  left: 40px;
-  right: 40px;
+  left: 0;
+  right: 0;
   overflow: hidden;
 }
 
@@ -197,32 +188,5 @@ const findIndex = (item: Item) =>
   100% {
     opacity: 0.1;
   }
-}
-
-.fade .splide__track::before,
-.fade .splide__track::after {
-  position: absolute;
-  top: -1px;
-  width: 4vw;
-  height: calc(100% + 2px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-@media (max-width: 600px) {
-  .fade .splide__track::before,
-  .fade .splide__track::after {
-    content: "";
-  }
-}
-
-.splide__track::before {
-  left: -1px;
-  background: linear-gradient(to right, var(--color-bg) 0%, transparent 100%);
-}
-
-.splide__track::after {
-  right: -1px;
-  background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
 }
 </style>
