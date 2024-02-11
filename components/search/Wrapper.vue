@@ -3,6 +3,7 @@
     <div
       v-if="countriesStore.showSearch"
       class="search fixed z-[4] p-4 inset-0 bg-bg/30 backdrop-blur transition-colors"
+      @keydown.stop
     >
       <div
         class="bg-border max-w-sm max-h-[calc(100svh-64px)] flex flex-col gap-6 mx-auto mt-4 p-3 rounded-lg transition-colors shadow-[0_0_9px_var(--color-shadow)]"

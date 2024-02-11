@@ -56,14 +56,16 @@ const handlePlay = () => {
 };
 
 const handleKeyDown = (event: KeyboardEvent) => {
+  const ctrl = event.metaKey || event.ctrlKey;
+
   // Handling Command + F for search
-  if ((event.metaKey || event.ctrlKey) && event.key === "f") {
+  if (ctrl && event.key === "f") {
     event.preventDefault();
     countriesStore.toggleSearch(true);
   }
 
   // Handling Command + D for drawer toggle
-  if ((event.metaKey || event.ctrlKey) && event.key === "d") {
+  if (ctrl && event.key === "d") {
     event.preventDefault();
     countriesStore.toggleDrawer(true);
   }
@@ -77,16 +79,21 @@ const handleKeyDown = (event: KeyboardEvent) => {
   // Handling Space key for play/pause
   if (event.key === " ") {
     event.preventDefault();
-    countriesStore.togglePlay();
+
+    if (countriesStore.activeChannel) {
+      countriesStore.togglePlay();
+    }
   }
 
-  // Handling Arrow Right for next channel
-  if (event.key === "ArrowRight") {
-    countriesStore.shuffle();
+  // Handling Command + Arrow Right for next channel
+  if (ctrl && event.key === "ArrowRight") {
+    if (!countriesStore.autoplay) {
+      countriesStore.shuffle();
+    }
   }
 
-  // Handling option/alt + digit for theme change
-  if (event.altKey && !isNaN(parseInt(event.key))) {
+  // Handling Command + digit for theme change
+  if (ctrl && !isNaN(parseInt(event.key))) {
     event.preventDefault();
 
     const index = parseInt(event.key) - 1;
@@ -98,7 +105,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 
   // Handling digit for favorite channel selection
-  if (!event.altKey && !isNaN(parseInt(event.key))) {
+  if (!ctrl && !isNaN(parseInt(event.key))) {
     const index = parseInt(event.key) - 1;
     const channel = countriesStore.favoriteChannels[index];
 

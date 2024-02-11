@@ -1,16 +1,20 @@
 <template>
-  <div class="actions fixed bottom-20 right-0 flex flex-col gap-3 p-3">
-    <base-icon-button name="ion:search" size="1.2" @click="search" />
+  <div class="actions fixed bottom-20 right-0 w-screen pointer-events-none">
+    <div class="max-w-[1400px] m-auto flex justify-end">
+      <div class="flex flex-col gap-3 p-3 pointer-events-auto">
+        <base-icon-button name="ion:search" size="1.2" @click="search" />
 
-    <base-icon-button
-      v-if="activeChannel"
-      :name="cahShare ? 'ci:share' : justCopied ? 'ci:check' : 'ci:copy'"
-      size="1.2"
-      dynamic
-      @click="share"
-    />
+        <base-icon-button
+          v-if="activeChannel"
+          :name="cahShare ? 'ci:share' : justCopied ? 'ci:check' : 'ci:copy'"
+          size="1.2"
+          dynamic
+          @click="share"
+        />
 
-    <base-icon-button name="ci:shuffle" size="1.2" @click="shuffle" />
+        <base-icon-button name="ci:shuffle" size="1.2" @click="shuffle" />
+      </div>
+    </div>
   </div>
 </template>
 
