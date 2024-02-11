@@ -4,10 +4,13 @@
   <transition name="skeleton">
     <app-loading v-if="showSpinner" />
   </transition>
+
+  <speed-insights />
 </template>
 
 <script lang="ts" setup>
 import "~/assets/main.scss";
+import { SpeedInsights } from "@vercel/speed-insights/vue";
 
 const showSpinner = ref(true);
 
