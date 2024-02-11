@@ -2,7 +2,6 @@
   <radio-slider
     v-model="place"
     title="City"
-    alphabet
     :loading="loading"
     :items="countriesStore.places"
     @go-to-letter="goToCityByLetter"

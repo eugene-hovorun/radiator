@@ -2,7 +2,6 @@
   <radio-slider
     v-model="channel"
     title="Channel"
-    alphabet
     :items="countriesStore.channels"
     :loading="fetchingChannels"
     @go-to-letter="goToChannelByLetter"

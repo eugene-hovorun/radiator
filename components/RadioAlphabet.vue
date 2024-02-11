@@ -39,7 +39,6 @@
 type Item = Country | Place | Channel;
 
 const props = defineProps({
-  enabled: Boolean,
   items: {
     type: Array as PropType<Item[]>,
     default: () => [],
@@ -49,7 +48,7 @@ const props = defineProps({
 const lettersMatrix = ref<[string[], string[]]>([[], []]);
 const emit = defineEmits(["select"]);
 
-const showLetters = computed(() => props.enabled && props.items.length > 10);
+const showLetters = computed(() => props.items.length > 10);
 
 const updateFirstLetters = () => {
   const isCountry = () => props.items.some((item) => "colors" in item);
@@ -88,9 +87,9 @@ const updateFirstLetters = () => {
 };
 
 watch(
-  [() => props.items, () => props.enabled],
+  [() => props.items],
   () => {
-    if (props.enabled) {
+    if (showLetters.value) {
       updateFirstLetters();
     }
   },

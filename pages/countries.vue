@@ -3,7 +3,6 @@
     <radio-slider
       v-model="country"
       title="Country"
-      alphabet
       :items="countriesStore.countries"
       @go-to-letter="goToCountryByLetter"
     >

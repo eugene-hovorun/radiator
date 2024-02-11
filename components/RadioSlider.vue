@@ -3,7 +3,6 @@
     <div class="radio-slider">
       <radio-alphabet
         :items="items"
-        :enabled="alphabet"
         @select="(letter) => $emit('go-to-letter', letter)"
       >
         <div class="slider-title text-main">
@@ -63,7 +62,6 @@ const props = defineProps<{
   modelValue: Item;
   title: string;
   loading?: boolean;
-  alphabet?: boolean;
 }>();
 
 const sliderRef = ref();
