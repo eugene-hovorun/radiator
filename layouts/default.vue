@@ -15,6 +15,12 @@ useHead({
   title: "Radiätor",
   style: [{ innerHTML: "html { background: #111; }" }],
   script: [{ src: "https://www.googletagmanager.com/gtag/js?id=G-7DC0E80PQR" }],
+  meta: [
+    {
+      name: "viewport",
+      content: "width=device-width, initial-scale=1, maximum-scale=1",
+    },
+  ],
 });
 
 useSeoMeta({

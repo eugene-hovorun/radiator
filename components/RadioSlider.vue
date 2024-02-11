@@ -227,14 +227,8 @@ const sliderOptions = {
   &--next::before {
     position: absolute;
     top: -2px;
-    width: 8vw;
+    width: 4vw;
     height: calc(100% + 4px);
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--color-bg),
-      transparent
-    );
     pointer-events: none;
   }
 
@@ -245,11 +239,13 @@ const sliderOptions = {
     }
 
     &--prev::before {
-      left: 50%;
+      left: 100%;
+      background: linear-gradient(to right, var(--color-bg), transparent);
     }
 
     &--next::before {
-      right: 50%;
+      right: 100%;
+      background: linear-gradient(to left, var(--color-bg), transparent);
     }
   }
 }
