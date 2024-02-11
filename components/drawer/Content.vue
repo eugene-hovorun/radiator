@@ -62,12 +62,16 @@ const goToChannel = (url: string) => {
 };
 </script>
 
-<style>
+<style lang="scss">
 .drawer-content {
   display: flex;
   flex-direction: column;
   height: calc(100svh - 78px);
   overflow: auto;
+
+  .text-primary-500 {
+    color: var(--color-main);
+  }
 }
 
 .drawer-content .cursor-pointer {
@@ -77,16 +81,11 @@ const goToChannel = (url: string) => {
 .drawer-content [type="button"] {
   padding: 8px 12px;
   background-color: transparent;
-  color: var(--color-text-light);
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .drawer-content [type="button"]:hover {
   background-color: transparent;
-}
-
-.drawer-content [type="button"] span[class*="icon"] {
-  color: var(--color-main);
 }
 </style>

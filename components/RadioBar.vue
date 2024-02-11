@@ -21,9 +21,17 @@
       </template>
 
       <div class="bar-actions">
+        <base-range
+          v-model="volume"
+          :min="0"
+          :max="1"
+          :step="0.01"
+          class="w-[8rem] hidden sm:flex"
+        />
+
         <base-icon-button
-          v-if="activeChannel"
           :name="isFavorite ? 'ion:heart' : 'ion:heart-outline'"
+          :disabled="!activeChannel"
           size="1.2"
           dynamic
           @click="toggleFavorite"
@@ -67,6 +75,11 @@ watch(
   },
   { immediate: true },
 );
+
+const volume = computed({
+  get: () => countriesStore.volume,
+  set: (value) => countriesStore.setVolume(value),
+});
 
 const togglePlay = () => {
   if (loadingChannelId.value) {

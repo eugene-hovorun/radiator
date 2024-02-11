@@ -1,9 +1,10 @@
 <template>
   <button
-    class="flex-shrink-0 rounded-full flex items-center justify-center transition bg-text-dark text-main hover:text-text-light opacity-90 hover:opacity-100"
+    class="flex-shrink-0 rounded-full flex items-center justify-center transition bg-text-dark text-main hover:text-text-light opacity-90 hover:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed"
+    :disabled="disabled"
     :style="style"
   >
-    <u-icon :name="props.name" dynamic />
+    <u-icon :name="name" dynamic />
   </button>
 </template>
 
@@ -17,6 +18,7 @@ const props = defineProps({
     type: String,
     default: "1",
   },
+  disabled: Boolean,
 });
 
 const style = computed(() => {

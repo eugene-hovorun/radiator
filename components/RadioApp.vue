@@ -10,6 +10,7 @@
         :playing="playing"
         :colors="colors"
         :theme="currentThemeValue"
+        :volume="volume"
         @loaded="countriesStore.loadingChannelId = null"
         @play="handlePlay"
         @error="channel && countriesStore.setFailedChannel(channel)"
@@ -33,6 +34,7 @@ const router = useRouter();
 const countriesStore = useCountriesStore();
 const channel = computed(() => countriesStore.activeChannel);
 const src = computed(() => channel.value?.src);
+const volume = computed(() => countriesStore.volume);
 const playing = computed(() => countriesStore.playing);
 const currentThemeValue = computed(() => countriesStore.currentThemeValue);
 
@@ -103,6 +105,18 @@ const handleKeyDown = (event: KeyboardEvent) => {
       countriesStore.autoplay = true;
       router.push(channel.url);
     }
+  }
+
+  // Handling Arrow Up for volume increase
+  if (event.key === "ArrowUp") {
+    event.preventDefault();
+    countriesStore.setVolume(Math.min(countriesStore.volume + 0.05, 1));
+  }
+
+  // Handling Arrow Down for volume decrease
+  if (event.key === "ArrowDown") {
+    event.preventDefault();
+    countriesStore.setVolume(Math.max(countriesStore.volume - 0.05, 0));
   }
 };
 

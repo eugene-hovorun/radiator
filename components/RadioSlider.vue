@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="radio-slider">
+    <div class="radio-slider" @wheel.passive="onWheel">
       <radio-alphabet
         :items="items"
         @select="(letter) => $emit('go-to-letter', letter)"
@@ -51,7 +51,7 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/virtual";
-import { Virtual, Mousewheel } from "swiper/modules";
+import { Virtual } from "swiper/modules";
 
 type Item = Country | Place | Channel;
 
@@ -91,6 +91,9 @@ watch(
   { immediate: true },
 );
 
+const onWheel = (e: WheelEvent) =>
+  e.deltaY > 0 ? sliderRef.value?.slideNext() : sliderRef.value?.slidePrev();
+
 const setSliderRef = (swiper: any) => {
   sliderRef.value = swiper;
   slideToValue(0);
@@ -103,11 +106,10 @@ const slideToValue = (speed?: number) =>
   sliderRef.value?.slideTo(findIndex(props.modelValue), speed);
 
 const sliderOptions = {
-  modules: [Virtual, Mousewheel],
+  modules: [Virtual],
   centeredSlides: true,
   spaceBetween: 8,
   slidesPerView: 2,
-  mousewheel: true,
   virtual: true,
   breakpoints: {
     1100: { slidesPerView: 5 },

@@ -13,6 +13,7 @@ import { setGradient } from "./utils";
 interface Props {
   src?: string;
   colors: string[];
+  volume: number;
   theme: Theme["value"];
   playing?: boolean;
 }
@@ -27,9 +28,20 @@ watch(
 );
 
 watch(
+  () => props.volume,
+  (volume) => {
+    const audio = getAudioElement();
+
+    if (audio) {
+      audio.volume = volume;
+    }
+  },
+);
+
+watch(
   () => props.playing,
   (playing) => {
-    const audio = document.querySelector("#audio") as HTMLAudioElement;
+    const audio = getAudioElement();
 
     if (playing) {
       audio?.play();
@@ -44,10 +56,13 @@ watch(
   () => setGradient(analyzer, props.theme, props.colors),
 );
 
+const getAudioElement = () =>
+  document.querySelector("#audio") as HTMLAudioElement;
+
 const playChannel = (src?: string) => {
   const canvas = document.querySelector("#canvas-container") as HTMLElement;
   const container = document.querySelector("#audio-container") as HTMLElement;
-  const audio = document.querySelector("#audio") as HTMLAudioElement;
+  const audio = getAudioElement();
 
   canvas.innerHTML = "";
   audio?.pause();
@@ -73,7 +88,7 @@ const playChannel = (src?: string) => {
       emit("play");
 
       const adjustVolumeInterval = setInterval(() => {
-        if (this.volume < 0.5) {
+        if (this.volume < props.volume) {
           this.volume += 0.025;
         } else {
           clearInterval(adjustVolumeInterval);
