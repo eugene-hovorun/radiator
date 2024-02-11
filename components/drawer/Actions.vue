@@ -16,20 +16,13 @@
 
 <script lang="ts" setup>
 import { useCountriesStore } from "../../store/countries";
-import { pickRandomItem } from "../../store/utils";
 
-const router = useRouter();
 const countriesStore = useCountriesStore();
 const activeChannel = computed(() => countriesStore.activeChannel);
 const justCopied = ref(false);
 const cahShare = "share" in navigator;
 
-const shuffle = () => {
-  router.replace(`/${pickRandomItem(countriesStore.countries).id}`);
-  countriesStore.autoplay = true;
-
-  setTimeout(closeDrawer, 300);
-};
+const shuffle = () => countriesStore.shuffle();
 
 const share = () => {
   if (!activeChannel.value) {

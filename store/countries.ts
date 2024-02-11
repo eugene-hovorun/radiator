@@ -119,6 +119,15 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.showSearch = show ?? false;
     },
 
+    shuffle() {
+      const app = useNuxtApp();
+
+      app.$router.replace(`/${pickRandomItem(this.countries).id}`);
+
+      this.autoplay = true;
+      this.toggleDrawer(false);
+    },
+
     applyStoredData() {
       const storedFavorites = localStorage.getItem("radio-favorites");
       const storedThemeValue = localStorage.getItem(

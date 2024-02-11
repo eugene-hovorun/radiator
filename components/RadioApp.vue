@@ -26,8 +26,10 @@
 
 <script setup lang="ts">
 import { useCountriesStore } from "../store/countries";
+import { themes } from "~/assets/themes";
 
 const route = useRoute();
+const router = useRouter();
 const countriesStore = useCountriesStore();
 const channel = computed(() => countriesStore.activeChannel);
 const src = computed(() => channel.value?.src);
@@ -66,6 +68,41 @@ const handleKeyDown = (event: KeyboardEvent) => {
   if (event.key === "Escape") {
     countriesStore.toggleSearch(false);
     countriesStore.toggleDrawer(false);
+  }
+
+  // Handling Space key for play/pause
+  if (event.key === " ") {
+    event.preventDefault();
+    countriesStore.togglePlay();
+  }
+
+  // Handling Arrow Right for next channel
+  if (event.key === "ArrowRight") {
+    countriesStore.shuffle();
+  }
+
+  // Handling option/alt + digit for theme change
+  if (event.altKey && !isNaN(parseInt(event.key))) {
+    event.preventDefault();
+
+    const index = parseInt(event.key) - 1;
+    const theme = themes[index];
+
+    if (theme) {
+      countriesStore.setTheme(theme.value);
+    }
+  }
+
+  // Handling digit for favorite channel selection
+  if (!event.altKey && !isNaN(parseInt(event.key))) {
+    const index = parseInt(event.key) - 1;
+    const channel = countriesStore.favoriteChannels[index];
+
+    if (channel) {
+      countriesStore.toggleDrawer(false);
+      countriesStore.autoplay = true;
+      router.push(channel.url);
+    }
   }
 };
 
