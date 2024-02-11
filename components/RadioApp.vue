@@ -11,6 +11,7 @@
         :colors="colors"
         :theme="currentThemeValue"
         :volume="volume"
+        :visibility="visibilityState"
         @loaded="countriesStore.loadingChannelId = null"
         @play="handlePlay"
         @error="channel && countriesStore.setFailedChannel(channel)"
@@ -37,6 +38,7 @@ const src = computed(() => channel.value?.src);
 const volume = computed(() => countriesStore.volume);
 const playing = computed(() => countriesStore.playing);
 const currentThemeValue = computed(() => countriesStore.currentThemeValue);
+const visibilityState = ref("visible");
 
 const colors = computed(() => {
   const countries = countriesStore.countries;
@@ -120,13 +122,19 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 };
 
+const handleVisibilityChange = () => {
+  visibilityState.value = document.visibilityState;
+};
+
 onMounted(() => {
   countriesStore.applyStoredData();
 
   document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("visibilitychange", handleVisibilityChange);
 });
 
 onUnmounted(() => {
   document.removeEventListener("keydown", handleKeyDown);
+  document.removeEventListener("visibilitychange", handleVisibilityChange);
 });
 </script>

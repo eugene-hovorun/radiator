@@ -14,6 +14,7 @@ interface Props {
   src?: string;
   colors: string[];
   volume: number;
+  visibility: string;
   theme: Theme["value"];
   playing?: boolean;
 }
@@ -54,6 +55,17 @@ watch(
 watch(
   () => props.theme,
   () => setGradient(analyzer, props.theme, props.colors),
+);
+
+watch(
+  () => props.visibility,
+  (visibility) => {
+    if (visibility === "hidden") {
+      analyzer.value?.stop();
+    } else {
+      analyzer.value?.start();
+    }
+  },
 );
 
 const getAudioElement = () =>
