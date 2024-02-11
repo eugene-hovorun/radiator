@@ -30,5 +30,9 @@ defineEmits(["update:modelValue"]);
   .text-primary-500 {
     color: var(--color-main);
   }
+
+  input:focus-visible {
+    box-shadow: none;
+  }
 }
 </style>
