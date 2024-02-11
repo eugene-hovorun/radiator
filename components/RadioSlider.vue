@@ -26,6 +26,19 @@
         </swiper>
       </transition>
 
+      <base-icon-button
+        v-if="sliderRef?.allowSlidePrev"
+        class="slider-button--prev"
+        name="ci:chevron-left"
+        @click="() => sliderRef?.slidePrev()"
+      />
+      <base-icon-button
+        v-if="sliderRef?.allowSlideNext"
+        class="slider-button--next"
+        name="ci:chevron-right"
+        @click="() => sliderRef?.slideNext()"
+      />
+
       <transition name="skeleton" mode="out-in">
         <div v-if="showSkeleton" class="skeleton">
           <div v-for="index in 5" :key="index" class="skeleton--item bg-main" />
@@ -113,6 +126,11 @@ const sliderOptions = {
   margin: 0 auto 12px;
 }
 
+.swiper-horizontal {
+  max-width: calc(100% - 64px);
+  margin: 0 auto;
+}
+
 .slide {
   position: relative;
   display: flex;
@@ -151,9 +169,17 @@ const sliderOptions = {
   height: 34px;
   z-index: 1;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 32px;
+  right: 32px;
   overflow: hidden;
+
+  &--item {
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100%;
+    border-radius: 24px;
+    animation: pulse 4s infinite;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -170,14 +196,6 @@ const sliderOptions = {
   }
 }
 
-.skeleton--item {
-  flex-grow: 1;
-  flex-shrink: 0;
-  height: 100%;
-  border-radius: 24px;
-  animation: pulse 4s infinite;
-}
-
 @keyframes pulse {
   0% {
     opacity: 0.1;
@@ -187,6 +205,54 @@ const sliderOptions = {
   }
   100% {
     opacity: 0.1;
+  }
+}
+
+.slider-button {
+  &--prev,
+  &--next {
+    position: absolute;
+    bottom: 2px;
+    background: var(--color-bg-main);
+    z-index: 1;
+  }
+
+  &--prev {
+    left: 0;
+  }
+
+  &--next {
+    right: 0;
+  }
+
+  &--prev::before,
+  &--next::before {
+    position: absolute;
+    top: -2px;
+    width: 8vw;
+    height: calc(100% + 4px);
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-bg),
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    &--prev::before,
+    &--next::before {
+      content: "";
+    }
+
+    &--prev::before {
+      left: 50%;
+    }
+
+    &--next::before {
+      right: 50%;
+    }
   }
 }
 </style>
