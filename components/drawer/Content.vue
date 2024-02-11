@@ -66,7 +66,7 @@ const goToChannel = (url: string) => {
 .drawer-content {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 78px);
+  height: calc(100svh - 78px);
   overflow: auto;
 }
 

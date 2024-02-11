@@ -5,7 +5,7 @@
       class="search fixed z-[4] p-4 inset-0 bg-bg/30 backdrop-blur transition-colors"
     >
       <div
-        class="bg-border max-w-sm max-h-[calc(100vh-64px)] flex flex-col gap-6 mx-auto mt-4 p-3 rounded-lg transition-colors shadow-[0_0_9px_var(--color-shadow)]"
+        class="bg-border max-w-sm max-h-[calc(100svh-64px)] flex flex-col gap-6 mx-auto mt-4 p-3 rounded-lg transition-colors shadow-[0_0_9px_var(--color-shadow)]"
       >
         <div class="flex gap-3 justify-between items-center">
           <lazy-app-logo />
@@ -84,23 +84,24 @@ import { highlightMatchedText } from "../../store/utils";
 const router = useRouter();
 const countriesStore = useCountriesStore();
 const query = ref("");
+const trimmedQuery = computed(() => query.value.trim());
 const searchResults = computed(() => ({
   countries: countriesStore.searchResults.countries.map((item) => ({
     ...item,
-    label: highlightMatchedText(item.title, query.value),
+    label: highlightMatchedText(item.title, trimmedQuery.value),
   })),
   channels: countriesStore.searchResults.channels.map((item) => ({
     ...item,
     label: highlightMatchedText(
       `<span class="search-country">${item.subtitle}</span> > ${item.title}`,
-      query.value,
+      trimmedQuery.value,
     ),
   })),
   places: countriesStore.searchResults.places.map((item) => ({
     ...item,
     label: highlightMatchedText(
       `<span class="search-country">${item.country}</span> > ${item.title}`,
-      query.value,
+      trimmedQuery.value,
     ),
   })),
 }));
@@ -116,7 +117,7 @@ const closeSearch = (autoplay?: boolean) => {
 const debouncedSearch = useDebounceFn(() => handleQueryChange(), 500);
 
 const handleQueryChange = () => {
-  countriesStore.getSearchResults(query.value);
+  countriesStore.getSearchResults(trimmedQuery.value);
 };
 
 const selectCountry = (country: Country) => {
