@@ -184,10 +184,33 @@ const sliderOptions = {
   }
 }
 
+.skeleton :nth-child(1),
+.skeleton :nth-child(5) {
+  animation-delay: -2.66s;
+}
+
+.skeleton :nth-child(2),
+.skeleton :nth-child(4) {
+  animation-delay: -1.33s;
+}
+
+.skeleton :nth-child(3) {
+  animation-delay: 0s;
+}
+
 @media (max-width: 1100px) {
   .skeleton :nth-child(1),
   .skeleton :nth-child(2) {
     display: none;
+  }
+
+  .skeleton :nth-child(3),
+  .skeleton :nth-child(5) {
+    animation-delay: -1s;
+  }
+
+  .skeleton :nth-child(4) {
+    animation-delay: 0s;
   }
 }
 
