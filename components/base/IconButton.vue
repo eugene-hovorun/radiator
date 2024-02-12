@@ -1,9 +1,5 @@
 <template>
-  <button
-    class="flex-shrink-0 rounded-full flex items-center justify-center transition bg-text-dark text-main hover:text-text-light opacity-90 hover:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed"
-    :disabled="disabled"
-    :style="style"
-  >
+  <button :disabled="disabled" :style="style">
     <u-icon :name="name" dynamic />
   </button>
 </template>
@@ -33,3 +29,29 @@ const style = computed(() => {
   };
 });
 </script>
+
+<style lang="scss" scoped>
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-text-dark);
+  color: var(--color-main);
+  opacity: 0.9;
+  transition:
+    opacity 0.25s,
+    color 0.25s;
+
+  &:hover {
+    color: var(--color-text-light);
+    opacity: 1;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+</style>

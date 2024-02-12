@@ -1,18 +1,13 @@
 <template>
-  <div
-    class="flex justify-around items-center h-8 mb-3 mx-auto p-1 rounded-full backdrop-blur bg-border/80 transition-colors"
-  >
+  <div class="alphabet">
     <template v-if="showLetters">
       <template v-for="(letter, index) in lettersMatrix[0]" :key="letter">
-        <button
-          class="text-main hover:underline capitalize text-xs flex-grow"
-          @click="handleLetterClick(letter)"
-        >
+        <button class="alphabet__letter" @click="handleLetterClick(letter)">
           {{ letter }}
         </button>
         <span
           v-if="index !== lettersMatrix[0].length - 1"
-          class="rounded border-2 border-text-dark"
+          class="alphabet__dot"
         ></span>
       </template>
     </template>
@@ -20,15 +15,12 @@
 
     <template v-if="showLetters">
       <template v-for="(letter, index) in lettersMatrix[1]" :key="letter">
-        <button
-          class="text-main hover:underline capitalize text-xs flex-grow"
-          @click="handleLetterClick(letter)"
-        >
+        <button class="alphabet__letter" @click="handleLetterClick(letter)">
           {{ letter }}
         </button>
         <span
           v-if="index !== lettersMatrix[1].length - 1"
-          class="rounded border-2 border-text-dark"
+          class="alphabet__dot"
         ></span>
       </template>
     </template>
@@ -99,3 +91,36 @@ watch(
 const handleLetterClick = (letter: string) =>
   emit("select", letter.toLowerCase());
 </script>
+
+<style lang="scss" scoped>
+.alphabet {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 32px;
+  margin: 0 auto 12px;
+  padding: 4px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-border) 80%, transparent);
+  backdrop-filter: blur(8px);
+  transition: background 0.25s;
+
+  &__letter {
+    font-size: 12px;
+    text-transform: capitalize;
+    flex-grow: 1;
+    color: var(--color-main);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-text-dark);
+  }
+}
+</style>

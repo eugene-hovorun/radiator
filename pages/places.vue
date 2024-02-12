@@ -8,11 +8,8 @@
   >
     <template #default="{ item }">
       <div
-        class="slide px-2 backdrop-blur transition-colors"
-        :class="{
-          'bg-main text-text-dark font-bold': item.slug === place?.slug,
-          'text-text-light': item.slug !== place?.slug,
-        }"
+        class="slide"
+        :class="{ active: item.slug === place?.slug }"
         @click="handleItemClick(item)"
       >
         <div class="slide-title">
@@ -80,3 +77,21 @@ const goToCityByLetter = (letter: string) => {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.slide {
+  padding-left: 16px;
+  padding-right: 16px;
+  color: var(--color-text-light);
+  transition:
+    background 0.25s,
+    color 0.25s;
+  backdrop-filter: blur(8px);
+
+  &.active {
+    background: var(--color-main);
+    color: var(--color-text-dark);
+    font-weight: bold;
+  }
+}
+</style>

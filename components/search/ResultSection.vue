@@ -1,11 +1,11 @@
 <template>
-  <div class="p-2 bg-bg text-xs text-main text-center rounded-md">
+  <div class="result-title">
     {{ title }}
   </div>
   <li
     v-for="result in items"
     :key="result.id"
-    class="result-section list-none p-2 text-sm cursor-pointer transition-colors text-text-light hover:text-main"
+    class="result-section"
     tabindex="0"
     @keydown.enter="$emit('select', result)"
     @click="$emit('select', result)"
@@ -22,3 +22,31 @@ interface Props {
 defineProps<Props>();
 defineEmits(["select"]);
 </script>
+
+<style scoped lang="scss">
+.result-title {
+  padding: 8px;
+  font-size: 12px;
+  background: var(--color-bg);
+  color: var(--color-main);
+  text-align: center;
+  border-radius: 8px;
+}
+
+.result-section {
+  list-style: none;
+  padding: 8px;
+  font-size: 14px;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: color 0.25s;
+
+  &:hover {
+    color: var(--color-main);
+  }
+
+  & + & {
+    border-top: 1px solid var(--color-bg);
+  }
+}
+</style>

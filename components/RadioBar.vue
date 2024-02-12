@@ -1,8 +1,6 @@
 <template>
-  <div
-    class="bar bg-border transition-colors shadow-[0_-10px_9px_var(--color-shadow)]"
-  >
-    <div class="bar-container">
+  <div class="bar">
+    <div class="bar__container">
       <template v-if="activeChannel">
         <play-button
           :playing="countriesStore.playing"
@@ -10,23 +8,23 @@
           @click="togglePlay"
         />
         <div>
-          <div v-if="countryTitle" class="bar-country text-main">
-            <img :src="flagSrc" class="w-6" alt="" />
+          <div v-if="countryTitle" class="bar__country">
+            <img :src="flagSrc" alt="" />
             <span>{{ countryTitle }}</span>
           </div>
-          <div class="bar-channel text-text-light">
+          <div class="bar__channel">
             <span v-if="activeChannel"> {{ activeChannel.title }}</span>
           </div>
         </div>
       </template>
 
-      <div class="bar-actions">
+      <div class="bar__actions">
         <base-range
           v-model="volume"
           :min="0"
           :max="1"
           :step="0.01"
-          class="w-[8rem] hidden sm:flex"
+          class="bar__volume"
         />
 
         <base-icon-button
@@ -107,22 +105,62 @@ const toggleFavorite = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-}
+  background: var(--color-border);
+  box-shadow: 0 -10px 9px var(--color-shadow);
+  transition: background 0.25s;
 
-.bar-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 12px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  &__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 12px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__country {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--color-main);
+
+    img {
+      width: 24px;
+    }
+  }
+
+  &__channel {
+    max-width: 300px;
+    height: 17px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--color-text-light);
+  }
+
+  &__actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__volume {
+    width: 128px;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
 }
 
 .channel-button {
@@ -131,32 +169,9 @@ const toggleFavorite = () => {
   font-size: 2rem;
 }
 
-.bar-country {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  font-size: 12px;
-}
-
-.bar-channel {
-  max-width: 300px;
-  height: 17px;
-  font-size: 14px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 @media (max-width: 600px) {
   .bar-channel {
     max-width: 130px;
   }
-}
-
-.bar-actions {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 16px;
 }
 </style>

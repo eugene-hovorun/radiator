@@ -1,9 +1,5 @@
 <template>
-  <button
-    :key="`${loading}`"
-    class="channel-button bg-text-dark text-main hover:text-text-light"
-    :class="{ playing, loading, failed }"
-  >
+  <button :key="`${loading}`" class="channel-button">
     <transition name="play" mode="out-in">
       <u-icon v-if="failed" name="iconamoon:unavailable" dynamic />
 
@@ -42,7 +38,7 @@ defineProps({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .channel-button {
   flex-shrink: 0;
   width: 30px;
@@ -52,7 +48,13 @@ defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.3s;
+  background: var(--color-text-dark);
+  color: var(--color-main);
+  transition: color 0.25s;
   opacity: 0.8;
+
+  &:hover {
+    color: var(--color-text-light);
+  }
 }
 </style>

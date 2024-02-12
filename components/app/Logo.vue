@@ -3,7 +3,7 @@ const branch = useRuntimeConfig().public.branch;
 </script>
 
 <template>
-  <span class="text-text-light">
+  <span>
     <svg
       v-if="branch === 'dev'"
       width="178"
@@ -65,3 +65,9 @@ const branch = useRuntimeConfig().public.branch;
     </svg>
   </span>
 </template>
+
+<style scoped>
+span {
+  color: var(--color-text-light);
+}
+</style>

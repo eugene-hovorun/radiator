@@ -72,20 +72,20 @@ const goToChannel = (url: string) => {
   .text-primary-500 {
     color: var(--color-main);
   }
-}
 
-.drawer-content .cursor-pointer {
-  border-bottom: 1px solid var(--color-bg);
-}
+  .cursor-pointer {
+    border-bottom: 1px solid var(--color-bg);
+  }
 
-.drawer-content [type="button"] {
-  padding: 8px 12px;
-  background-color: transparent;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
+  [type="button"] {
+    padding: 8px 12px;
+    background-color: transparent;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 
-.drawer-content [type="button"]:hover {
-  background-color: transparent;
+  [type="button"]:hover {
+    background-color: transparent;
+  }
 }
 </style>

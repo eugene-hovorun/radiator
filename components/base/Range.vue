@@ -4,7 +4,7 @@
     :min="min"
     :max="max"
     :step="step"
-    class="base-range w-[10rem]"
+    class="base-range"
     @update:model-value="$emit('update:modelValue', $event)"
   />
 </template>

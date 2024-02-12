@@ -1,7 +1,7 @@
 <template>
-  <div class="actions fixed bottom-20 right-0 w-screen pointer-events-none">
-    <div class="max-w-[1400px] m-auto flex justify-end">
-      <div class="flex flex-col gap-3 p-3 pointer-events-auto">
+  <div class="actions">
+    <div class="actions__container">
+      <div class="actions__list">
         <base-icon-button name="ion:search" size="1.2" @click="search" />
 
         <base-icon-button
@@ -67,8 +67,31 @@ const closeDrawer = () => {
 };
 </script>
 
-<style scoped>
-.actions button {
-  background: var(--color-border);
+<style lang="scss" scoped>
+.actions {
+  position: fixed;
+  bottom: 80px;
+  right: 0;
+  width: 100vw;
+  pointer-events: none;
+
+  button {
+    background: var(--color-border);
+  }
+
+  &__container {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    pointer-events: auto;
+  }
 }
 </style>

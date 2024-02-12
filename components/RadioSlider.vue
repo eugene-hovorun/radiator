@@ -5,7 +5,7 @@
         :items="items"
         @select="(letter) => $emit('go-to-letter', letter)"
       >
-        <div class="slider-title text-main">
+        <div class="slider-title">
           <span>{{ title }}</span>
           <span v-if="items.length > 2">
             {{ findIndex(modelValue) + 1 }} / {{ items.length }}
@@ -40,7 +40,7 @@
 
       <transition name="skeleton" mode="out-in">
         <div v-if="showSkeleton" class="skeleton">
-          <div v-for="index in 5" :key="index" class="skeleton--item bg-main" />
+          <div v-for="index in 5" :key="index" class="skeleton--item" />
         </div>
       </transition>
     </div>
@@ -151,6 +151,7 @@ const sliderOptions = {
   font-size: 10px;
   margin: 0 12px;
   text-align: center;
+  color: var(--color-main);
 }
 
 .slide-title {
@@ -178,6 +179,7 @@ const sliderOptions = {
     flex-shrink: 0;
     height: 100%;
     border-radius: 24px;
+    background: var(--color-main);
     animation: pulse 4s infinite;
   }
 }

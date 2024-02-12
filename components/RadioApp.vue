@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-bg transition-colors">
-    <main class="max-w-[1400px] min-h-[100svh] m-auto pt-6">
-      <div class="relative z-[1]">
+  <div class="app">
+    <main class="app__container">
+      <div class="app__view">
         <slot />
       </div>
 
@@ -145,3 +145,22 @@ onUnmounted(() => {
   document.removeEventListener("visibilitychange", handleVisibilityChange);
 });
 </script>
+
+<style scoped lang="scss">
+.app {
+  background: var(--color-bg);
+  transition: background 0.25s;
+
+  &__container {
+    max-width: 1400px;
+    min-height: 100svh;
+    margin: auto;
+    padding-top: 24px;
+  }
+
+  &__view {
+    position: relative;
+    z-index: 1;
+  }
+}
+</style>

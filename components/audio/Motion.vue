@@ -1,9 +1,6 @@
 <template>
-  <div id="audio-container" class="absolute w-0 h-1" />
-  <div
-    id="canvas-container"
-    class="fixed w-[100%] h-[110%] bottom-20 left-0 pointer-events-none"
-  />
+  <div id="audio-container" />
+  <div id="canvas-container" />
 </template>
 
 <script lang="ts" setup>
@@ -126,3 +123,20 @@ const playChannel = (src?: string) => {
   analyzer.value.start();
 };
 </script>
+
+<style scoped>
+[id="audio-container"] {
+  position: absolute;
+  width: 0px;
+  height: 1px;
+}
+
+[id="canvas-container"] {
+  position: fixed;
+  width: 100%;
+  height: 110%;
+  bottom: 80px;
+  left: 0;
+  pointer-events: none;
+}
+</style>

@@ -1,8 +1,6 @@
 <template>
-  <div
-    class="flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors text-text-light hover:text-main"
-  >
-    <img :src="`/flag/${channel.countryId}.svg`" class="w-6" alt="" />
+  <div class="favorite">
+    <img :src="`/flag/${channel.countryId}.svg`" alt="" />
     <div>{{ channel.title }}</div>
   </div>
 </template>
@@ -14,3 +12,23 @@ interface Props {
 
 defineProps<Props>();
 </script>
+
+<style scoped lang="scss">
+.favorite {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  color: var(--color-text-light);
+  transition: color 0.25s;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-main);
+  }
+
+  img {
+    width: 24px;
+  }
+}
+</style>

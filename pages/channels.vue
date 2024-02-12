@@ -8,16 +8,14 @@
   >
     <template #default="{ item }">
       <div
-        class="slide gap-2 border-2 pr-4 pl-0 border-main backdrop-blur transition-colors"
+        class="slide"
         :class="{
-          'text-text-dark bg-main font-bold': item.id === channel?.id,
-          'text-text-light': item.id !== channel?.id,
-          'opacity-30': isFailed(item),
+          active: item.id === channel?.id,
+          failed: isFailed(item),
         }"
         @click="handleSelect(item)"
       >
         <play-button
-          class="mr-auto"
           :playing="item.id === playingChannelId && countriesStore.playing"
           :loading="item.id === loadingChannelId"
           :failed="isFailed(item)"
@@ -126,3 +124,28 @@ const goToChannelByLetter = (letter: string) => {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.slide {
+  padding-left: 0;
+  padding-right: 16px;
+  gap: 8px;
+  justify-content: space-between;
+  border: 2px solid var(--color-main);
+  color: var(--color-text-light);
+  transition:
+    background 0.25s,
+    color 0.25s;
+  backdrop-filter: blur(8px);
+
+  &.active {
+    font-weight: bold;
+    background: var(--color-main);
+    color: var(--color-text-dark);
+  }
+
+  &.failed {
+    opacity: 0.3;
+  }
+}
+</style>

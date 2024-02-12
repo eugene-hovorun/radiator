@@ -1,15 +1,6 @@
 <template>
-  <div
-    class="flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors hover:text-main"
-    :class="{
-      'bg-bg text-main transition-colors': selected,
-      'text-text-light': !selected,
-    }"
-  >
-    <div
-      class="w-6 h-6 rounded-full"
-      :style="`background: ${theme.gradient}`"
-    ></div>
+  <div class="theme" :class="{ selected }">
+    <div class="theme__preview" :style="`background: ${theme.gradient}`"></div>
     <div>{{ theme.title }}</div>
   </div>
 </template>
@@ -22,3 +13,30 @@ interface Props {
 
 defineProps<Props>();
 </script>
+
+<style lang="scss" scoped>
+.theme {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: color 0.25s;
+
+  &:hover {
+    color: var(--color-main);
+  }
+
+  &.selected {
+    background: var(--color-bg);
+    color: var(--color-main);
+  }
+
+  &__preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+}
+</style>

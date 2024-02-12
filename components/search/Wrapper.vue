@@ -1,23 +1,16 @@
 <template>
   <transition name="drawer" mode="out-in">
-    <div
-      v-if="countriesStore.showSearch"
-      class="search fixed z-[4] p-4 inset-0 bg-bg/30 backdrop-blur transition-colors"
-      @keydown.stop
-    >
-      <div
-        class="bg-border max-w-sm max-h-[calc(100svh-64px)] flex flex-col gap-6 mx-auto mt-4 p-3 rounded-lg transition-colors shadow-[0_0_9px_var(--color-shadow)]"
-      >
-        <div class="flex gap-3 justify-between items-center">
+    <div v-if="countriesStore.showSearch" class="search__overlay" @keydown.stop>
+      <div class="search">
+        <div class="search__header">
           <lazy-app-logo />
 
           <base-icon-button name="ion:close" @click="() => closeSearch()" />
         </div>
 
-        <div class="relative">
+        <div class="search__dropdown">
           <u-input
             v-model="query"
-            class="w-full"
             autofocus
             autocomplete="off"
             placeholder="country, city or channel"
@@ -27,7 +20,7 @@
             <svg
               v-if="countriesStore.fetchingSearch"
               viewBox="0 0 42 42"
-              class="w-6 absolute right-1 top-1"
+              class="search__loading"
             >
               <circle
                 cx="21"
@@ -50,7 +43,7 @@
           </transition>
         </div>
 
-        <div class="overflow-auto">
+        <div class="search__results">
           <search-result-section
             v-if="searchResults.countries.length"
             title="Countries"
@@ -137,26 +130,68 @@ const selectChannel = (channel: Channel) => {
 };
 </script>
 
-<style>
-.search input:focus {
-  box-shadow: 0 0 0 1px var(--color-main);
-}
-
-.search [aria-haspopup="menu"] {
+<style lang="scss">
+.search {
   display: flex;
-  width: 100%;
-}
+  flex-direction: column;
+  gap: 24px;
+  padding: 12px;
+  margin: 16px auto 0;
+  background: var(--color-border);
+  max-width: 384px;
+  max-height: calc(100svh - 64px);
+  border-radius: 8px;
+  box-shadow: 0 0 9px var(--color-shadow);
+  transition: background 0.25s;
 
-.search .search-result {
-  font-weight: bold;
-  color: var(--color-main);
-}
+  &__overlay {
+    position: fixed;
+    z-index: 4;
+    padding: 16px;
+    inset: 0;
+    backdrop-filter: blur(8px);
+    background: color-mix(in srgb, var(--color-bg) 30%, transparent);
+    transition: background 0.25s;
+  }
 
-.search .search-country {
-  opacity: 0.5;
-}
+  &__header {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.result-section + .result-section {
-  border-top: 1px solid var(--color-bg);
+  &__dropdown {
+    position: relative;
+  }
+
+  &__loading {
+    position: absolute;
+    width: 24px;
+    right: 4px;
+    top: 4px;
+  }
+
+  &__results {
+    overflow: auto;
+  }
+
+  input:focus {
+    box-shadow: 0 0 0 1px var(--color-main);
+  }
+
+  [aria-haspopup="menu"] {
+    display: flex;
+    width: 100%;
+  }
+
+  .search-result {
+    font-weight: bold;
+    color: var(--color-main);
+  }
+
+  .search-country {
+    opacity: 0.5;
+  }
 }
 </style>

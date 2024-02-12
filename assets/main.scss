@@ -5,6 +5,10 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   $shades: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
   $colors: "main", "bg", "text-dark", "text-light", "border", "shadow";
