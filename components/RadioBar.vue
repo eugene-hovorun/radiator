@@ -12,8 +12,9 @@
             <img :src="flagSrc" alt="" />
             <span>{{ countryTitle }}</span>
           </div>
-          <div class="bar__channel">
-            <span v-if="activeChannel"> {{ activeChannel.title }}</span>
+
+          <div v-if="activeChannel" class="bar__channel">
+            {{ activeChannel.title }}
           </div>
         </div>
       </template>
@@ -139,12 +140,15 @@ const toggleFavorite = () => {
 
   &__channel {
     max-width: 300px;
-    height: 17px;
     font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     color: var(--color-text-light);
+
+    @media (max-width: 600px) {
+      max-width: 180px;
+    }
   }
 
   &__actions {
