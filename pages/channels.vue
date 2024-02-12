@@ -21,7 +21,11 @@
           :failed="isFailed(item)"
         />
         <div class="slide-title">
-          {{ isFailed(item) ? "Unavailable" : item.title }}
+          {{
+            isFailed(item)
+              ? "Unavailable. Loading random channel..."
+              : item.title
+          }}
         </div>
       </div>
     </template>

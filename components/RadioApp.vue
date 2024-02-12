@@ -14,7 +14,7 @@
         :visibility="visibilityState"
         @loaded="countriesStore.loadingChannelId = null"
         @play="handlePlay"
-        @error="channel && countriesStore.setFailedChannel(channel)"
+        @error="handleError"
       />
 
       <radio-bar />
@@ -52,6 +52,16 @@ const handlePlay = () => {
   if (channel.value) {
     countriesStore.playingChannelId = channel.value.id;
     countriesStore.togglePlay(true);
+  }
+};
+
+const handleError = () => {
+  if (channel.value) {
+    countriesStore.setFailedChannel(channel.value);
+
+    setTimeout(() => {
+      countriesStore.shuffle();
+    }, 2000);
   }
 };
 
