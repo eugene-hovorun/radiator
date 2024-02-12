@@ -31,7 +31,7 @@ watch(
     const audio = getAudioElement();
 
     if (audio) {
-      audio.volume = volume;
+      audio.volume = Math.min(volume, 1);
     }
   },
 );
@@ -97,7 +97,7 @@ const playChannel = (src?: string) => {
       emit("play");
 
       const adjustVolumeInterval = setInterval(() => {
-        if (this.volume < props.volume) {
+        if (this.volume < props.volume && this.volume < 0.95) {
           this.volume += 0.025;
         } else {
           clearInterval(adjustVolumeInterval);
