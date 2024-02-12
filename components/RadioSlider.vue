@@ -155,7 +155,7 @@ const sliderOptions = {
 }
 
 .slide-title {
-  line-height: 1;
+  line-height: 1.2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
