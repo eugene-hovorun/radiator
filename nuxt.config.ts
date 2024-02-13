@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@pinia/nuxt",
     "nuxt-vercel-analytics",
+    "nuxt-gtag",
     [
       "@nuxtjs/google-fonts",
       {
@@ -26,6 +27,9 @@ export default defineNuxtConfig({
       },
     ],
   ],
+  gtag: {
+    id: "G-7DC0E80PQR",
+  },
   tailwindcss: {
     config: {
       plugins: [

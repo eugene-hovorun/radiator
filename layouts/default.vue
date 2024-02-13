@@ -17,12 +17,6 @@ const showSpinner = ref(true);
 useHead({
   title: "Radiätor",
   style: [{ innerHTML: "html { background: #111; }" }],
-  script: [
-    {
-      src: "https://www.googletagmanager.com/gtag/js?id=G-7DC0E80PQR",
-      defer: true,
-    },
-  ],
   meta: [
     {
       name: "viewport",
