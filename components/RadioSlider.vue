@@ -28,13 +28,13 @@
       <base-icon-button
         v-if="sliderRef?.allowSlidePrev"
         class="slider-button--prev"
-        name="ci:chevron-left"
+        name="arrow-left"
         @click="() => sliderRef?.slidePrev()"
       />
       <base-icon-button
         v-if="sliderRef?.allowSlideNext"
         class="slider-button--next"
-        name="ci:chevron-right"
+        name="arrow-right"
         @click="() => sliderRef?.slideNext()"
       />
 

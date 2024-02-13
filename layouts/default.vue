@@ -6,6 +6,7 @@
   </transition>
 
   <speed-insights />
+  <app-icon-sprite />
 </template>
 
 <script lang="ts" setup>

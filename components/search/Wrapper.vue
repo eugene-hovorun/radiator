@@ -5,7 +5,7 @@
         <div class="search__header">
           <lazy-app-logo />
 
-          <base-icon-button name="ion:close" @click="() => closeSearch()" />
+          <base-icon-button name="close" @click="() => closeSearch()" />
         </div>
 
         <div class="search__dropdown">
@@ -17,29 +17,12 @@
             @input="debouncedSearch"
           />
           <transition name="play" mode="out-in">
-            <svg
+            <base-icon-button
               v-if="countriesStore.fetchingSearch"
-              viewBox="0 0 42 42"
               class="search__loading"
-            >
-              <circle
-                cx="21"
-                cy="21"
-                r="19"
-                fill="none"
-                stroke="var(--color-main)"
-                stroke-width="4"
-                stroke-dasharray="10 5"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  repeatCount="indefinite"
-                  dur="4s"
-                  values="0 21 21;360 21 21"
-                ></animateTransform>
-              </circle>
-            </svg>
+              name="loading"
+              :size="24"
+            />
           </transition>
         </div>
 
@@ -170,6 +153,7 @@ const selectChannel = (channel: Channel) => {
     width: 24px;
     right: 4px;
     top: 4px;
+    background: transparent !important;
   }
 
   &__results {

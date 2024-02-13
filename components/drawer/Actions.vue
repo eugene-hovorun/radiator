@@ -2,17 +2,16 @@
   <div class="actions">
     <div class="actions__container">
       <div class="actions__list">
-        <base-icon-button name="ion:search" size="1.2" @click="search" />
+        <base-icon-button name="search" :size="36" @click="search" />
 
         <base-icon-button
           v-if="activeChannel"
-          :name="cahShare ? 'ci:share' : justCopied ? 'ci:check' : 'ci:copy'"
-          size="1.2"
-          dynamic
+          :name="cahShare ? 'share' : justCopied ? 'check' : 'copy'"
+          :size="36"
           @click="share"
         />
 
-        <base-icon-button name="ci:shuffle" size="1.2" @click="shuffle" />
+        <base-icon-button name="shuffle" :size="36" @click="shuffle" />
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@
         <div class="drawer__header">
           <lazy-app-logo />
 
-          <base-icon-button name="ion:close" @click="closeDrawer" />
+          <base-icon-button name="close" @click="closeDrawer" />
         </div>
 
         <drawer-content />

@@ -1,6 +1,8 @@
 <template>
-  <button :disabled="disabled" :style="style">
-    <u-icon :name="name" dynamic />
+  <button :disabled="disabled" :style="buttonStyle">
+    <svg :width="svgSize" :height="svgSize">
+      <use :href="`#${name}`" />
+    </svg>
   </button>
 </template>
 
@@ -11,23 +13,18 @@ const props = defineProps({
     required: true,
   },
   size: {
-    type: String,
-    default: "1",
+    type: Number,
+    default: 30,
   },
   disabled: Boolean,
 });
 
-const style = computed(() => {
-  const size = parseFloat(props.size);
-  const width = size * 30;
-  const fontSize = size * 24;
+const buttonStyle = computed(() => ({
+  width: `${props.size}px`,
+  height: `${props.size}px`,
+}));
 
-  return {
-    width: `${width}px`,
-    height: `${width}px`,
-    fontSize: `${fontSize}px`,
-  };
-});
+const svgSize = computed(() => props.size * 0.8);
 </script>
 
 <style lang="scss" scoped>

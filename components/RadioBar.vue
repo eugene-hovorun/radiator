@@ -29,17 +29,15 @@
         />
 
         <base-icon-button
-          :name="isFavorite ? 'ion:heart' : 'ion:heart-outline'"
+          :name="isFavorite ? 'heart' : 'heart-outline'"
           :disabled="!activeChannel"
-          size="1.2"
-          dynamic
+          :size="36"
           @click="toggleFavorite"
         />
 
         <base-icon-button
-          name="bx:menu-alt-right"
-          size="1.2"
-          dynamic
+          name="menu-alt-right"
+          :size="36"
           @click="() => countriesStore.toggleDrawer(true)"
         />
       </div>
