@@ -1,6 +1,6 @@
 <template>
   <div class="drawer-content">
-    <lazy-u-accordion :items="items">
+    <lazy-base-accordion :items="items">
       <template #theme>
         <drawer-theme
           v-for="theme in themes"
@@ -19,7 +19,7 @@
           @click="goToChannel(channel.url)"
         />
       </template>
-    </lazy-u-accordion>
+    </lazy-base-accordion>
 
     <lazy-drawer-ios-caption v-if="isIos" />
   </div>
@@ -35,20 +35,20 @@ const favoriteChannels = computed(() => countriesStore.favoriteChannels);
 const isIos =
   /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
-const items = [
+const items = ref<AccordionContent[]>([
   {
+    icon: "swatch",
     label: "Theme",
-    icon: "i-heroicons-swatch",
-    defaultOpen: false,
+    active: false,
     slot: "theme",
   },
   {
+    icon: "heart-outline",
     label: "Favorites",
-    icon: "i-heroicons-heart",
-    defaultOpen: true,
+    active: true,
     slot: "favorites",
   },
-];
+]);
 
 const currentThemeValue = computed({
   get: () => countriesStore.currentThemeValue,
@@ -68,24 +68,5 @@ const goToChannel = (url: string) => {
   flex-direction: column;
   height: calc(100svh - 78px);
   overflow: auto;
-
-  .text-primary-500 {
-    color: var(--color-main);
-  }
-
-  .cursor-pointer {
-    border-bottom: 1px solid var(--color-bg);
-  }
-
-  [type="button"] {
-    padding: 8px 12px;
-    background-color: transparent;
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
-  [type="button"]:hover {
-    background-color: transparent;
-  }
 }
 </style>

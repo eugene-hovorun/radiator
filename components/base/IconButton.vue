@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" :style="buttonStyle">
+  <button :disabled="disabled" :class="{ transparent }" :style="buttonStyle">
     <svg :width="svgSize" :height="svgSize">
       <use :href="`#${name}`" />
     </svg>
@@ -17,6 +17,10 @@ const props = defineProps({
     default: 30,
   },
   disabled: Boolean,
+  transparent: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const buttonStyle = computed(() => ({
@@ -34,12 +38,15 @@ button {
   justify-content: center;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--color-text-dark);
   color: var(--color-main);
   opacity: 0.9;
   transition:
     opacity 0.25s,
     color 0.25s;
+
+  &:not(.transparent) {
+    background: var(--color-text-dark);
+  }
 
   &:hover {
     color: var(--color-text-light);

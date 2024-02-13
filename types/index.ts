@@ -54,4 +54,11 @@ declare global {
     countries: Country[];
     places: Place[];
   }
+
+  interface AccordionContent {
+    label: string;
+    icon: string;
+    slot: string;
+    active: boolean;
+  }
 }
