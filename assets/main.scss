@@ -1,4 +1,5 @@
 @import "./_transitions.scss";
+@import "./_theme.scss";
 
 body {
   font-family: "Inter", sans-serif;
@@ -21,14 +22,3 @@ button {
   box-sizing: border-box;
 }
 
-:root {
-  $shades: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
-  $colors: "main", "bg", "text-dark", "text-light", "border", "shadow";
-
-  @each $color in $colors {
-    @each $shade in $shades {
-      --color-#{$color}: hsl(var(--twc-#{$color}));
-      --color-#{$color}-#{$shade}: hsl(var(--twc-#{$color}-#{$shade}));
-    }
-  }
-}
