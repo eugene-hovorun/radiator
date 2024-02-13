@@ -9,21 +9,13 @@
         </div>
 
         <div class="search__dropdown">
-          <u-input
+          <base-textfield
             v-model="query"
-            autofocus
-            autocomplete="off"
+            :loading="countriesStore.fetchingSearch"
+            :autofocus="true"
             placeholder="country, city or channel"
             @input="debouncedSearch"
           />
-          <transition name="play" mode="out-in">
-            <base-icon-button
-              v-if="countriesStore.fetchingSearch"
-              class="search__loading"
-              name="loading"
-              :size="24"
-            />
-          </transition>
         </div>
 
         <div class="search__results">
@@ -148,25 +140,8 @@ const selectChannel = (channel: Channel) => {
     position: relative;
   }
 
-  &__loading {
-    position: absolute;
-    width: 24px;
-    right: 4px;
-    top: 4px;
-    background: transparent !important;
-  }
-
   &__results {
     overflow: auto;
-  }
-
-  input:focus {
-    box-shadow: 0 0 0 1px var(--color-main);
-  }
-
-  [aria-haspopup="menu"] {
-    display: flex;
-    width: 100%;
   }
 
   .search-result {

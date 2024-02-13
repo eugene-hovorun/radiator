@@ -5,6 +5,7 @@
         <play-button
           :playing="countriesStore.playing"
           :loading="!!loadingChannelId"
+          :size="48"
           @click="togglePlay"
         />
         <div>
@@ -163,12 +164,6 @@ const toggleFavorite = () => {
       display: none;
     }
   }
-}
-
-.channel-button {
-  width: 48px;
-  height: 48px;
-  font-size: 2rem;
 }
 
 @media (max-width: 600px) {

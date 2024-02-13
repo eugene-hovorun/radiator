@@ -40,9 +40,7 @@ button {
   border-radius: 50%;
   color: var(--color-main);
   opacity: 0.9;
-  transition:
-    opacity 0.25s,
-    color 0.25s;
+  transition: 0.25s;
 
   &:not(.transparent) {
     background: var(--color-text-dark);

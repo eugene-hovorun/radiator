@@ -10,11 +10,6 @@
 }
 
 .play {
-  &-enter-active,
-  &-leave-active {
-    transition: 0.25s;
-  }
-
   &-enter {
     transform: scale(1.2);
     opacity: 0.1;
