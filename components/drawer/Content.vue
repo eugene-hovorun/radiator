@@ -1,6 +1,6 @@
 <template>
   <div class="drawer-content">
-    <lazy-base-accordion :items="items">
+    <lazy-base-accordion id="drawer" :items="items">
       <template #theme>
         <drawer-theme
           v-for="theme in themes"
