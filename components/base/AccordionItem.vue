@@ -3,7 +3,7 @@
     <dt class="accordion-item-header">
       <button class="accordion-item-button" @click="$emit('toggle')">
         <base-icon-button :name="item.icon" transparent />
-        <h4 class="accordion-item-title">{{ item.label }}</h4>
+        <div class="accordion-item-title">{{ item.label }}</div>
         <span class="accordion-item-icon"></span>
       </button>
     </dt>
@@ -24,12 +24,16 @@ defineEmits(["toggle"]);
 </script>
 
 <style lang="scss" scoped>
+dt,
+dd {
+  margin: 0;
+}
 .accordion-item-header {
   position: relative;
-  color: var(--color-main);
   padding: 8px 12px;
 
-  h4 {
+  .accordion-item-title {
+    color: var(--color-text-light);
     font-size: 1.25rem;
     margin-bottom: 0;
     font-weight: bold;
