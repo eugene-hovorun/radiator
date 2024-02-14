@@ -11,6 +11,7 @@ export default defineNuxtConfig({
         .trim(),
     },
   },
+  buildModules: ["@nuxtjs/pwa"],
   site: {
     url: "https://www.radiator.cc/",
     name: "Radiator",
