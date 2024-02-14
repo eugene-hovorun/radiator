@@ -6,6 +6,7 @@
     :step="step"
     :value="modelValue"
     :style="{ backgroundSize }"
+    :aria-label="label"
     @input="handleInput"
   />
 </template>
@@ -27,6 +28,10 @@ const props = defineProps({
   step: {
     type: Number,
     default: 1,
+  },
+  label: {
+    type: String,
+    default: "range",
   },
 });
 
