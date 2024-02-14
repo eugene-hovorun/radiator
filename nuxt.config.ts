@@ -11,7 +11,15 @@ export default defineNuxtConfig({
         .trim(),
     },
   },
+  site: {
+    url: "https://www.radiator.cc/",
+    name: "Radiator",
+    description:
+      "App that lets you listen to radio stations from around the world!",
+    defaultLocale: "en",
+  },
   modules: [
+    "@nuxtjs/seo",
     "@pinia/nuxt",
     "nuxt-vercel-analytics",
     "nuxt-gtag",
