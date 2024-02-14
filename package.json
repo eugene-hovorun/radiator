@@ -24,9 +24,9 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.12.3",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@typescript-eslint/parser": "^6.19.1",
+    "@vueuse/core": "^10.7.2",
     "audiomotion-analyzer": "^4.3.0",
     "axios": "^1.6.5",
     "eslint": "^8.56.0",

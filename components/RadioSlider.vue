@@ -29,12 +29,14 @@
         v-if="sliderRef?.allowSlidePrev"
         class="slider-button--prev"
         name="arrow-left"
+        transparent
         @click="() => sliderRef?.slidePrev()"
       />
       <base-icon-button
         v-if="sliderRef?.allowSlideNext"
         class="slider-button--next"
         name="arrow-right"
+        transparent
         @click="() => sliderRef?.slideNext()"
       />
 

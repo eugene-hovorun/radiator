@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    "@nuxt/ui",
     "@pinia/nuxt",
     "nuxt-vercel-analytics",
     "nuxt-gtag",
