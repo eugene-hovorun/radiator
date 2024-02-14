@@ -15,7 +15,7 @@
         class="textfield__loading"
         name="loading"
         :transparent="true"
-        :size="24"
+        :size="26"
       />
     </transition>
   </div>
