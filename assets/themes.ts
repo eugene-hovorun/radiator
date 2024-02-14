@@ -1,5 +1,10 @@
 export const themes: Theme[] = [
   {
+    title: "Deep Purple",
+    value: "deeppurple",
+    gradient: "linear-gradient(-45deg, #B980F5, #673AB7)",
+  },
+  {
     title: "Steel Blue",
     value: "steelblue",
     gradient: "linear-gradient(-45deg, #4682B4, #222C35)",
@@ -8,11 +13,6 @@ export const themes: Theme[] = [
     title: "Orange Red",
     value: "orangered",
     gradient: "linear-gradient(-45deg, #F64504, #3E2F29)",
-  },
-  {
-    title: "Deep Purple",
-    value: "deeppurple",
-    gradient: "linear-gradient(-45deg, #B980F5, #673AB7)",
   },
   {
     title: "Sunlit Gold",
