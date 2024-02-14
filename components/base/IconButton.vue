@@ -1,5 +1,10 @@
 <template>
-  <button :disabled="disabled" :class="{ transparent }" :style="buttonStyle">
+  <button
+    :disabled="disabled"
+    :class="{ transparent }"
+    :style="buttonStyle"
+    :aria-label="label"
+  >
     <svg :width="svgSize" :height="svgSize">
       <use :href="`#${name}`" />
     </svg>
@@ -16,7 +21,14 @@ const props = defineProps({
     type: Number,
     default: 30,
   },
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  label: {
+    type: String,
+    default: "radio-button",
+  },
   transparent: {
     type: Boolean,
     default: false,

@@ -27,6 +27,7 @@
 
       <base-icon-button
         v-if="sliderRef?.allowSlidePrev"
+        label="Previous"
         class="slider-button--prev"
         name="arrow-left"
         transparent
@@ -34,6 +35,7 @@
       />
       <base-icon-button
         v-if="sliderRef?.allowSlideNext"
+        label="Next"
         class="slider-button--next"
         name="arrow-right"
         transparent

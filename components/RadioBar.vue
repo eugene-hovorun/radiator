@@ -31,6 +31,7 @@
 
         <base-icon-button
           :name="isFavorite ? 'heart' : 'heart-outline'"
+          label="Favorite"
           :disabled="!activeChannel"
           :size="36"
           @click="toggleFavorite"
@@ -38,6 +39,7 @@
 
         <base-icon-button
           name="menu-alt-right"
+          label="Menu"
           :size="36"
           @click="() => countriesStore.toggleDrawer(true)"
         />

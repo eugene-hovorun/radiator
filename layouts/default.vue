@@ -16,6 +16,9 @@ import { SpeedInsights } from "@vercel/speed-insights/vue";
 const showSpinner = ref(true);
 
 useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
   title: "Radiätor",
   style: [{ innerHTML: "html { background: #111; }" }],
   meta: [
