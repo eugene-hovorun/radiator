@@ -70,7 +70,7 @@ onMounted(() => {
     border-radius: 6px;
     padding: 8px 12px;
     line-height: 1.4;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--color-text-light);
     box-shadow: 0 0 2px 0 var(--color-border);
     background-color: var(--color-bg);
