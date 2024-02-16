@@ -58,7 +58,6 @@ const handleInput = (e: Event) => {
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  display: block;
   width: 100%;
   height: 6px;
   border-radius: 4px;
@@ -69,6 +68,7 @@ input[type="range"] {
     var(--color-main) 100%
   );
   background-repeat: no-repeat;
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -86,7 +86,6 @@ input[type="range"] {
     width: 16px;
     border-radius: 50%;
     background: var(--color-main);
-    cursor: pointer;
   }
 
   &::-webkit-slider-thumb {
