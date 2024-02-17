@@ -1,6 +1,10 @@
 <template>
   <transition name="drawer" mode="out-in">
-    <div v-if="countriesStore.showSearch" class="search__overlay" @keydown.stop>
+    <div
+      v-if="countriesStore.showSearch"
+      class="search__overlay"
+      @keydown="filterKeys"
+    >
       <div class="search">
         <div class="search__header">
           <lazy-app-logo />
@@ -102,6 +106,12 @@ const selectPlace = (place: Place) => {
 const selectChannel = (channel: Channel) => {
   closeSearch(true);
   router.push(channel.url);
+};
+
+const filterKeys = (event: KeyboardEvent) => {
+  if (!isNaN(parseInt(event.key))) {
+    event.stopPropagation();
+  }
 };
 </script>
 

@@ -19,36 +19,51 @@
           @click="goToChannel(channel.url)"
         />
       </template>
+
+      <template #shortcuts>
+        <drawer-shortcuts />
+      </template>
     </lazy-base-accordion>
 
-    <lazy-drawer-ios-caption v-if="isIos" />
+    <lazy-drawer-ios-caption v-if="isIos()" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useCountriesStore } from "../../store/countries";
+import { hasTouchScreen, isIos } from "../../store/utils";
 import { themes } from "~/assets/themes";
 
 const router = useRouter();
 const countriesStore = useCountriesStore();
 const favoriteChannels = computed(() => countriesStore.favoriteChannels);
-const isIos =
-  /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
-const items = ref<AccordionContent[]>([
-  {
-    icon: "swatch",
-    label: "Theme",
-    active: false,
-    slot: "theme",
-  },
-  {
-    icon: "heart-outline",
-    label: "Favorites",
-    active: true,
-    slot: "favorites",
-  },
-]);
+const themeSection = {
+  icon: "swatch",
+  label: "Theme",
+  active: false,
+  slot: "theme",
+};
+
+const favoriteSection = {
+  icon: "heart-outline",
+  label: "Favorites",
+  active: true,
+  slot: "favorites",
+};
+
+const shortcutsSection = {
+  icon: "keyboard",
+  label: "Shortcuts",
+  active: false,
+  slot: "shortcuts",
+};
+
+const items = ref<AccordionContent[]>(
+  hasTouchScreen()
+    ? [themeSection, favoriteSection]
+    : [themeSection, favoriteSection, shortcutsSection],
+);
 
 const currentThemeValue = computed({
   get: () => countriesStore.currentThemeValue,

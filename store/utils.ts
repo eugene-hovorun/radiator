@@ -88,3 +88,17 @@ export function highlightMatchedText(searchResult: string, query: string) {
 
   return searchResult;
 }
+
+export function hasTouchScreen() {
+  return "maxTouchPoints" in navigator && navigator.maxTouchPoints > 0;
+}
+
+export function isIos() {
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
+  );
+}
+
+export function isMac() {
+  return /Mac/.test(navigator.platform);
+}

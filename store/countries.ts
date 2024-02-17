@@ -118,7 +118,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     },
 
     toggleSearch(show?: boolean) {
-      this.showSearch = show ?? false;
+      this.showSearch = show ?? !this.showSearch;
     },
 
     setVolume(volume: number) {

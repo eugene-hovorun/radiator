@@ -71,19 +71,13 @@ const handleKeyDown = (event: KeyboardEvent) => {
   // Handling Command + F for search
   if (ctrl && event.key === "f") {
     event.preventDefault();
-    countriesStore.toggleSearch(true);
+    countriesStore.toggleSearch();
   }
 
   // Handling Command + D for drawer toggle
   if (ctrl && event.key === "d") {
     event.preventDefault();
-    countriesStore.toggleDrawer(true);
-  }
-
-  // Handling Escape key for closing search and drawer
-  if (event.key === "Escape") {
-    countriesStore.toggleSearch(false);
-    countriesStore.toggleDrawer(false);
+    countriesStore.toggleDrawer();
   }
 
   // Handling Space key for play/pause
@@ -95,8 +89,8 @@ const handleKeyDown = (event: KeyboardEvent) => {
     }
   }
 
-  // Handling Command + Arrow Right for next channel
-  if (ctrl && event.key === "ArrowRight") {
+  // Handling Arrow Right for next channel
+  if (event.key === "ArrowRight") {
     if (!countriesStore.autoplay) {
       countriesStore.shuffle();
     }
