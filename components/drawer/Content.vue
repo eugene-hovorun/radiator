@@ -25,7 +25,10 @@
       </template>
     </lazy-base-accordion>
 
-    <lazy-drawer-ios-caption v-if="isIos()" />
+    <lazy-drawer-ios-caption
+      v-if="countriesStore.showIOSCaption && isIos()"
+      @close="() => countriesStore.closeIOSCaption()"
+    />
   </div>
 </template>
 

@@ -23,6 +23,7 @@ type State = {
   volume: number;
   showDrawer: boolean;
   showSearch: boolean;
+  showIOSCaption: boolean;
   searchResults: SearchPayload;
   currentThemeValue: Theme["value"];
   abortController: AbortController | null;
@@ -48,6 +49,7 @@ export const useCountriesStore = defineStore("countriesStore", {
     volume: 0.5,
     showDrawer: false,
     showSearch: false,
+    showIOSCaption: false,
     searchResults: EMPTY_SEARCH_PAYLOAD,
     currentThemeValue: themes[0].value,
     abortController: null,
@@ -137,11 +139,13 @@ export const useCountriesStore = defineStore("countriesStore", {
     },
 
     applyStoredData() {
+      const storedIOSCaption = localStorage.getItem("radio-ios-caption");
       const storedVolume = localStorage.getItem("radio-volume");
       const storedFavorites = localStorage.getItem("radio-favorites");
       const storedThemeValue = localStorage.getItem(
         "radio-theme",
       ) as Theme["value"];
+      const showIOSCaption = storedIOSCaption !== "true";
       const volume = storedVolume ? parseFloat(storedVolume) : 0.5;
       const theme = storedThemeValue || themes[0].value;
       const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
@@ -161,6 +165,7 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.favoriteChannels = favorites;
       this.currentThemeValue = theme;
       this.volume = volume;
+      this.showIOSCaption = showIOSCaption;
 
       document.documentElement.setAttribute("data-theme", theme);
     },
@@ -210,6 +215,11 @@ export const useCountriesStore = defineStore("countriesStore", {
 
       setMediaSessionAction("pause", () => this.togglePlay(false));
       setMediaSessionAction("play", () => this.togglePlay(true));
+    },
+
+    closeIOSCaption() {
+      this.showIOSCaption = false;
+      localStorage.setItem("radio-ios-caption", "true");
     },
 
     async getSearchResults(query: string) {
