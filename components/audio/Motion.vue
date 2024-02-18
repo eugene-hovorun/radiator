@@ -74,8 +74,12 @@ const playChannel = (src?: string) => {
   const audio = getAudioElement();
 
   canvas.innerHTML = "";
-  audio?.pause();
-  audio?.parentElement?.removeChild(audio);
+
+  if (audio) {
+    audio.src = "";
+    audio.pause();
+    audio.parentElement?.removeChild(audio);
+  }
 
   if (!src) {
     return;
