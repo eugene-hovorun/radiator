@@ -137,6 +137,5 @@ const playChannel = (src?: string) => {
   height: 110%;
   bottom: 80px;
   left: 0;
-  pointer-events: none;
 }
 </style>

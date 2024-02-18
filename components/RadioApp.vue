@@ -133,20 +133,30 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 };
 
+const handleDoubleClick = () => {
+  countriesStore.toggleFullScreen();
+};
+
 const handleVisibilityChange = () => {
   visibilityState.value = document.visibilityState;
 };
 
 onMounted(() => {
+  const canvas = document.querySelector("#canvas-container") as HTMLElement;
+
   countriesStore.applyStoredData();
 
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("visibilitychange", handleVisibilityChange);
+  canvas?.addEventListener("dblclick", handleDoubleClick);
 });
 
 onUnmounted(() => {
+  const canvas = document.querySelector("#canvas-container") as HTMLElement;
+
   document.removeEventListener("keydown", handleKeyDown);
   document.removeEventListener("visibilitychange", handleVisibilityChange);
+  canvas?.removeEventListener("dblclick", handleDoubleClick);
 });
 </script>
 

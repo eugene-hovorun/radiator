@@ -12,15 +12,25 @@
 <script lang="ts" setup>
 import "~/assets/main.scss";
 import { SpeedInsights } from "@vercel/speed-insights/vue";
+import { useCountriesStore } from "../store/countries";
 
 const showSpinner = ref(true);
+const countriesStore = useCountriesStore();
+
+watch(
+  () => countriesStore.activeChannel,
+  (channel) => {
+    document.title = getTitle(document.title, channel?.title);
+  },
+);
 
 useHead({
   htmlAttrs: {
     lang: "en",
   },
-  title: "Radiätor",
-  style: [{ innerHTML: "html { background: #111; }" }],
+  style: [{ innerHTML: "html { background: #212121; }" }],
+  titleTemplate: (title) =>
+    getTitle(title, countriesStore.activeChannel?.title),
   meta: [
     {
       name: "viewport",
@@ -43,4 +53,8 @@ useSeoMeta({
 onMounted(() => {
   showSpinner.value = false;
 });
+
+const getTitle = (title: string = "Radiator", channel?: string) => {
+  return channel ? `Radiator | ${channel}` : title;
+};
 </script>

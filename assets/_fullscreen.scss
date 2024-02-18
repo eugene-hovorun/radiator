@@ -1,0 +1,26 @@
+.app__view,
+.bar {
+    transition: opacity 0.25s, transform 0.25s;
+}
+
+div[id="canvas-container"]  {
+    transition: bottom 0.25s;
+}
+
+.full-screen {
+    .app__view {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-50%);
+    }
+
+    .bar {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(50%);
+    }
+
+    div[id="canvas-container"] {
+        bottom: 0;
+    }
+}

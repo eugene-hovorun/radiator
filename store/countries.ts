@@ -171,6 +171,10 @@ export const useCountriesStore = defineStore("countriesStore", {
       this.currentThemeValue = theme;
     },
 
+    toggleFullScreen() {
+      document.documentElement.classList.toggle("full-screen");
+    },
+
     toggleFavorite(channel: FavoriteChannel) {
       const index = this.favoriteChannels.findIndex((c) => c.id === channel.id);
 
