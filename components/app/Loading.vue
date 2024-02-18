@@ -15,4 +15,11 @@ div {
   place-content: center;
   pointer-events: none;
 }
+
+img {
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  opacity: 0.8;
+}
 </style>
