@@ -58,10 +58,6 @@ const handlePlay = () => {
 const handleError = () => {
   if (channel.value) {
     countriesStore.setFailedChannel(channel.value);
-
-    setTimeout(() => {
-      countriesStore.shuffle();
-    }, 2000);
   }
 };
 

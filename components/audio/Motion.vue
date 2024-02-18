@@ -76,7 +76,7 @@ const playChannel = (src?: string) => {
   canvas.innerHTML = "";
 
   if (audio) {
-    audio.src = "";
+    // audio.src = "";
     audio.pause();
     audio.parentElement?.removeChild(audio);
   }
