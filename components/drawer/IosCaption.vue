@@ -22,7 +22,7 @@
   background: var(--color-bg);
   border-radius: 8px;
   font-size: 14px;
-  color: var(--color-text-light);
+  color: var(--color-light);
 
   &__header {
     display: flex;

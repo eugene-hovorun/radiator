@@ -38,7 +38,7 @@ defineProps({
 
 <style scoped lang="scss">
 .play-button {
-  background: var(--color-text-dark);
+  background: var(--color-dark);
   border-radius: 50%;
 }
 </style>

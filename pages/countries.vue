@@ -80,7 +80,7 @@ onMounted(() => {
 .slide {
   padding-left: 16px;
   padding-right: 16px;
-  color: var(--color-text-light);
+  color: var(--color-light);
   transition:
     background 0.25s,
     color 0.25s;
@@ -88,7 +88,7 @@ onMounted(() => {
 
   &.active {
     background: var(--color-main);
-    color: var(--color-text-dark);
+    color: var(--color-dark);
     font-weight: bold;
   }
 }

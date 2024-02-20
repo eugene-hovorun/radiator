@@ -20,7 +20,7 @@ defineProps<Props>();
   align-items: center;
   gap: 12px;
   padding: 8px 12px;
-  color: var(--color-text-light);
+  color: var(--color-light);
   cursor: pointer;
   transition: color 0.25s;
 

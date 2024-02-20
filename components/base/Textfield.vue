@@ -71,12 +71,12 @@ onMounted(() => {
     padding: 8px 12px;
     line-height: 1.4;
     font-size: 16px;
-    color: var(--color-text-light);
+    color: var(--color-light);
     box-shadow: 0 0 2px 0 var(--color-border);
     background-color: var(--color-bg);
 
     &::placeholder {
-      color: var(--color-text-light);
+      color: var(--color-light);
       opacity: 0.618;
     }
 

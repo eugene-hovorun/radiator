@@ -72,7 +72,7 @@ const render = () => h("div", { class: classes.row }, getShortcut());
   min-width: 24px;
   height: 24px;
   padding: 2px 4px;
-  color: var(--color-text-dark);
+  color: var(--color-dark);
   font-weight: bold;
   background: var(--color-main);
   border-radius: 4px;

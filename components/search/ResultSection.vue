@@ -37,7 +37,7 @@ defineEmits(["select"]);
   list-style: none;
   padding: 8px;
   font-size: 14px;
-  color: var(--color-text-light);
+  color: var(--color-light);
   cursor: pointer;
   transition: color 0.25s;
 

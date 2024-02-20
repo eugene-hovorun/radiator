@@ -55,11 +55,11 @@ button {
   transition: 0.25s;
 
   &:not(.transparent) {
-    background: var(--color-text-dark);
+    background: var(--color-dark);
   }
 
   &:hover {
-    color: var(--color-text-light);
+    color: var(--color-light);
     opacity: 1;
   }
 

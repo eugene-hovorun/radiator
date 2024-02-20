@@ -33,7 +33,7 @@ dd {
   padding: 8px 12px;
 
   .accordion-item-title {
-    color: var(--color-text-light);
+    color: var(--color-light);
     font-size: 1.25rem;
     margin-bottom: 0;
     font-weight: bold;

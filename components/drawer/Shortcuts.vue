@@ -42,7 +42,7 @@ const shortcuts = ref([
 
 <style lang="scss" scoped>
 .shortcuts {
-  color: var(--color-text-light);
+  color: var(--color-light);
   cursor: default;
   transition: color 0.25s;
 

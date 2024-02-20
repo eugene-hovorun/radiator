@@ -146,7 +146,7 @@ const toggleFavorite = () => {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    color: var(--color-text-light);
+    color: var(--color-light);
 
     @media (max-width: 600px) {
       max-width: 180px;

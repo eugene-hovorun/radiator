@@ -132,7 +132,7 @@ const goToChannelByLetter = (letter: string) => {
   gap: 8px;
   justify-content: space-between;
   border: 2px solid var(--color-main);
-  color: var(--color-text-light);
+  color: var(--color-light);
   transition:
     background 0.25s,
     color 0.25s;
@@ -141,7 +141,7 @@ const goToChannelByLetter = (letter: string) => {
   &.active {
     font-weight: bold;
     background: var(--color-main);
-    color: var(--color-text-dark);
+    color: var(--color-dark);
   }
 
   &.failed {

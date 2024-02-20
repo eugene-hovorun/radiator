@@ -68,6 +68,6 @@ const branch = useRuntimeConfig().public.branch;
 
 <style scoped>
 span {
-  color: var(--color-text-light);
+  color: var(--color-light);
 }
 </style>
