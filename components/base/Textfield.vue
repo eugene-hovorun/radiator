@@ -46,8 +46,7 @@ const textfield = ref<HTMLDivElement | null>(null);
 
 const handleInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  console.log(props.modelValue);
-  console.log(target.value);
+
   emit("update:modelValue", target.value);
   emit("input");
 };
