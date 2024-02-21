@@ -109,7 +109,8 @@ const selectChannel = (channel: Channel) => {
 };
 
 const filterKeys = (event: KeyboardEvent) => {
-  if (!isNaN(parseInt(event.key))) {
+  // Preventing numbers and space key
+  if (!isNaN(parseInt(event.key)) || event.key === " ") {
     event.stopPropagation();
   }
 };

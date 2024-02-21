@@ -78,8 +78,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
 
   // Handling Space key for play/pause
   if (event.key === " ") {
-    event.preventDefault();
-
     if (countriesStore.activeChannel) {
       countriesStore.togglePlay();
     }
