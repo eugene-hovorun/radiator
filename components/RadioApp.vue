@@ -160,6 +160,7 @@ onUnmounted(() => {
 .app {
   background: var(--color-bg);
   transition: background 0.25s;
+  min-height: 400px;
 
   &__container {
     max-width: 1400px;

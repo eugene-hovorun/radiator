@@ -117,6 +117,7 @@ const toggleFavorite = () => {
   background: var(--color-border);
   box-shadow: 0 -10px 9px var(--color-shadow);
   transition: background 0.25s;
+  z-index: 1;
 
   &__container {
     max-width: 1400px;
