@@ -21,6 +21,7 @@ defineProps<Props>();
   gap: 12px;
   padding: 8px 12px;
   color: var(--color-light);
+  font-size: 14px;
   cursor: pointer;
   transition: color 0.25s;
 

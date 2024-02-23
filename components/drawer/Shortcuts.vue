@@ -43,12 +43,14 @@ const shortcuts = ref([
 <style lang="scss" scoped>
 .shortcuts {
   color: var(--color-light);
+  font-size: 14px;
   cursor: default;
   transition: color 0.25s;
 
   .shortcut {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 8px 12px;
   }
 }

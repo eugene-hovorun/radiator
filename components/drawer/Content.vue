@@ -12,12 +12,20 @@
       </template>
 
       <template #favorites>
-        <drawer-favorite
-          v-for="channel in favoriteChannels"
-          :key="channel.id"
-          :channel="channel"
-          @click="goToChannel(channel.url)"
-        />
+        <template v-if="favoriteChannels.length">
+          <drawer-favorite
+            v-for="channel in favoriteChannels"
+            :key="channel.id"
+            :channel="channel"
+            @click="() => goToChannel(channel.url)"
+          />
+        </template>
+        <template v-else>
+          <div class="empty-favorites">
+            <base-icon-button name="heart" :size="24" transparent />
+            <div>Favorite channels appear here</div>
+          </div>
+        </template>
       </template>
 
       <template #shortcuts>
@@ -44,14 +52,14 @@ const favoriteChannels = computed(() => countriesStore.favoriteChannels);
 const themeSection = {
   icon: "swatch",
   label: "Theme",
-  active: false,
+  active: !favoriteChannels.value.length,
   slot: "theme",
 };
 
 const favoriteSection = {
   icon: "heart-outline",
   label: "Favorites",
-  active: true,
+  active: !!favoriteChannels.value.length,
   slot: "favorites",
 };
 
@@ -86,5 +94,16 @@ const goToChannel = (url: string) => {
   flex-direction: column;
   height: calc(100svh - 78px);
   overflow: auto;
+}
+
+.empty-favorites {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 12px;
+  color: var(--color-light);
+  font-size: 12px;
+  opacity: 0.5;
 }
 </style>
