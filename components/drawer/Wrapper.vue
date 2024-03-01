@@ -14,8 +14,6 @@
 
         <drawer-content />
       </div>
-
-      <drawer-actions />
     </div>
   </transition>
 </template>

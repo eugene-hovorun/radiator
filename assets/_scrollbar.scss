@@ -1,0 +1,17 @@
+.scrollbar {
+	scrollbar-color: var(--color-main) var(--color-border);
+	scrollbar-width: thin;
+
+	&::-webkit-scrollbar {
+		height: 4px;
+		width: 4px;
+
+		&-thumb {
+			background-color: var(--color-main);
+		}
+
+		&-track-piece {
+			background-color: var(--color-border);
+		}
+	}
+}

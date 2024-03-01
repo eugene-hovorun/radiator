@@ -27,10 +27,9 @@ defineEmits(["select"]);
 .result-title {
   padding: 8px;
   font-size: 12px;
-  background: var(--color-bg);
+  background-color: var(--color-bg);
   color: var(--color-main);
   text-align: center;
-  border-radius: 8px;
 }
 
 .result-section {

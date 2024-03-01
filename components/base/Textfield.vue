@@ -1,5 +1,12 @@
 <template>
   <div ref="textfield" class="textfield">
+    <base-icon-button
+      :transparent="true"
+      class="textfield__prepend"
+      name="search"
+      :size="32"
+    />
+
     <input
       :value="modelValue"
       :placeholder="placeholder"
@@ -15,7 +22,7 @@
         class="textfield__loading"
         name="loading"
         :transparent="true"
-        :size="26"
+        :size="32"
       />
     </transition>
   </div>
@@ -61,18 +68,20 @@ onMounted(() => {
 <style lang="scss" scoped>
 .textfield {
   position: relative;
+  flex-grow: 1;
 
   &__input {
     width: 100%;
+    height: 45px;
     outline: none;
     border: 0;
-    border-radius: 6px;
-    padding: 8px 12px;
+    border-radius: 16px;
+    padding: 8px 12px 8px 40px;
     line-height: 1.4;
     font-size: 16px;
     color: var(--color-light);
-    box-shadow: 0 0 2px 0 var(--color-border);
-    background-color: var(--color-bg);
+    background: color-mix(in srgb, var(--color-border) 80%, transparent);
+    backdrop-filter: blur(8px);
 
     &::placeholder {
       color: var(--color-light);
@@ -84,11 +93,23 @@ onMounted(() => {
     }
   }
 
+  &__prepend {
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    pointer-events: none;
+    color: var(--color-light);
+    opacity: 0.618;
+  }
+
   &__loading {
     position: absolute;
-    width: 24px;
     right: 6px;
-    top: 6px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
   }
 }
 </style>

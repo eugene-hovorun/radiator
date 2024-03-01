@@ -22,7 +22,6 @@ type State = {
   autoplay: boolean;
   volume: number;
   showDrawer: boolean;
-  showSearch: boolean;
   showIOSCaption: boolean;
   searchResults: SearchPayload;
   currentThemeValue: Theme["value"];
@@ -48,7 +47,6 @@ export const useCountriesStore = defineStore("countriesStore", {
     autoplay: false,
     volume: 0.5,
     showDrawer: false,
-    showSearch: false,
     showIOSCaption: false,
     searchResults: EMPTY_SEARCH_PAYLOAD,
     currentThemeValue: themes[0].value,
@@ -117,10 +115,6 @@ export const useCountriesStore = defineStore("countriesStore", {
 
     toggleDrawer(show?: boolean) {
       this.showDrawer = show ?? !this.showDrawer;
-    },
-
-    toggleSearch(show?: boolean) {
-      this.showSearch = show ?? !this.showSearch;
     },
 
     setVolume(volume: number) {

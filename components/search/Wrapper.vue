@@ -1,52 +1,40 @@
 <template>
-  <transition name="drawer" mode="out-in">
-    <div
-      v-if="countriesStore.showSearch"
-      class="search__overlay"
-      @keydown="filterKeys"
-    >
-      <div class="search">
-        <div class="search__header">
-          <lazy-app-logo />
+  <div class="search" @keydown="filterKeys">
+    <div class="search__field">
+      <base-textfield
+        v-model="query"
+        :loading="countriesStore.fetchingSearch"
+        :autofocus="true"
+        placeholder="Search"
+        @input="debouncedSearch"
+      />
 
-          <base-icon-button name="close" @click="() => closeSearch()" />
-        </div>
-
-        <div class="search__dropdown">
-          <base-textfield
-            v-model="query"
-            :loading="countriesStore.fetchingSearch"
-            :autofocus="true"
-            placeholder="country, city or channel"
-            @input="debouncedSearch"
-          />
-        </div>
-
-        <div class="search__results">
-          <search-result-section
-            v-if="searchResults.countries.length"
-            title="Countries"
-            :items="searchResults.countries"
-            @select="selectCountry"
-          />
-
-          <search-result-section
-            v-if="searchResults.places.length"
-            title="Places"
-            :items="searchResults.places"
-            @select="selectPlace"
-          />
-
-          <search-result-section
-            v-if="searchResults.channels.length"
-            title="Channels"
-            :items="searchResults.channels"
-            @select="selectChannel"
-          />
-        </div>
-      </div>
+      <slot name="append" />
     </div>
-  </transition>
+
+    <div class="search__results scrollbar">
+      <search-result-section
+        v-if="searchResults.countries.length"
+        title="Countries"
+        :items="searchResults.countries"
+        @select="selectCountry"
+      />
+
+      <search-result-section
+        v-if="searchResults.places.length"
+        title="Places"
+        :items="searchResults.places"
+        @select="selectPlace"
+      />
+
+      <search-result-section
+        v-if="searchResults.channels.length"
+        title="Channels"
+        :items="searchResults.channels"
+        @select="selectChannel"
+      />
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -83,7 +71,6 @@ const closeSearch = (autoplay?: boolean) => {
   countriesStore.clearSearchResults();
   query.value = "";
 
-  countriesStore.toggleSearch(false);
   countriesStore.autoplay = !!autoplay;
 };
 
@@ -120,39 +107,29 @@ const filterKeys = (event: KeyboardEvent) => {
 .search {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 24px;
-  padding: 12px;
-  margin: 16px auto 0;
-  background: var(--color-border);
-  max-width: 384px;
-  max-height: calc(100svh - 64px);
-  border-radius: 8px;
-  box-shadow: 0 0 9px var(--color-shadow);
+  max-width: 420px;
+  margin: auto;
   transition: background 0.25s;
 
-  &__overlay {
-    position: fixed;
-    z-index: 4;
-    padding: 16px;
-    inset: 0;
-    backdrop-filter: blur(8px);
-    background: color-mix(in srgb, var(--color-bg) 30%, transparent);
-    transition: background 0.25s;
-  }
-
-  &__header {
+  &__field {
     display: flex;
     gap: 12px;
-    justify-content: space-between;
     align-items: center;
   }
 
-  &__dropdown {
-    position: relative;
-  }
-
   &__results {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 0;
+    right: 0;
     overflow: auto;
+    max-height: 400px;
+    background-color: var(--color-border);
+    box-shadow: 0 -10px 9px var(--color-shadow);
+    border-radius: 16px;
+    z-index: 2;
   }
 
   .search-result {

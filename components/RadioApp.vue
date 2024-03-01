@@ -2,6 +2,23 @@
   <div class="app">
     <main class="app__container">
       <div class="app__view">
+        <div class="app__logo">
+          <app-logo :width="220" />
+        </div>
+
+        <div class="app__search">
+          <search-wrapper>
+            <template #append>
+              <base-icon-button
+                name="menu-alt-right"
+                class="app__drawer-button"
+                :transparent="true"
+                :size="36"
+                @click="() => countriesStore.toggleDrawer()"
+              />
+            </template>
+          </search-wrapper>
+        </div>
         <slot />
       </div>
 
@@ -20,8 +37,6 @@
       <radio-bar />
 
       <lazy-drawer-wrapper />
-
-      <lazy-search-wrapper />
     </main>
   </div>
 </template>
@@ -64,12 +79,6 @@ const handleError = () => {
 
 const handleKeyDown = (event: KeyboardEvent) => {
   const ctrl = event.metaKey || event.ctrlKey;
-
-  // Handling Command + F for search
-  if (ctrl && event.key === "f") {
-    event.preventDefault();
-    countriesStore.toggleSearch();
-  }
 
   // Handling Command + D for drawer toggle
   if (ctrl && event.key === "d") {
@@ -171,7 +180,7 @@ onUnmounted(() => {
 .app {
   background: var(--color-bg);
   transition: background 0.25s;
-  min-height: 400px;
+  min-height: 550px;
 
   &__container {
     max-width: 1400px;
@@ -183,6 +192,25 @@ onUnmounted(() => {
   &__view {
     position: relative;
     z-index: 1;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__search {
+    margin-bottom: 16px;
+    padding: 16px 0;
+    margin: 0 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__drawer-button {
+    min-height: 45px;
+    min-width: 45px;
+    border-radius: 16px;
+    background: var(--color-border);
   }
 }
 </style>

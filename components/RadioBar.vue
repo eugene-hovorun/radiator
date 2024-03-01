@@ -31,18 +31,27 @@
         />
 
         <base-icon-button
-          :name="isFavorite ? 'heart' : 'heart-outline'"
-          label="Favorite"
-          :disabled="!activeChannel"
+          name="shuffle"
           :size="36"
-          @click="toggleFavorite"
+          :transparent="true"
+          @click="shuffle"
         />
 
         <base-icon-button
-          name="menu-alt-right"
-          label="Menu"
+          :name="cahShare ? 'share' : justCopied ? 'check' : 'copy'"
           :size="36"
-          @click="() => countriesStore.toggleDrawer(true)"
+          :disabled="!activeChannel"
+          :transparent="true"
+          @click="share"
+        />
+
+        <base-icon-button
+          :name="isFavorite ? 'heart' : 'heart-outline'"
+          label="Favorite"
+          :disabled="!activeChannel"
+          :transparent="true"
+          :size="36"
+          @click="toggleFavorite"
         />
       </div>
     </div>
@@ -64,6 +73,37 @@ const isFavorite = computed(() => {
 
 const flagSrc = ref("");
 const countryTitle = ref("");
+const justCopied = ref(false);
+const cahShare = "share" in navigator;
+
+const shuffle = () => countriesStore.shuffle();
+
+const share = () => {
+  if (!activeChannel.value) {
+    return;
+  }
+
+  const title = activeChannel.value.title;
+  const url = window.location.href;
+  const text = `Listen to ${title} on Radiator`;
+
+  if ("share" in navigator) {
+    navigator.share({ title, text, url });
+  } else {
+    const input = document.createElement("input");
+    input.value = url;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+
+    justCopied.value = true;
+
+    setTimeout(() => {
+      justCopied.value = false;
+    }, 500);
+  }
+};
 
 watch(
   () => activeChannel.value,
@@ -150,7 +190,7 @@ const toggleFavorite = () => {
     color: var(--color-light);
 
     @media (max-width: 600px) {
-      max-width: 180px;
+      max-width: 130px;
     }
   }
 
