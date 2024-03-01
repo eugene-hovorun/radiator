@@ -27,7 +27,7 @@ export default defineNuxtConfig({
       "@nuxtjs/google-fonts",
       {
         families: {
-          Inter: [400, 700],
+          Inter: [400, 700, 900],
         },
         display: "swap",
       },
