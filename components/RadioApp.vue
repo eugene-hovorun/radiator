@@ -2,23 +2,7 @@
   <div class="app">
     <main class="app__container">
       <div class="app__view">
-        <div class="app__logo">
-          <app-logo :width="220" />
-        </div>
-
-        <div class="app__search">
-          <search-wrapper>
-            <template #append>
-              <base-icon-button
-                name="menu-alt-right"
-                class="app__drawer-button"
-                :transparent="true"
-                :size="36"
-                @click="() => countriesStore.toggleDrawer()"
-              />
-            </template>
-          </search-wrapper>
-        </div>
+        <radio-header />
         <slot />
       </div>
 
@@ -152,24 +136,29 @@ onMounted(() => {
 
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("visibilitychange", handleVisibilityChange);
+  canvas?.addEventListener("dblclick", handleDoubleClick);
 
-  if (canvas) {
-    canvas.addEventListener("dblclick", handleDoubleClick);
+  addGestureListeners(document.body, {
+    onSwipeRight: () => countriesStore.toggleDrawer(),
+    onSwipeLeft: () => {
+      if (countriesStore.showDrawer) {
+        countriesStore.toggleDrawer(false);
+      } else if (!countriesStore.autoplay) {
+        countriesStore.shuffle();
+      }
+    },
+    onTap: (event: TouchEvent) => {
+      const target = event.target as HTMLElement;
 
-    addGestureListeners(canvas, {
-      onSwipeRight: () => countriesStore.toggleDrawer(),
-      onSwipeLeft: () => {
-        if (!countriesStore.autoplay) {
-          countriesStore.shuffle();
-        }
-      },
-      onTap: () => {
-        if (countriesStore.activeChannel) {
-          countriesStore.togglePlay();
-        }
-      },
-    });
-  }
+      if (target.tagName !== "CANVAS") {
+        return;
+      }
+
+      if (countriesStore.activeChannel) {
+        countriesStore.togglePlay();
+      }
+    },
+  });
 });
 
 onUnmounted(() => {
@@ -197,25 +186,6 @@ onUnmounted(() => {
   &__view {
     position: relative;
     z-index: 1;
-  }
-
-  &__logo {
-    display: flex;
-    justify-content: center;
-  }
-
-  &__search {
-    margin-bottom: 16px;
-    padding: 16px 0;
-    margin: 0 12px 16px;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  &__drawer-button {
-    min-height: 45px;
-    min-width: 45px;
-    border-radius: 16px;
-    background: var(--color-border);
   }
 }
 </style>
