@@ -102,3 +102,56 @@ export function isIos() {
 export function isMac() {
   return /Mac/.test(navigator.platform);
 }
+
+export function addGestureListeners(
+  gestureZone: HTMLElement,
+  {
+    onSwipeLeft,
+    onSwipeRight,
+    onSwipeUp,
+    onSwipeDown,
+  }: {
+    onSwipeLeft?: () => void;
+    onSwipeRight?: () => void;
+    onSwipeUp?: () => void;
+    onSwipeDown?: () => void;
+  },
+) {
+  if (!hasTouchScreen() || !gestureZone) {
+    return;
+  }
+
+  let touchstartX = 0;
+  let touchstartY = 0;
+  let touchendX = 0;
+  let touchendY = 0;
+
+  gestureZone.ontouchstart = function (event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+  };
+
+  gestureZone.ontouchend = function (event) {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    handleGesture();
+  };
+
+  function handleGesture() {
+    if (onSwipeLeft && touchendX < touchstartX) {
+      onSwipeLeft();
+    }
+
+    if (onSwipeRight && touchendX > touchstartX) {
+      onSwipeRight();
+    }
+
+    if (onSwipeUp && touchendY < touchstartY) {
+      onSwipeUp();
+    }
+
+    if (onSwipeDown && touchendY > touchstartY) {
+      onSwipeDown();
+    }
+  }
+}

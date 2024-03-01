@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import { useCountriesStore } from "../store/countries";
+import { addGestureListeners } from "../store/utils";
 import { themes } from "~/assets/themes";
 
 const route = useRoute();
@@ -142,7 +143,19 @@ onMounted(() => {
 
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("visibilitychange", handleVisibilityChange);
-  canvas?.addEventListener("dblclick", handleDoubleClick);
+
+  if (canvas) {
+    canvas.addEventListener("dblclick", handleDoubleClick);
+
+    addGestureListeners(canvas, {
+      onSwipeRight: () => countriesStore.toggleDrawer(),
+      onSwipeLeft: () => {
+        if (!countriesStore.autoplay) {
+          countriesStore.shuffle();
+        }
+      },
+    });
+  }
 });
 
 onUnmounted(() => {
