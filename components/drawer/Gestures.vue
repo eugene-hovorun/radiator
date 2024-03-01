@@ -10,36 +10,20 @@
 <script setup lang="ts">
 const shortcuts = ref([
   {
-    label: "Search",
-    is: "search",
-  },
-  {
     label: "Sidebar",
-    is: "sidebar",
-  },
-  {
-    label: "Volume",
-    is: "volume",
+    is: "sidebar-mobile",
   },
   {
     label: "Pause/Play",
-    is: "pause",
+    is: "pause-mobile",
   },
   {
     label: "Shuffle",
-    is: "shuffle",
-  },
-  {
-    label: "Theme Switching",
-    is: "theme",
-  },
-  {
-    label: "Favorite Switching",
-    is: "favorite",
+    is: "shuffle-mobile",
   },
   {
     label: "Fullscreen",
-    is: "fullscreen",
+    is: "fullscreen-mobile",
   },
 ]);
 </script>

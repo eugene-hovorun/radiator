@@ -167,6 +167,7 @@ const toggleFavorite = () => {
     display: flex;
     align-items: center;
     gap: 16px;
+    user-select: none;
   }
 
   &__country {

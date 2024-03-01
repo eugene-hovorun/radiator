@@ -28,6 +28,8 @@ const getShortcut = () => {
         h("span", { class: classes.plus }, "+"),
         h("span", { class: classes.key }, "D"),
       ];
+    case "sidebar-mobile":
+      return [h("span", { class: classes.key }, "Swipe left")];
     case "volume":
       return [
         h("span", { class: classes.key }, "↑"),
@@ -36,6 +38,8 @@ const getShortcut = () => {
       ];
     case "pause":
       return [h("span", { class: classes.key }, "Space")];
+    case "pause-mobile":
+      return [h("span", { class: classes.key }, "Tap")];
     case "shuffle":
       return [
         h("span", { class: classes.key }, modifier),
@@ -46,6 +50,8 @@ const getShortcut = () => {
           "↑",
         ),
       ];
+    case "shuffle-mobile":
+      return [h("span", { class: classes.key }, "Swipe right")];
     case "theme":
       return [
         h("span", { class: classes.key }, modifier),
@@ -54,6 +60,10 @@ const getShortcut = () => {
       ];
     case "favorite":
       return [h("span", { class: classes.key }, "1 - 9")];
+    case "fullscreen":
+      return [h("span", { class: classes.key }, "Double click")];
+    case "fullscreen-mobile":
+      return [h("span", { class: classes.key }, "Double tap")];
   }
 };
 

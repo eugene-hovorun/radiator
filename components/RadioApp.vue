@@ -163,6 +163,11 @@ onMounted(() => {
           countriesStore.shuffle();
         }
       },
+      onTap: () => {
+        if (countriesStore.activeChannel) {
+          countriesStore.togglePlay();
+        }
+      },
     });
   }
 });

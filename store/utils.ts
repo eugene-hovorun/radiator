@@ -110,11 +110,13 @@ export function addGestureListeners(
     onSwipeRight,
     onSwipeUp,
     onSwipeDown,
+    onTap,
   }: {
     onSwipeLeft?: () => void;
     onSwipeRight?: () => void;
     onSwipeUp?: () => void;
     onSwipeDown?: () => void;
+    onTap?: () => void;
   },
 ) {
   if (!hasTouchScreen() || !gestureZone) {
@@ -152,6 +154,10 @@ export function addGestureListeners(
 
     if (onSwipeDown && touchendY > touchstartY) {
       onSwipeDown();
+    }
+
+    if (onTap && touchendY === touchstartY) {
+      onTap();
     }
   }
 }
