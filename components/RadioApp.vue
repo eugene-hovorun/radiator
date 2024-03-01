@@ -93,8 +93,8 @@ const handleKeyDown = (event: KeyboardEvent) => {
     }
   }
 
-  // Handling Arrow Right for next channel
-  if (event.key === "ArrowRight") {
+  // Handling Command + Arrow Right for shuffle
+  if (ctrl && event.key === "ArrowRight") {
     if (!countriesStore.autoplay) {
       countriesStore.shuffle();
     }

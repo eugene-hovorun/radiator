@@ -38,6 +38,8 @@ const getShortcut = () => {
       return [h("span", { class: classes.key }, "Space")];
     case "shuffle":
       return [
+        h("span", { class: classes.key }, modifier),
+        h("span", { class: classes.plus }, "+"),
         h(
           "span",
           { class: classes.key, style: "transform: rotate(90deg)" },
@@ -82,5 +84,6 @@ const render = () => h("div", { class: classes.row }, getShortcut());
 .plus {
   color: var(--color-main);
   font-weight: bold;
+  line-height: 0;
 }
 </style>
