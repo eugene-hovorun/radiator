@@ -4,15 +4,16 @@
       <base-textfield
         v-model="query"
         :loading="countriesStore.fetchingSearch"
-        :autofocus="true"
         placeholder="Search"
         @input="debouncedSearch"
+        @focus="handleFocus(true)"
+        @blur="handleFocus()"
       />
 
       <slot name="append" />
     </div>
 
-    <div class="search__results scrollbar">
+    <div v-if="showResults" class="search__results scrollbar">
       <search-result-section
         v-if="searchResults.countries.length"
         title="Countries"
@@ -45,6 +46,7 @@ import { highlightMatchedText } from "../../store/utils";
 const router = useRouter();
 const countriesStore = useCountriesStore();
 const query = ref("");
+const showResults = ref(false);
 const trimmedQuery = computed(() => query.value.trim());
 const searchResults = computed(() => ({
   countries: countriesStore.searchResults.countries.map((item) => ({
@@ -67,13 +69,6 @@ const searchResults = computed(() => ({
   })),
 }));
 
-const closeSearch = (autoplay?: boolean) => {
-  countriesStore.clearSearchResults();
-  query.value = "";
-
-  countriesStore.autoplay = !!autoplay;
-};
-
 const debouncedSearch = useDebounceFn(() => handleQueryChange(), 500);
 
 const handleQueryChange = () => {
@@ -81,18 +76,26 @@ const handleQueryChange = () => {
 };
 
 const selectCountry = (country: Country) => {
-  closeSearch();
   router.push(`/${country.id}`);
 };
 
 const selectPlace = (place: Place) => {
-  closeSearch();
   router.push(`/${place.countryId}/${place.slug}`);
 };
 
 const selectChannel = (channel: Channel) => {
-  closeSearch(true);
   router.push(channel.url);
+  countriesStore.autoplay = true;
+};
+
+const handleFocus = (focused = false) => {
+  if (focused) {
+    showResults.value = true;
+  } else {
+    setTimeout(() => {
+      showResults.value = false;
+    }, 100);
+  }
 };
 
 const filterKeys = (event: KeyboardEvent) => {

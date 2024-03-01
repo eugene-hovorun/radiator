@@ -14,6 +14,8 @@
       type="text"
       class="textfield__input"
       @input="handleInput"
+      @focus="() => emit('focus')"
+      @blur="() => emit('blur')"
     />
 
     <transition name="play" mode="out-in">
@@ -48,7 +50,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["update:modelValue", "input"]);
+const emit = defineEmits(["update:modelValue", "input", "focus", "blur"]);
 const textfield = ref<HTMLDivElement | null>(null);
 
 const handleInput = (e: Event) => {
@@ -102,6 +104,7 @@ onMounted(() => {
     pointer-events: none;
     color: var(--color-light);
     opacity: 0.618;
+    z-index: 1;
   }
 
   &__loading {
