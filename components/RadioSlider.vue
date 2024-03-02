@@ -7,7 +7,7 @@
       >
         <div class="slider-title">
           <span>{{ title }}</span>
-          <span v-if="items.length > 2">
+          <span v-if="items.length > 2" class="slider-amount">
             {{ findIndex(modelValue) + 1 }} / {{ items.length }}
           </span>
         </div>
@@ -165,6 +165,10 @@ const sliderOptions = {
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.slider-amount {
+  color: var(--color-light);
 }
 
 .skeleton {

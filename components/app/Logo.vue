@@ -8,7 +8,10 @@ defineProps({
 </script>
 
 <template>
-  <div :style="`min-width: ${width}px; font-size: ${width / 10}px`">
+  <div
+    class="logo"
+    :style="`min-width: ${width}px; font-size: ${width / 10}px`"
+  >
     <svg :width="width / 5.33" viewBox="0 0 143 143" fill="currentColor">
       <path
         fill="var(--color-main)"
@@ -24,36 +27,35 @@ defineProps({
       />
     </svg>
 
-    <span>
-      RADIATOR APP
-
-      <svg viewBox="0 0 63 10" fill="none">
-        <rect x="0" y="0" width="63" height="10" />
-        <circle cx="22.5" cy="0.75" r="0.72" fill="var(--color-main)" />
-        <circle cx="24.8" cy="0.75" r="0.72" fill="var(--color-main)" />
-      </svg>
-    </span>
+    <div class="logo__text">
+      <span>RADIÄTOR APP</span>
+      <span>RADIATOR APP</span>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-div {
+.logo {
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 900;
-  color: var(--color-light);
 
-  span {
+  &__text {
     position: relative;
     display: flex;
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+    color: var(--color-main);
 
-    svg {
+    span {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      white-space: nowrap;
+
+      & + span {
+        color: var(--color-light);
+      }
     }
   }
 }
