@@ -30,18 +30,12 @@
           class="bar__volume"
         />
 
-        <base-icon-button
-          name="shuffle"
-          :size="36"
-          :transparent="true"
-          @click="shuffle"
-        />
+        <base-icon-button name="shuffle" :size="36" @click="shuffle" />
 
         <base-icon-button
           :name="cahShare ? 'share' : justCopied ? 'check' : 'copy'"
           :size="36"
           :disabled="!activeChannel"
-          :transparent="true"
           @click="share"
         />
 
@@ -49,7 +43,6 @@
           :name="isFavorite ? 'heart' : 'heart-outline'"
           label="Favorite"
           :disabled="!activeChannel"
-          :transparent="true"
           :size="36"
           @click="toggleFavorite"
         />

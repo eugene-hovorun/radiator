@@ -10,7 +10,6 @@
           <base-icon-button
             name="menu-alt-right"
             class="header__drawer-button"
-            :transparent="true"
             :size="36"
             @click="() => countriesStore.toggleDrawer()"
           />

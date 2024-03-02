@@ -2,7 +2,7 @@
   <div :class="{ 'is-active': item.active }">
     <dt class="accordion-item-header">
       <button class="accordion-item-button" @click="$emit('toggle')">
-        <base-icon-button :name="item.icon" transparent />
+        <base-icon :name="item.icon" />
         <div class="accordion-item-title">{{ item.label }}</div>
         <span class="accordion-item-icon"></span>
       </button>

@@ -8,7 +8,11 @@
         @input="debouncedSearch"
         @focus="handleFocus(true)"
         @blur="handleFocus()"
-      />
+      >
+        <template #prepend>
+          <base-icon name="search" color="light" />
+        </template>
+      </base-textfield>
 
       <slot name="append" />
     </div>

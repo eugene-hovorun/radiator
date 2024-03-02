@@ -22,7 +22,7 @@
         </template>
         <template v-else>
           <div class="empty-favorites">
-            <base-icon-button name="heart" :size="24" transparent />
+            <base-icon name="heart" :size="20" />
             <div>Favorite channels appear here</div>
           </div>
         </template>

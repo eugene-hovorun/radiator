@@ -9,11 +9,7 @@
         <div class="drawer__header">
           <lazy-app-logo :width="180" />
 
-          <base-icon-button
-            name="close"
-            :transparent="true"
-            @click="closeDrawer"
-          />
+          <base-icon-button name="close" @click="closeDrawer" />
         </div>
 
         <drawer-content />

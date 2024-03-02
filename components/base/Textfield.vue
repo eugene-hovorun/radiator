@@ -1,11 +1,8 @@
 <template>
   <div ref="textfield" class="textfield">
-    <base-icon-button
-      :transparent="true"
-      class="textfield__prepend"
-      name="search"
-      :size="32"
-    />
+    <span class="textfield__prepend">
+      <slot name="prepend" />
+    </span>
 
     <input
       :value="modelValue"
@@ -19,13 +16,7 @@
     />
 
     <transition name="play" mode="out-in">
-      <base-icon-button
-        v-if="loading"
-        class="textfield__loading"
-        name="loading"
-        :transparent="true"
-        :size="32"
-      />
+      <base-icon v-if="loading" class="textfield__loading" name="loading" />
     </transition>
   </div>
 </template>
@@ -100,9 +91,9 @@ onMounted(() => {
     left: 6px;
     top: 0;
     bottom: 0;
-    margin: auto;
+    display: flex;
+    align-items: center;
     pointer-events: none;
-    color: var(--color-light);
     opacity: 0.618;
     z-index: 1;
   }

@@ -1,13 +1,6 @@
 <template>
-  <button
-    :disabled="disabled"
-    :class="{ transparent }"
-    :style="buttonStyle"
-    :aria-label="label"
-  >
-    <svg :width="svgSize" :height="svgSize">
-      <use :href="`#${name}`" />
-    </svg>
+  <button :disabled="disabled" :style="buttonStyle" :aria-label="label">
+    <base-icon :name="name" :size="svgSize" inherit-color />
   </button>
 </template>
 
@@ -28,10 +21,6 @@ const props = defineProps({
   label: {
     type: String,
     default: "radio-button",
-  },
-  transparent: {
-    type: Boolean,
-    default: false,
   },
 });
 
@@ -54,11 +43,7 @@ button {
   opacity: 0.9;
   transition: 0.25s;
 
-  &:not(.transparent) {
-    background: var(--color-dark);
-  }
-
-  &:hover {
+  &:hover:not(:disabled) {
     color: var(--color-light);
     opacity: 1;
   }

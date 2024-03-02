@@ -58,5 +58,9 @@ defineProps({
       }
     }
   }
+
+  path {
+    transition: fill 0.25s;
+  }
 }
 </style>
