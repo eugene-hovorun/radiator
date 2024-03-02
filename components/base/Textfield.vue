@@ -8,6 +8,7 @@
       :value="modelValue"
       :placeholder="placeholder"
       autocomplete="off"
+      spellcheck="false"
       type="text"
       class="textfield__input"
       @input="handleInput"
@@ -15,9 +16,13 @@
       @blur="() => emit('blur')"
     />
 
-    <transition name="play" mode="out-in">
-      <base-icon v-if="loading" class="textfield__loading" name="loading" />
-    </transition>
+    <span class="textfield__append">
+      <transition name="play" mode="out-in">
+        <base-icon v-if="loading" color="light" name="loading" />
+
+        <slot v-else name="append" />
+      </transition>
+    </span>
   </div>
 </template>
 
@@ -93,17 +98,19 @@ onMounted(() => {
     bottom: 0;
     display: flex;
     align-items: center;
-    pointer-events: none;
     opacity: 0.618;
     z-index: 1;
   }
 
-  &__loading {
+  &__append {
     position: absolute;
     right: 6px;
     top: 0;
     bottom: 0;
-    margin: auto;
+    display: flex;
+    align-items: center;
+    opacity: 0.618;
+    z-index: 1;
   }
 }
 </style>

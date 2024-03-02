@@ -1,6 +1,6 @@
 <template>
   <button :disabled="disabled" :style="buttonStyle" :aria-label="label">
-    <base-icon :name="name" :size="svgSize" inherit-color />
+    <base-icon :name="name" :size="svgSize" :color="color" />
   </button>
 </template>
 
@@ -22,11 +22,16 @@ const props = defineProps({
     type: String,
     default: "radio-button",
   },
+  color: {
+    type: String,
+    default: "main",
+  },
 });
 
 const buttonStyle = computed(() => ({
   width: `${props.size}px`,
   height: `${props.size}px`,
+  color: `var(--color-${props.color})`,
 }));
 
 const svgSize = computed(() => props.size * 0.8);
@@ -39,7 +44,6 @@ button {
   justify-content: center;
   flex-shrink: 0;
   border-radius: 50%;
-  color: var(--color-main);
   opacity: 0.9;
   transition: 0.25s;
 

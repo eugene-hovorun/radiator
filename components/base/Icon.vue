@@ -20,15 +20,9 @@ const props = defineProps({
     type: String,
     default: "main",
   },
-  inheritColor: {
-    type: Boolean,
-    default: false,
-  },
 });
 
-const colorStyle = computed(() =>
-  props.inheritColor ? {} : { color: `var(--color-${props.color})` },
-);
+const colorStyle = computed(() => ({ color: `var(--color-${props.color})` }));
 </script>
 
 <style scoped lang="scss">

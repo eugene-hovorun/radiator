@@ -12,6 +12,15 @@
         <template #prepend>
           <base-icon name="search" color="light" />
         </template>
+
+        <template #append>
+          <base-icon-button
+            v-if="query"
+            name="close"
+            color="light"
+            @click="clearSearch"
+          />
+        </template>
       </base-textfield>
 
       <slot name="append" />
@@ -100,6 +109,11 @@ const handleFocus = (focused = false) => {
       showResults.value = false;
     }, 100);
   }
+};
+
+const clearSearch = () => {
+  query.value = "";
+  countriesStore.clearSearchResults();
 };
 
 const filterKeys = (event: KeyboardEvent) => {
