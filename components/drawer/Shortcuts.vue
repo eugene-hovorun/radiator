@@ -10,10 +10,6 @@
 <script setup lang="ts">
 const shortcuts = ref([
   {
-    label: "Search",
-    is: "search",
-  },
-  {
     label: "Sidebar",
     is: "sidebar",
   },

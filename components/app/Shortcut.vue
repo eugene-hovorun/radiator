@@ -16,12 +16,6 @@ const modifier = isMac() ? "⌘" : "Ctrl";
 
 const getShortcut = () => {
   switch (props.is) {
-    case "search":
-      return [
-        h("span", { class: classes.key }, modifier),
-        h("span", { class: classes.plus }, "+"),
-        h("span", { class: classes.key }, "F"),
-      ];
     case "sidebar":
       return [
         h("span", { class: classes.key }, modifier),
