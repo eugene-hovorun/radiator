@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { useCountriesStore } from "../store/countries";
-import { addGestureListeners } from "../store/utils";
+// import { addGestureListeners } from "../store/utils";
 import { themes } from "~/assets/themes";
 
 const route = useRoute();
@@ -138,27 +138,27 @@ onMounted(() => {
   document.addEventListener("visibilitychange", handleVisibilityChange);
   canvas?.addEventListener("dblclick", handleDoubleClick);
 
-  addGestureListeners(document.body, {
-    onSwipeRight: () => countriesStore.toggleDrawer(),
-    onSwipeLeft: () => {
-      if (countriesStore.showDrawer) {
-        countriesStore.toggleDrawer(false);
-      } else if (!countriesStore.autoplay) {
-        countriesStore.shuffle();
-      }
-    },
-    onTap: (event: TouchEvent) => {
-      const target = event.target as HTMLElement;
+  // addGestureListeners(document.body, {
+  //   onSwipeRight: () => countriesStore.toggleDrawer(),
+  //   onSwipeLeft: () => {
+  //     if (countriesStore.showDrawer) {
+  //       countriesStore.toggleDrawer(false);
+  //     } else if (!countriesStore.autoplay) {
+  //       countriesStore.shuffle();
+  //     }
+  //   },
+  //   onTap: (event: TouchEvent) => {
+  //     const target = event.target as HTMLElement;
 
-      if (target.tagName !== "CANVAS") {
-        return;
-      }
+  //     if (target.tagName !== "CANVAS") {
+  //       return;
+  //     }
 
-      if (countriesStore.activeChannel) {
-        countriesStore.togglePlay();
-      }
-    },
-  });
+  //     if (countriesStore.activeChannel) {
+  //       countriesStore.togglePlay();
+  //     }
+  //   },
+  // });
 });
 
 onUnmounted(() => {

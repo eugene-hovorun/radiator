@@ -74,16 +74,16 @@ const shortcutsSection = {
   slot: "shortcuts",
 };
 
-const gestureSection = {
-  icon: "touch",
-  label: "Gestures",
-  active: false,
-  slot: "gestures",
-};
+// const gestureSection = {
+//   icon: "touch",
+//   label: "Gestures",
+//   active: false,
+//   slot: "gestures",
+// };
 
 const items = ref<AccordionContent[]>(
   hasTouchScreen()
-    ? [themeSection, favoriteSection, gestureSection]
+    ? [themeSection, favoriteSection]
     : [themeSection, favoriteSection, shortcutsSection],
 );
 
