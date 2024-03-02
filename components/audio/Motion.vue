@@ -1,4 +1,9 @@
 <template>
+  <!-- <canvas class="particles"></canvas>
+  <component
+    :is="'script'"
+    src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"
+  ></component> -->
   <div id="audio-container" />
   <div id="canvas-container" />
 </template>
@@ -126,6 +131,16 @@ const playChannel = (src?: string) => {
   container.appendChild(player);
   analyzer.value.start();
 };
+
+// onMounted(() => {
+//   setTimeout(() => {
+//     window.Particles.init({
+//       selector: ".particles",
+//       color: ["#B980F5", "#FF78D2"],
+//       connectParticles: true,
+//     });
+//   }, 1000);
+// });
 </script>
 
 <style scoped>
@@ -142,4 +157,13 @@ const playChannel = (src?: string) => {
   bottom: 80px;
   left: 0;
 }
+
+/* .particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+} */
 </style>
