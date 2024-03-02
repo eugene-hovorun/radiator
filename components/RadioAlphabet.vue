@@ -1,5 +1,5 @@
 <template>
-  <div class="alphabet">
+  <div class="alphabet" :class="{ chip: !showLetters }">
     <template v-if="showLetters">
       <template v-for="(letter, index) in lettersMatrix[0]" :key="letter">
         <button class="alphabet__letter" @click="handleLetterClick(letter)">
@@ -104,6 +104,18 @@ const handleLetterClick = (letter: string) =>
   background: color-mix(in srgb, var(--color-border) 80%, transparent);
   backdrop-filter: blur(8px);
   transition: background 0.25s;
+
+  &.chip {
+    width: calc(20% - 16px);
+
+    @media (max-width: 1100px) {
+      width: calc(33% - 16px);
+    }
+
+    @media (max-width: 600px) {
+      width: calc(50% - 32px);
+    }
+  }
 
   &__letter {
     font-size: 12px;

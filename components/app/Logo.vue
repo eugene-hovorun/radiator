@@ -24,7 +24,15 @@ defineProps({
       />
     </svg>
 
-    <span>RADIATOR APP</span>
+    <span>
+      RADIATOR APP
+
+      <svg viewBox="0 0 63 10" fill="none">
+        <rect x="0" y="0" width="63" height="10" />
+        <circle cx="22.5" cy="0.75" r="0.72" fill="var(--color-main)" />
+        <circle cx="24.8" cy="0.75" r="0.72" fill="var(--color-main)" />
+      </svg>
+    </span>
   </div>
 </template>
 
@@ -37,7 +45,16 @@ div {
   color: var(--color-light);
 
   span {
+    position: relative;
     display: flex;
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

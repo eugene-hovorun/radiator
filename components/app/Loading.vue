@@ -17,8 +17,8 @@ div {
 }
 
 img {
-  width: 64px;
-  height: 64px;
+  width: 120px;
+  height: 120px;
   pointer-events: none;
   opacity: 0.8;
 }
