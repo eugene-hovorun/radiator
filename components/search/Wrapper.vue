@@ -26,28 +26,30 @@
       <slot name="append" />
     </div>
 
-    <div v-if="showResults" class="search__results scrollbar">
-      <search-result-section
-        v-if="searchResults.countries.length"
-        title="Countries"
-        :items="searchResults.countries"
-        @select="selectCountry"
-      />
+    <keep-alive>
+      <div v-if="showResults" class="search__results scrollbar">
+        <search-result-section
+          v-if="searchResults.countries.length"
+          title="Countries"
+          :items="searchResults.countries"
+          @select="selectCountry"
+        />
 
-      <search-result-section
-        v-if="searchResults.places.length"
-        title="Places"
-        :items="searchResults.places"
-        @select="selectPlace"
-      />
+        <search-result-section
+          v-if="searchResults.places.length"
+          title="Places"
+          :items="searchResults.places"
+          @select="selectPlace"
+        />
 
-      <search-result-section
-        v-if="searchResults.channels.length"
-        title="Channels"
-        :items="searchResults.channels"
-        @select="selectChannel"
-      />
-    </div>
+        <search-result-section
+          v-if="searchResults.channels.length"
+          title="Channels"
+          :items="searchResults.channels"
+          @select="selectChannel"
+        />
+      </div>
+    </keep-alive>
   </div>
 </template>
 
