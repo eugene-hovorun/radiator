@@ -1,5 +1,5 @@
 <template>
-  <radio-slider
+  <nav-slider
     v-model="place"
     title="City"
     :loading="loading"
@@ -7,17 +7,13 @@
     @go-to-letter="goToCityByLetter"
   >
     <template #default="{ item }">
-      <div
-        class="slide"
-        :class="{ active: item.slug === place?.slug }"
-        @click="handleItemClick(item)"
-      >
-        <div class="slide-title">
-          {{ item.title }}
-        </div>
-      </div>
+      <nav-slide
+        :item="item"
+        :active="item.slug === place?.slug"
+        @select="handleItemClick(item)"
+      />
     </template>
-  </radio-slider>
+  </nav-slider>
 
   <router-view />
 </template>
@@ -77,21 +73,3 @@ const goToCityByLetter = (letter: string) => {
   }
 };
 </script>
-
-<style scoped lang="scss">
-.slide {
-  padding-left: 16px;
-  padding-right: 16px;
-  color: var(--color-light);
-  transition:
-    background 0.25s,
-    color 0.25s;
-  backdrop-filter: blur(8px);
-
-  &.active {
-    background: var(--color-main);
-    color: var(--color-dark);
-    font-weight: bold;
-  }
-}
-</style>

@@ -1,23 +1,19 @@
 <template>
   <radio-app>
-    <radio-slider
+    <nav-slider
       v-model="country"
       title="Country"
       :items="countriesStore.countries"
       @go-to-letter="goToCountryByLetter"
     >
       <template #default="{ item }">
-        <div
-          class="slide"
-          :class="{ active: item.slug === country?.slug }"
-          @click="handleItemClick(item)"
-        >
-          <div class="slide-title">
-            {{ item.title }}
-          </div>
-        </div>
+        <nav-slide
+          :item="item"
+          :active="item.slug === country?.slug"
+          @select="handleItemClick(item)"
+        />
       </template>
-    </radio-slider>
+    </nav-slider>
 
     <router-view />
   </radio-app>
@@ -75,21 +71,3 @@ onMounted(() => {
   }
 });
 </script>
-
-<style scoped lang="scss">
-.slide {
-  padding-left: 16px;
-  padding-right: 16px;
-  color: var(--color-light);
-  transition:
-    background 0.25s,
-    color 0.25s;
-  backdrop-filter: blur(8px);
-
-  &.active {
-    background: var(--color-main);
-    color: var(--color-dark);
-    font-weight: bold;
-  }
-}
-</style>

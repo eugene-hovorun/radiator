@@ -1,5 +1,5 @@
 <template>
-  <radio-slider
+  <nav-slider
     v-model="channel"
     title="Channel"
     :items="countriesStore.channels"
@@ -7,25 +7,16 @@
     @go-to-letter="goToChannelByLetter"
   >
     <template #default="{ item }">
-      <div
-        class="slide"
-        :class="{
-          active: item.id === channel?.id,
-          failed: isFailed(item),
-        }"
-        @click="handleSelect(item)"
-      >
-        <play-button
-          :playing="item.id === playingChannelId && countriesStore.playing"
-          :loading="item.id === loadingChannelId"
-          :failed="isFailed(item)"
-        />
-        <div class="slide-title">
-          {{ isFailed(item) ? "Unavailable" : item.title }}
-        </div>
-      </div>
+      <nav-slide
+        :item="item"
+        :active="item.id === channel?.id"
+        :playing="item.id === playingChannelId && countriesStore.playing"
+        :loading="item.id === loadingChannelId"
+        :failed="isFailed(item)"
+        @select="handleSelect(item)"
+      />
     </template>
-  </radio-slider>
+  </nav-slider>
 
   <router-view />
 </template>
@@ -124,28 +115,3 @@ const goToChannelByLetter = (letter: string) => {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.slide {
-  padding-left: 0;
-  padding-right: 16px;
-  gap: 8px;
-  justify-content: space-between;
-  border: 2px solid var(--color-main);
-  color: var(--color-light);
-  transition:
-    background 0.25s,
-    color 0.25s;
-  backdrop-filter: blur(8px);
-
-  &.active {
-    font-weight: bold;
-    background: var(--color-main);
-    color: var(--color-dark);
-  }
-
-  &.failed {
-    opacity: 0.3;
-  }
-}
-</style>

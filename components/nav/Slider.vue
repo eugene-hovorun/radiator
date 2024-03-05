@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <div class="radio-slider" @wheel.passive="onWheel">
-      <radio-alphabet
+      <nav-alphabet
         :items="items"
         @select="(letter) => $emit('go-to-letter', letter)"
       >
@@ -11,7 +11,7 @@
             {{ findIndex(modelValue) + 1 }} / {{ items.length }}
           </span>
         </div>
-      </radio-alphabet>
+      </nav-alphabet>
 
       <transition name="skeleton" mode="out-in">
         <swiper v-if="!loading" v-bind="sliderOptions" @swiper="setSliderRef">
@@ -135,19 +135,6 @@ const sliderOptions = {
   margin: 0 auto;
 }
 
-.slide {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 34px;
-  text-align: center;
-  font-size: 12px;
-  border-radius: 24px;
-  cursor: pointer;
-  overflow: hidden;
-}
-
 .slider-title {
   display: flex;
   flex-shrink: 0;
@@ -156,15 +143,6 @@ const sliderOptions = {
   margin: 0 12px;
   text-align: center;
   color: var(--color-main);
-}
-
-.slide-title {
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .slider-amount {
