@@ -44,8 +44,15 @@ declare global {
       | "Orange Red"
       | "Flag Palette"
       | "Deep Purple"
+      | "Lush Lime"
       | "Sunlit Gold";
-    value: "steelblue" | "orangered" | "flag" | "deeppurple" | "sunlit";
+    value:
+      | "steelblue"
+      | "orangered"
+      | "flag"
+      | "deeppurple"
+      | "sunlit"
+      | "lime";
     gradient: string;
   }
 

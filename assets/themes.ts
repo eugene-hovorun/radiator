@@ -20,6 +20,11 @@ export const themes: Theme[] = [
     gradient: "linear-gradient(-45deg, #FED428, #ffdf80)",
   },
   {
+    title: "Lush Lime",
+    value: "lime",
+    gradient: "linear-gradient(-45deg, #85ff0a, #0c270c)",
+  },
+  {
     title: "Flag Palette",
     value: "flag",
     gradient: "linear-gradient(-45deg, red, green, white, blue, red)",
