@@ -19,7 +19,6 @@
 <script lang="ts" setup>
 interface Props {
   item: Channel | Place | Country;
-  type?: "channel" | "place";
   active: boolean;
   playing?: boolean;
   failed?: boolean;
@@ -27,7 +26,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: "place",
   active: false,
   playing: false,
   failed: false,
