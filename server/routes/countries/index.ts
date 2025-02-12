@@ -2,7 +2,7 @@ import { api } from "../../utils";
 
 export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
   try {
-    if (getHeader(event, "from_radiator")) {
+    if (getHeader(event, "ref") || getHeader(event, "Ref")) {
       setHeader(event, "Access-Control-Allow-Origin", "*");
       setHeader(event, "Access-Control-Allow-Methods", "GET, POST, OPTIONS");
       setHeader(
