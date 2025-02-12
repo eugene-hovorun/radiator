@@ -10,8 +10,10 @@ export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
       "Origin, X-Requested-With, Content-Type, Accept, Ref"
     );
 
-    if (event.method === "OPTIONS") {
-      return null;
+    // Handle OPTIONS request
+    if (event.node.req.method === "OPTIONS") {
+      setResponseStatus(event, 204);
+      return "OK";
     }
 
     return await api.getCountries();
