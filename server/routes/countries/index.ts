@@ -8,8 +8,12 @@ export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
       setHeader(
         event,
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
+        "Origin, X-Requested-With, Content-Type, Accept, Ref"
       );
+    }
+
+    if (event.method === "OPTIONS") {
+      return null;
     }
 
     return await api.getCountries();
