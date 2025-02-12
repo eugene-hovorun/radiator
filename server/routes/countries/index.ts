@@ -2,15 +2,13 @@ import { api } from "../../utils";
 
 export default defineEventHandler(async (event): Promise<Place[] | unknown> => {
   try {
-    if (getHeader(event, "ref") || getHeader(event, "Ref")) {
-      setHeader(event, "Access-Control-Allow-Origin", "*");
-      setHeader(event, "Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-      setHeader(
-        event,
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Ref"
-      );
-    }
+    setHeader(event, "Access-Control-Allow-Origin", "*");
+    setHeader(event, "Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    setHeader(
+      event,
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Ref"
+    );
 
     if (event.method === "OPTIONS") {
       return null;
